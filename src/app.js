@@ -129,16 +129,13 @@ const state = {
 
 const navByRole = {
   learner: [
-    ["home", "home", "메인화면"],
-    ["vod", "play", "VOD 콘텐츠"],
-    ["pbl", "compass", "PBL 콘텐츠"],
+    ["home", "home", "홈"],
+    ["explore", "compass", "학습 탐색"],
+    ["learning", "book", "내 학습"],
+    ["peer", "users", "동료학습", "3"],
     ["community", "message", "커뮤니티"],
-    ["intro", "shield", "소개"],
-    ["personal", "user", "개인메뉴"],
-    ["member", "users", "회원"],
-    ["diagnosis", "chart", "역량진단"],
-    ["roadmap", "growth", "로드맵"],
-    ["admin", "settings", "관리시스템"],
+    ["growth", "growth", "나의 성장"],
+    ["my", "user", "MY"],
   ],
   commander: [
     ["commander", "home", "현황"],
@@ -159,104 +156,16 @@ const navByRole = {
   ],
 };
 
-const learnerChildren = {
-  home: [["peer-request", "동료평가요청"], ["leaderboard", "부대별 리더보드"]],
-  vod: [["vod-detail", "콘텐츠 상세"], ["vod-learning", "VOD 학습"]],
-  pbl: [["pbl-detail", "콘텐츠 상세"], ["pbl-learning", "PBL 학습"]],
-  community: [["notice", "공지사항"], ["qna", "Q&A"], ["faq", "FAQ"], ["news", "뉴스"]],
-  personal: [["my-courses", "내 강의"], ["favorites", "관심강의"], ["dashboard", "대시보드"], ["my-posts", "작성한 게시글"], ["profile", "프로필"], ["skill-chart", "스파이더차트"]],
-  member: [["signup", "회원가입"], ["login", "로그인·로그아웃"], ["account-recovery", "아이디·비밀번호찾기"], ["withdrawal", "회원탈퇴"]],
-};
-
-const learnerSectionLabels = {
-  home: "SERVICE",
-  personal: "MY SPACE",
-  member: "ACCOUNT & GROWTH",
-  admin: "SYSTEM",
-};
-
-const learnerRouteNames = new Set([
-  "home", "vod", "pbl", "community", "intro", "personal", "member", "diagnosis", "roadmap",
-  "explore", "project", "learning", "workspace", "peer", "growth", "my",
-  "video-learning", "vod-resources", "coding-practice", "quiz", "vod-board", "team-space", "ai-chat",
-  "vod-posts", "pbl-posts", "board-inquiries", "peer-reviews", "ai-dialogs", "profile-basic", "profile-interests",
-  "diagnosis-start", "diagnosis-result", "roadmap-ai-basic", "roadmap-data", "roadmap-project",
-  "peer-requested", "peer-feedback", "leaderboard-participation", "leaderboard-growth", "leaderboard-project",
-  "recent-courses", "weekly-status", "annual-status", "growth-log", "recent-learning-list",
-  "certificates", "badges", "skills", "credits",
-  ...Object.values(learnerChildren).flat().map(([route]) => route),
-]);
-
 const labels = {
-  home: "메인화면",
-  vod: "VOD 콘텐츠 목록",
-  "vod-detail": "VOD 콘텐츠 상세",
-  "vod-learning": "VOD 학습",
-  "video-learning": "동영상",
-  "vod-resources": "자료·과제 제출",
-  "coding-practice": "코딩",
-  quiz: "퀴즈",
-  "vod-board": "VOD 게시판",
-  pbl: "PBL 콘텐츠 목록",
-  "pbl-detail": "PBL 콘텐츠 상세",
-  "pbl-learning": "PBL 학습",
-  "team-space": "팀구성",
-  "ai-chat": "AI채팅",
-  explore: "통합 검색",
-  project: "PBL 콘텐츠 상세",
-  learning: "내 강의",
-  workspace: "PBL 학습",
-  peer: "동료평가요청",
-  "peer-request": "동료평가요청",
-  leaderboard: "부대별 리더보드",
+  home: "홈",
+  explore: "학습 탐색",
+  project: "프로젝트 상세",
+  learning: "내 학습",
+  workspace: "미션 수행",
+  peer: "동료학습",
   community: "커뮤니티",
-  notice: "공지사항",
-  qna: "Q&A",
-  faq: "FAQ",
-  news: "뉴스",
-  intro: "소개",
-  personal: "개인메뉴",
-  "my-courses": "내 강의",
-  favorites: "관심강의",
-  dashboard: "대시보드",
-  "recent-courses": "최근학습강의",
-  "weekly-status": "주간학습현황",
-  "annual-status": "연간학습현황",
-  "growth-log": "성장로그",
-  "recent-learning-list": "최근강의 학습목록",
-  certificates: "수료증",
-  badges: "뱃지",
-  skills: "스킬",
-  credits: "크레딧",
-  "my-posts": "작성한 게시글",
-  "vod-posts": "VOD 관련글",
-  "pbl-posts": "PBL 관련글",
-  "board-inquiries": "게시판 질의글",
-  "peer-reviews": "동료평가글",
-  "ai-dialogs": "AI교관 대화글",
-  profile: "프로필",
-  "profile-basic": "기본정보",
-  "profile-interests": "관심 분야",
-  "skill-chart": "스파이더차트",
-  member: "회원",
-  signup: "회원가입",
-  login: "로그인·로그아웃",
-  "account-recovery": "아이디·비밀번호찾기",
-  withdrawal: "회원탈퇴",
-  diagnosis: "역량진단",
-  "diagnosis-start": "역량진단 시작",
-  "diagnosis-result": "역량진단 결과",
-  roadmap: "로드맵",
-  "roadmap-ai-basic": "AI 기초 로드맵",
-  "roadmap-data": "데이터 분석 로드맵",
-  "roadmap-project": "실전 프로젝트 로드맵",
-  "peer-requested": "내가 요청한 평가",
-  "peer-feedback": "받은 피드백",
-  "leaderboard-participation": "참여 순위",
-  "leaderboard-growth": "성장 순위",
-  "leaderboard-project": "프로젝트 성과",
-  growth: "대시보드",
-  my: "개인메뉴",
+  growth: "나의 성장",
+  my: "MY",
   commander: "지휘관 대시보드",
   unit: "부대 학습",
   programs: "교육 프로그램",
@@ -282,7 +191,7 @@ function routeFromHash() {
   const next = window.location.hash.replace("#/", "").split("?")[0];
   if (navByRole.commander.some(([route]) => route === next)) state.role = "commander";
   if (navByRole.admin.some(([route]) => route === next)) state.role = "admin";
-  if (learnerRouteNames.has(next)) state.role = "learner";
+  if (["home", "explore", "project", "learning", "workspace", "peer", "community", "growth", "my"].includes(next)) state.role = "learner";
   return labels[next] ? next : state.role === "learner" ? "home" : state.role;
 }
 
@@ -301,21 +210,13 @@ function sidebar() {
       </div>
       <div class="environment-badge"><span></span> MILI AI 학습 플랫폼 <b>MVP</b></div>
       <nav class="nav-list">
+        <p class="nav-caption">WORKSPACE</p>
         ${items
           .map(
-            ([route, iconName, label, count]) => {
-              const children = state.role === "learner" ? learnerChildren[route] || [] : [];
-              const isActive = state.route === route || children.some(([childRoute]) => childRoute === state.route);
-              const caption = state.role === "learner" ? learnerSectionLabels[route] : route === items[0][0] ? "WORKSPACE" : "";
-              return `
-                ${caption ? `<p class="nav-caption ${route !== items[0][0] ? "section-start" : ""}">${caption}</p>` : ""}
-                <div class="nav-tree ${isActive ? "expanded" : ""}">
-                  <a href="#/${route}" class="nav-item ${isActive ? "active" : ""}" data-route="${route}">
-                    ${icon(iconName)}<span>${label}</span>${count ? `<em>${count}</em>` : children.length ? `<span class="nav-chevron">${icon("chevron", 14)}</span>` : ""}
-                  </a>
-                  ${children.length ? `<div class="nav-sublist">${children.map(([childRoute, childLabel]) => `<a href="#/${childRoute}" class="nav-subitem ${state.route === childRoute ? "active" : ""}">${childLabel}</a>`).join("")}</div>` : ""}
-                </div>`;
-            },
+            ([route, iconName, label, count]) => `
+              <a href="#/${route}" class="nav-item ${state.route === route ? "active" : ""}" data-route="${route}">
+                ${icon(iconName)}<span>${label}</span>${count ? `<em>${count}</em>` : ""}
+              </a>`,
           )
           .join("")}
       </nav>
@@ -361,7 +262,7 @@ function topbar() {
 function mobileNav() {
   const items = state.role === "learner" ? navByRole.learner.slice(0, 4) : navByRole[state.role].slice(0, 4);
   return `<nav class="mobile-nav" aria-label="모바일 메뉴">
-    ${items.map(([route, iconName, label]) => `<a href="#/${route}" class="${state.route === route || (learnerChildren[route] || []).some(([childRoute]) => childRoute === state.route) ? "active" : ""}">${icon(iconName, 19)}<span>${label.replace(" 콘텐츠", "")}</span></a>`).join("")}
+    ${items.map(([route, iconName, label]) => `<a href="#/${route}" class="${state.route === route ? "active" : ""}">${icon(iconName, 19)}<span>${label}</span></a>`).join("")}
     <button data-action="open-menu">${icon("menu", 19)}<span>전체</span></button>
   </nav>`;
 }
@@ -432,137 +333,6 @@ function progressBar(value, label = "") {
   return `<div class="progress-wrap" ${label ? `aria-label="${label} ${value}%"` : ""}><span style="width:${value}%"></span></div>`;
 }
 
-const iaPages = {
-  "vod-learning": {
-    eyebrow: "VOD LEARNING",
-    title: "VOD 학습",
-    description: "영상 시청부터 실습과 질의응답까지 한 과정 안에서 이어집니다.",
-    groups: [
-      ["학습 콘텐츠", "과정 순서에 맞춰 학습하고 완료 상태를 확인합니다.", [["video-learning", "동영상"], ["vod-resources", "자료·과제 제출"], ["coding-practice", "코딩"], ["quiz", "퀴즈"], ["vod-board", "게시판"]]],
-    ],
-  },
-  "pbl-learning": {
-    eyebrow: "PBL LEARNING",
-    title: "PBL 학습",
-    description: "미션 수행, 협업, 동료평가와 AI 교관을 하나의 프로젝트 흐름으로 제공합니다.",
-    groups: [
-      ["프로젝트 수행", "현재 미션과 협업 상태를 확인하고 결과물을 발전시킵니다.", [["workspace", "미션목록·현황"], ["peer-request", "동료평가"], ["team-space", "팀구성"], ["ai-chat", "AI채팅"]]],
-    ],
-  },
-  community: {
-    eyebrow: "COMMUNITY",
-    title: "커뮤니티",
-    description: "교육 소식과 학습 질문을 찾고 동료들과 경험을 나눕니다.",
-    groups: [
-      ["소식", "운영 공지와 최신 교육 자료를 확인합니다.", [["notice", "공지사항"], ["news", "뉴스"]]],
-      ["질문과 도움", "학습 질문과 자주 묻는 내용을 빠르게 찾습니다.", [["qna", "Q&A"], ["faq", "FAQ"]]],
-    ],
-  },
-  intro: {
-    eyebrow: "ABOUT MILI AI",
-    title: "소개",
-    description: "임무 중심 AI 학습으로 개인과 부대의 디지털 역량을 연결합니다.",
-    groups: [
-      ["MILI AI 서비스", "실제 업무 문제를 프로젝트와 VOD 학습으로 전환하고, 수행 결과를 역량으로 기록하는 통합 학습 플랫폼입니다.", [["pbl", "PBL 프로젝트"], ["vod", "VOD 과정"], ["diagnosis", "역량진단"], ["roadmap", "맞춤 로드맵"]]],
-    ],
-  },
-  personal: {
-    eyebrow: "MY SPACE",
-    title: "개인메뉴",
-    description: "나의 강의, 활동, 성장 기록과 계정 정보를 한곳에서 관리합니다.",
-    groups: [
-      ["학습 관리", "PBL과 VOD 강의를 통합해 확인합니다.", [["my-courses", "내 강의"], ["favorites", "관심강의"]]],
-      ["성장 대시보드", "학습 현황과 획득 역량을 확인합니다.", [["dashboard", "대시보드"], ["recent-courses", "최근학습강의"], ["weekly-status", "주간학습현황"], ["annual-status", "연간학습현황"], ["growth-log", "성장로그"], ["recent-learning-list", "최근강의 학습목록"], ["certificates", "수료증"], ["badges", "뱃지"], ["skills", "스킬"], ["roadmap", "로드맵"], ["credits", "크레딧"], ["skill-chart", "스파이더차트"]]],
-      ["나의 활동", "작성한 글과 대화 기록을 유형별로 확인합니다.", [["my-posts", "작성한 게시글"], ["profile", "프로필"]]],
-    ],
-  },
-  "my-posts": {
-    eyebrow: "MY ACTIVITY",
-    title: "작성한 게시글",
-    description: "과정과 프로젝트에서 남긴 글, 평가와 AI 교관 대화를 모아봅니다.",
-    groups: [
-      ["학습 게시글", "콘텐츠 문맥별 활동 기록입니다.", [["vod-posts", "VOD 관련글"], ["pbl-posts", "PBL 관련글"], ["board-inquiries", "게시판 질의글"]]],
-      ["학습 상호작용", "평가와 대화 기록은 일반 게시글과 분리해 관리합니다.", [["peer-reviews", "동료평가글"], ["ai-dialogs", "AI교관 대화글"]]],
-    ],
-  },
-  profile: {
-    eyebrow: "PROFILE",
-    title: "프로필",
-    description: "기본정보와 관심 분야, 역량진단 결과를 확인합니다.",
-    groups: [
-      ["프로필 정보", "학습 추천과 포트폴리오에 활용되는 정보입니다.", [["profile-basic", "기본정보"], ["profile-interests", "관심 분야"], ["diagnosis", "역량진단결과"]]],
-    ],
-  },
-  member: {
-    eyebrow: "MEMBERSHIP",
-    title: "회원",
-    description: "가입부터 계정 복구와 탈퇴까지 회원 절차를 관리합니다.",
-    groups: [
-      ["회원 서비스", "안전한 인증과 계정 관리를 제공합니다.", [["signup", "회원가입"], ["login", "로그인·로그아웃"], ["account-recovery", "아이디·비밀번호찾기"], ["withdrawal", "회원탈퇴"]]],
-    ],
-  },
-  diagnosis: {
-    eyebrow: "COMPETENCY DIAGNOSIS",
-    title: "역량진단",
-    description: "현재 AI 수준과 선수지식을 진단하고 다음 학습의 기준을 만듭니다.",
-    groups: [
-      ["진단 프로세스", "진단 응시 후 결과를 비교하고 추천 학습으로 연결합니다.", [["diagnosis-start", "역량진단 시작"], ["diagnosis-result", "진단 결과"], ["roadmap", "추천 로드맵"]]],
-    ],
-  },
-  roadmap: {
-    eyebrow: "LEARNING ROADMAP",
-    title: "로드맵",
-    description: "목표 역량까지 필요한 VOD와 PBL 프로젝트를 단계별로 안내합니다.",
-    groups: [
-      ["나의 학습 경로", "선수학습부터 실전 프로젝트까지 진행 순서를 확인합니다.", [["roadmap-ai-basic", "AI 기초"], ["roadmap-data", "데이터 분석"], ["roadmap-project", "실전 프로젝트"]]],
-    ],
-  },
-  "peer-request": {
-    eyebrow: "PEER REVIEW",
-    title: "동료평가요청",
-    description: "평가할 과제와 내가 요청한 평가의 진행 상태를 확인합니다.",
-    groups: [
-      ["동료평가", "마감과 배정 상태를 기준으로 평가 업무를 관리합니다.", [["peer", "평가할 과제"], ["peer-requested", "내가 요청한 평가"], ["peer-feedback", "받은 피드백"]]],
-    ],
-  },
-  leaderboard: {
-    eyebrow: "UNIT LEADERBOARD",
-    title: "부대별 리더보드",
-    description: "공개 기준에 따라 부대별 참여와 학습 성과를 비교합니다.",
-    groups: [
-      ["리더보드", "개인 정보 없이 집계된 학습 지표를 제공합니다.", [["leaderboard-participation", "참여 순위"], ["leaderboard-growth", "성장 순위"], ["leaderboard-project", "프로젝트 성과"]]],
-    ],
-  },
-  "skill-chart": {
-    eyebrow: "SKILL CHART",
-    title: "스파이더차트",
-    description: "분야별 역량 수준과 변화 추이를 시각적으로 비교합니다.",
-    groups: [
-      ["역량 분석", "프로젝트·진단 결과를 근거로 현재 수준을 표시합니다.", [["dashboard", "역량 현황"], ["diagnosis", "역량진단"], ["roadmap", "추천 로드맵"]]],
-    ],
-  },
-};
-
-function iaMenuView(route) {
-  const page = iaPages[route];
-  return `
-    <section class="view ia-view">
-      ${pageHeader(page.eyebrow, page.title, page.description)}
-      <div class="ia-path"><span>서비스시스템</span>${icon("chevron", 13)}<strong>${page.title}</strong><em>IA 반영</em></div>
-      <div class="ia-menu-grid ${page.groups.length === 1 ? "single" : ""}">
-        ${page.groups.map(([title, description, items], groupIndex) => `<article class="ia-menu-card panel"><div class="ia-card-index">${String(groupIndex + 1).padStart(2, "0")}</div><div class="ia-card-head"><span>${icon(groupIndex % 2 ? "message" : "folder", 19)}</span><div><h2>${title}</h2><p>${description}</p></div></div><nav>${items.map(([itemRoute, itemLabel]) => `<a href="#/${itemRoute}"><span>${itemLabel}</span>${icon("arrow", 15)}</a>`).join("")}</nav></article>`).join("")}
-      </div>
-    </section>`;
-}
-
-function catalogDepthNav(kind) {
-  const isVod = kind === "vod";
-  const items = isVod
-    ? [["vod-detail", "콘텐츠 상세"], ["vod-learning", "VOD 학습"], ["video-learning", "동영상"], ["vod-resources", "자료·과제 제출"], ["coding-practice", "코딩"], ["quiz", "퀴즈"], ["vod-board", "게시판"]]
-    : [["pbl-detail", "콘텐츠 상세"], ["pbl-learning", "PBL 학습"], ["peer-request", "동료평가"], ["team-space", "팀구성"], ["ai-chat", "AI채팅"]];
-  return `<nav class="catalog-depth-nav" aria-label="${isVod ? "VOD" : "PBL"} 하위 메뉴"><span>${isVod ? "VOD 콘텐츠 목록" : "PBL 콘텐츠 목록"}</span>${items.map(([route, label]) => `<a href="#/${route}">${label}</a>`).join("")}</nav>`;
-}
-
 function homeView() {
   return `
     <section class="view dashboard-view">
@@ -615,48 +385,38 @@ function homeView() {
 }
 
 function miniCourse(project) {
-  const target = project.eyebrow.includes("VOD") ? "vod-detail" : "pbl-detail";
-  return `<button class="mini-course" data-project="${project.id}" data-target="${target}"><span class="mini-cover ${project.tone}"><b>${project.eyebrow.split(" · ")[1]}</b><small>${project.level}</small></span><span class="mini-copy"><small>${project.eyebrow}</small><strong>${project.title}</strong><span><em>${project.fit}% 적합</em> · ${project.duration}</span></span>${icon("arrow", 17)}</button>`;
+  return `<button class="mini-course" data-project="${project.id}"><span class="mini-cover ${project.tone}"><b>${project.eyebrow.split(" · ")[1]}</b><small>${project.level}</small></span><span class="mini-copy"><small>${project.eyebrow}</small><strong>${project.title}</strong><span><em>${project.fit}% 적합</em> · ${project.duration}</span></span>${icon("arrow", 17)}</button>`;
 }
 
 function projectCard(project) {
-  const target = project.eyebrow.includes("VOD") ? "vod-detail" : "pbl-detail";
   return `<article class="project-card">
-    <button class="project-cover ${project.tone}" data-project="${project.id}" data-target="${target}" aria-label="${project.title} 상세 보기">
+    <button class="project-cover ${project.tone}" data-project="${project.id}" aria-label="${project.title} 상세 보기">
       <span class="project-index">${project.id === "demand-forecast" ? "01" : String(projects.indexOf(project) + 1).padStart(2, "0")}</span>
       <span class="cover-grid"></span>
       <span class="fit-score"><b>${project.fit}</b><small>% MATCH</small></span>
       ${project.mode.includes("모바일") ? '<span class="mobile-ready">모바일 학습</span>' : ""}
     </button>
-    <div class="project-info"><div><span class="eyebrow">${project.eyebrow}</span><span class="bookmark" aria-label="찜하기">♡</span></div><h3>${project.title}</h3><p>${project.description}</p><div class="tag-row">${project.skills.map((skill) => `<span>${skill}</span>`).join("")}</div><footer><span>${icon("clock", 15)} ${project.duration}</span><span>${icon("users", 15)} ${project.mode}</span><button data-project="${project.id}" data-target="${target}">${icon("arrow", 17)}</button></footer></div>
+    <div class="project-info"><div><span class="eyebrow">${project.eyebrow}</span><span class="bookmark" aria-label="찜하기">♡</span></div><h3>${project.title}</h3><p>${project.description}</p><div class="tag-row">${project.skills.map((skill) => `<span>${skill}</span>`).join("")}</div><footer><span>${icon("clock", 15)} ${project.duration}</span><span>${icon("users", 15)} ${project.mode}</span><button data-project="${project.id}">${icon("arrow", 17)}</button></footer></div>
   </article>`;
 }
 
-function exploreView(kind = "all") {
+function exploreView() {
   const filtered = projects.filter((project) => {
     const query = state.search.toLowerCase();
     const matchesQuery = !query || `${project.title} ${project.description} ${project.skills.join(" ")}`.toLowerCase().includes(query);
     const matchesFilter = state.filter === "전체" || project.level === state.filter || project.mode.includes(state.filter) || project.eyebrow.includes(state.filter);
-    const isVod = project.eyebrow.includes("VOD");
-    const matchesKind = kind === "all" || (kind === "vod" ? isVod : !isVod);
-    return matchesQuery && matchesFilter && matchesKind;
+    return matchesQuery && matchesFilter;
   });
-  const isVod = kind === "vod";
-  const isPbl = kind === "pbl";
-  const pageTitle = isVod ? "VOD 콘텐츠 목록" : isPbl ? "PBL 콘텐츠 목록" : "통합 학습 검색";
-  const pageDescription = isVod ? "짧은 이론 학습부터 코딩·퀴즈까지 과정별로 탐색하세요." : isPbl ? "실제 임무 문제를 해결하며 결과물과 역량을 함께 완성하세요." : "VOD와 PBL 콘텐츠를 한 번에 검색하세요.";
-  const filterItems = isVod ? ["전체", "입문", "중급", "모바일"] : ["전체", "입문", "중급", "고급", "프로젝트"];
   return `
     <section class="view explore-view">
-      ${pageHeader(isVod ? "VOD CATALOG" : isPbl ? "PBL CATALOG" : "LEARNING CATALOG", pageTitle, pageDescription, '<button class="secondary-button">♡ 관심강의 <span class="soft-count">4</span></button>')}
-      ${kind !== "all" ? catalogDepthNav(kind) : ""}
+      ${pageHeader("LEARNING CATALOG", "임무에서 출발하는 AI 학습", "나의 직무와 역량에 맞는 프로젝트를 찾아 실제 문제를 해결해 보세요.", '<button class="secondary-button">♡ 찜한 학습 <span class="soft-count">4</span></button>')}
       <div class="catalog-search">
         <label>${icon("search", 20)}<input id="catalog-search" type="search" value="${escapeHtml(state.search)}" placeholder="배우고 싶은 기술이나 해결하고 싶은 문제를 검색하세요" /></label>
         <button class="filter-button">${icon("filter", 18)} 상세 필터 <span>2</span></button>
       </div>
       <div class="catalog-toolbar">
         <div class="filter-chips" role="group" aria-label="콘텐츠 필터">
-          ${filterItems.map((filter) => `<button data-filter="${filter}" class="${state.filter === filter ? "active" : ""}">${filter}</button>`).join("")}
+          ${["전체", "입문", "중급", "고급", "프로젝트", "모바일"].map((filter) => `<button data-filter="${filter}" class="${state.filter === filter ? "active" : ""}">${filter}</button>`).join("")}
         </div>
         <div class="result-meta"><span><b>${filtered.length}</b>개의 학습</span><select aria-label="정렬"><option>추천순</option><option>최신순</option><option>짧은 학습순</option></select></div>
       </div>
@@ -667,7 +427,7 @@ function exploreView(kind = "all") {
 function projectDetailView() {
   return `
     <section class="view project-detail-view">
-      <button class="back-link" data-action="go-explore">← PBL 콘텐츠 목록으로</button>
+      <button class="back-link" data-action="go-explore">← 학습 탐색으로</button>
       <div class="project-hero">
         <div class="hero-copy"><span class="eyebrow light">LOGISTICS · DATA ANALYTICS</span><div class="tag-row glass-tags"><span>팀 프로젝트</span><span>중급</span><span>6주</span></div><h1>AI로 군수 수요<br />예측하기</h1><p>불확실한 보급 환경에서 더 나은 판단을 내릴 수 있도록, 실제 군수 데이터로 수요 예측 모델과 의사결정 대시보드를 완성합니다.</p><div class="hero-actions"><button class="primary-button light-button" data-action="start-project">학습 시작하기 ${icon("arrow", 17)}</button><button class="outline-button light-outline">♡ 찜하기</button></div></div>
         <div class="hero-visual"><div class="radar-grid"></div><div class="signal-line"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="hero-metric"><span>PREDICTION ACCURACY</span><strong>87.4<small>%</small></strong><em>목표 성능 기준</em></div></div>
@@ -683,28 +443,12 @@ function projectDetailView() {
     </section>`;
 }
 
-function vodDetailView() {
-  const lessons = [["01", "AI와 데이터 기반 의사결정", "동영상 · 24분"], ["02", "좋은 지표와 나쁜 지표", "동영상 · 31분"], ["03", "작전 사례 데이터 읽기", "자료·과제 · 45분"], ["04", "의사결정 편향 점검", "퀴즈 · 12문항"], ["05", "나의 부대 지표 설계", "코딩·제출 · 60분"]];
-  return `
-    <section class="view project-detail-view vod-detail-view">
-      <a class="back-link" href="#/vod">← VOD 콘텐츠 목록으로</a>
-      <div class="project-hero vod-hero">
-        <div class="hero-copy"><span class="eyebrow light">DATA LITERACY · VOD</span><div class="tag-row glass-tags"><span>입문</span><span>모바일 가능</span><span>총 4시간</span></div><h1>지휘관을 위한<br />데이터 리터러시</h1><p>교육과 작전 현황을 올바르게 읽고, 숫자 뒤의 맥락과 위험을 판단하는 데이터 기반 의사결정 과정을 익힙니다.</p><div class="hero-actions"><button class="primary-button light-button" data-action="start-vod">VOD 학습 시작 ${icon("play", 17)}</button><button class="outline-button light-outline">♡ 관심강의</button></div></div>
-        <div class="hero-visual vod-visual"><div class="radar-grid"></div><div class="vod-play-symbol">${icon("play", 38)}</div><div class="hero-metric"><span>COURSE PROGRESS</span><strong>00<small>%</small></strong><em>5개 학습 콘텐츠</em></div></div>
-      </div>
-      <div class="detail-layout">
-        <div class="detail-main"><nav class="detail-tabs"><button class="active">과정 소개</button><button>VOD 학습</button><button>자료·과제</button><button>게시판</button></nav><section class="detail-section"><span class="section-number">01</span><div><span class="eyebrow">CURRICULUM</span><h2>영상, 과제, 퀴즈를 순서대로 학습합니다</h2><p class="lead">각 차시의 완료 조건을 충족하면 다음 콘텐츠가 열리며, 학습 노트와 AI 교관을 모든 차시에서 사용할 수 있습니다.</p><div class="vod-lesson-list">${lessons.map(([number, title, meta]) => `<a href="#/vod-learning"><span>${number}</span><div><b>${title}</b><small>${meta}</small></div>${icon("chevron", 16)}</a>`).join("")}</div></div></section></div>
-        <aside class="enroll-card panel"><span class="status-label"><i></i> 바로 학습 가능</span><h3>과정 정보</h3><dl><div><dt>콘텐츠</dt><dd>동영상 2 · 실습 3</dd></div><div><dt>난이도</dt><dd>입문</dd></div><div><dt>수료 조건</dt><dd>진도 90% · 퀴즈 70점</dd></div><div><dt>제공 기관</dt><dd>국방 AI 교육센터</dd></div></dl><button class="primary-button" data-action="start-vod">학습 시작하기</button></aside>
-      </div>
-    </section>`;
-}
-
 function learningView() {
   return `
     <section class="view learning-view">
       ${pageHeader("MY LEARNING", "내 학습", "프로젝트와 VOD를 한곳에서 확인하고 이어서 학습하세요.", '<button class="secondary-button">학습 기록 보기</button>')}
       <div class="summary-strip"><div><span class="summary-icon active">${icon("play", 19)}</span><p><small>진행 중</small><strong>4</strong></p></div><div><span class="summary-icon pending">${icon("clock", 19)}</span><p><small>승인 대기</small><strong>1</strong></p></div><div><span class="summary-icon complete">${icon("check", 19)}</span><p><small>완료·수료</small><strong>12</strong></p></div><div><span class="summary-icon time">${icon("chart", 19)}</span><p><small>누적 학습</small><strong>68<em>시간</em></strong></p></div></div>
-      <div class="content-tabs"><button class="active">전체 4</button><button>PBL 2</button><button>VOD 2</button><button>동료평가 <span>3</span></button></div>
+      <div class="content-tabs"><button class="active">전체 4</button><button>프로젝트 2</button><button>VOD 2</button></div>
       <div class="learning-stack">
         <article class="learning-card featured-learning"><div class="learning-cover lime"><span>M03</span><small>PROJECT</small></div><div class="learning-copy"><div><span class="eyebrow">수송 · 데이터 분석</span><span class="chip orange">D-09</span></div><h3>AI로 군수 수요 예측하기</h3><p>미션 03 · 예측 모델 설계 및 기준선 비교</p><div class="progress-line"><span>전체 진행률</span><b>48%</b>${progressBar(48)}</div><div class="learning-meta"><span>${icon("clock", 15)} 최근 학습 2분 전</span><span>${icon("users", 15)} 알파 2팀</span></div></div><button class="primary-button" data-action="continue-learning">이어서 수행 ${icon("arrow", 16)}</button></article>
         <article class="learning-card"><div class="learning-cover blue"><span>07</span><small>VOD</small></div><div class="learning-copy"><div><span class="eyebrow">공통 · 데이터 기초</span><span class="chip blue">학습 중</span></div><h3>Python 데이터 분석 기초</h3><p>7강 · 데이터 시각화와 인사이트 도출</p><div class="progress-line"><span>과정 진도</span><b>72%</b>${progressBar(72)}</div><div class="learning-meta"><span>${icon("clock", 15)} 18분 남음</span><span>${icon("play", 15)} 9 / 12강</span></div></div><button class="secondary-button">이어서 보기 ${icon("arrow", 16)}</button></article>
@@ -791,36 +535,16 @@ function adminView() {
 
 function genericView() {
   const title = labels[state.route] || "준비 중인 메뉴";
-  return `<section class="view generic-view">${pageHeader("INFORMATION ARCHITECTURE", title, "제공해주신 IA 기준으로 서비스 경로에 연결된 메뉴입니다.")}<div class="empty-state large">${icon("folder", 40)}<span class="eyebrow">MENU CONNECTED</span><h2>${title} 메뉴 구성이 반영되었습니다.</h2><p>현재는 메뉴와 탐색 경로를 우선 구성했으며, 세부 업무 기능은 다음 구현 단계에서 확장할 수 있습니다.</p><button class="primary-button" data-action="go-home">메인화면으로 돌아가기</button></div></section>`;
+  return `<section class="view generic-view">${pageHeader("MILI AI WORKSPACE", title, "기획 문서의 메뉴 구조를 반영한 다음 확장 화면입니다.")}<div class="empty-state large">${icon("folder", 40)}<span class="eyebrow">NEXT ITERATION</span><h2>${title} 화면은 다음 구축 단계에서 연결됩니다.</h2><p>현재 MVP에서는 핵심 학습 흐름과 역할별 대시보드 탐색을 우선 제공합니다.</p><button class="primary-button" data-action="go-home">대시보드로 돌아가기</button></div></section>`;
 }
 
 const views = {
   home: homeView,
-  vod: () => exploreView("vod"),
-  "vod-detail": vodDetailView,
-  "vod-learning": () => iaMenuView("vod-learning"),
-  pbl: () => exploreView("pbl"),
-  "pbl-detail": projectDetailView,
-  "pbl-learning": workspaceView,
   explore: exploreView,
   project: projectDetailView,
   learning: learningView,
   workspace: workspaceView,
   peer: peerView,
-  "peer-request": peerView,
-  leaderboard: () => iaMenuView("leaderboard"),
-  community: () => iaMenuView("community"),
-  intro: () => iaMenuView("intro"),
-  personal: () => iaMenuView("personal"),
-  "my-courses": learningView,
-  favorites: () => exploreView("all"),
-  dashboard: growthView,
-  "my-posts": () => iaMenuView("my-posts"),
-  profile: () => iaMenuView("profile"),
-  "skill-chart": () => iaMenuView("skill-chart"),
-  member: () => iaMenuView("member"),
-  diagnosis: () => iaMenuView("diagnosis"),
-  roadmap: () => iaMenuView("roadmap"),
   growth: growthView,
   commander: commanderView,
   admin: adminView,
@@ -863,7 +587,7 @@ document.addEventListener("click", (event) => {
   const filterTarget = event.target.closest("[data-filter]");
   const aiQuestion = event.target.closest("[data-ai-question]");
 
-  if (projectTarget) navigate(projectTarget.dataset.target || "pbl-detail");
+  if (projectTarget) navigate("project");
   if (filterTarget) {
     state.filter = filterTarget.dataset.filter;
     render();
@@ -878,13 +602,12 @@ document.addEventListener("click", (event) => {
     "close-ai": () => { state.aiOpen = false; render(); },
     "toggle-notifications": () => { state.notificationsOpen = !state.notificationsOpen; state.aiOpen = false; render(); },
     "go-search": () => navigate("explore"),
-    "go-explore": () => navigate("pbl"),
-    "go-learning": () => navigate("my-courses"),
-    "go-peer": () => navigate("peer-request"),
+    "go-explore": () => navigate("explore"),
+    "go-learning": () => navigate("learning"),
+    "go-peer": () => navigate("peer"),
     "go-home": () => navigate(state.role === "learner" ? "home" : state.role),
-    "continue-learning": () => navigate("pbl-learning"),
-    "start-project": () => { navigate("pbl-learning"); toast("프로젝트 학습을 시작했습니다."); },
-    "start-vod": () => { navigate("vod-learning"); toast("VOD 학습을 시작했습니다."); },
+    "continue-learning": () => navigate("workspace"),
+    "start-project": () => { navigate("workspace"); toast("프로젝트 학습을 시작했습니다."); },
     "clear-filters": () => { state.filter = "전체"; state.search = ""; render(); },
     "submit-mission": () => { state.submitted = true; render(); toast("미션 결과물이 제출되었습니다. 동료평가를 요청할 수 있어요."); },
   };

@@ -20,15 +20,6 @@ test("core learner, commander, and operator views are registered", () => {
   }
 });
 
-test("provided IA top-level menus and learning branches are registered", () => {
-  for (const menu of ["메인화면", "VOD 콘텐츠", "PBL 콘텐츠", "커뮤니티", "소개", "개인메뉴", "회원", "역량진단", "로드맵", "관리시스템"]) {
-    assert.match(app, new RegExp(`"${menu}"`));
-  }
-  for (const branch of ["동영상", "자료·과제 제출", "미션목록·현황", "동료평가", "AI채팅", "스파이더차트"]) {
-    assert.match(app, new RegExp(`"${branch}"`));
-  }
-});
-
 test("responsive navigation rules are present", () => {
   assert.match(css, /\.mobile-nav/);
   assert.match(css, /@media \(max-width: 760px\)/);
