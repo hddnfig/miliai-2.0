@@ -124,18 +124,16 @@ const state = {
   filter: "전체",
   submitted: false,
   aiMessages: [],
-  checklist: new Set(["문제 정의 확인", "데이터 품질 점검"]),
+  checklist: new Set(["품목군별 검증 구간 추가", "MAPE 비교표 갱신", "민감정보 포함 여부 확인"]),
 };
 
 const navByRole = {
   learner: [
     ["home", "home", "홈"],
-    ["explore", "compass", "학습 탐색"],
+    ["explore", "compass", "탐색"],
     ["learning", "book", "내 학습"],
-    ["peer", "users", "동료학습", "3"],
-    ["community", "message", "커뮤니티"],
+    ["peer", "users", "함께 학습", "3"],
     ["growth", "growth", "나의 성장"],
-    ["my", "user", "MY"],
   ],
   commander: [
     ["commander", "home", "현황"],
@@ -158,11 +156,11 @@ const navByRole = {
 
 const labels = {
   home: "홈",
-  explore: "학습 탐색",
+  explore: "탐색",
   project: "프로젝트 상세",
   learning: "내 학습",
   workspace: "미션 수행",
-  peer: "동료학습",
+  peer: "함께 학습",
   community: "커뮤니티",
   growth: "나의 성장",
   my: "MY",
@@ -260,10 +258,17 @@ function topbar() {
 }
 
 function mobileNav() {
-  const items = state.role === "learner" ? navByRole.learner.slice(0, 4) : navByRole[state.role].slice(0, 4);
+  const items = state.role === "learner"
+    ? [
+        ["home", "home", "홈"],
+        ["explore", "compass", "탐색"],
+        ["learning", "book", "내 학습"],
+        ["growth", "growth", "성장"],
+      ]
+    : navByRole[state.role].slice(0, 4);
   return `<nav class="mobile-nav" aria-label="모바일 메뉴">
     ${items.map(([route, iconName, label]) => `<a href="#/${route}" class="${state.route === route ? "active" : ""}">${icon(iconName, 19)}<span>${label}</span></a>`).join("")}
-    <button data-action="open-menu">${icon("menu", 19)}<span>전체</span></button>
+    <a href="#/my" class="${state.route === "my" ? "active" : ""}" aria-label="MY">${icon("user", 19)}<span>MY</span></a>
   </nav>`;
 }
 
@@ -319,7 +324,7 @@ function shell(content) {
         <main id="main-content" class="main-content" tabindex="-1">${content}</main>
       </div>
       ${mobileNav()}
-      <button class="ai-fab" data-action="open-ai" aria-label="AI 교관 열기">${icon("sparkles", 20)}<span>AI 교관</span></button>
+      ${state.route === "workspace" ? `<button class="ai-fab" data-action="open-ai" aria-label="AI 교관 열기">${icon("sparkles", 20)}<span>AI 교관</span></button>` : ""}
       ${noticePanel()}
       ${aiPanel()}
     </div>`;
@@ -335,50 +340,97 @@ function progressBar(value, label = "") {
 
 function homeView() {
   return `
-    <section class="view dashboard-view">
-      <div class="welcome-row">
-        <div><span class="eyebrow">2026. 07. 23 · 목요일</span><h1>좋은 저녁이에요, 김밀리 상병님.</h1><p>오늘의 작은 진전이 내일의 작전 역량이 됩니다.</p></div>
-        <div class="streak-pill"><span>7</span><div><small>연속 학습</small><strong>이번 주 최고 기록</strong></div></div>
-      </div>
-      <div class="dashboard-grid">
-        <article class="continue-card panel">
-          <div class="card-topline"><span class="eyebrow light">CONTINUE MISSION</span><span class="sync-state">${icon("check", 14)} 2분 전 자동 저장</span></div>
-          <div class="continue-body">
-            <div class="mission-emblem"><span>M03</span><small>OF 06</small></div>
-            <div class="continue-copy"><span class="chip glass">팀 프로젝트 · 중급</span><h2>AI로 군수 수요 예측하기</h2><p>미션 03. 예측 모델 설계 및 기준선 비교</p>
-              <div class="continue-progress"><div><span>전체 진행률</span><strong>48%</strong></div>${progressBar(48)}</div>
-              <div class="continue-actions"><button class="primary-button light-button" data-action="continue-learning">이어서 수행하기 ${icon("arrow", 17)}</button><span>D-09 · 8월 1일 마감</span></div>
+    <section class="view dashboard-view priority-home">
+      <header class="home-intro">
+        <div>
+          <span class="eyebrow">FRIDAY · 2026. 07. 24</span>
+          <h1>오늘 연결할 지식이, <br />내일 해결할 문제의 길이 됩니다.</h1>
+          <p>김밀리 상병님, 지금은 새 학습보다 받은 피드백을 반영하는 일이 먼저예요.</p>
+        </div>
+        <div class="today-signal" aria-label="오늘의 우선순위 1개">
+          <span>${icon("message", 18)}</span>
+          <div><small>오늘의 우선순위</small><strong>수정 필요 1건</strong></div>
+          <em>D-2</em>
+        </div>
+      </header>
+
+      <div class="priority-grid">
+        <article class="priority-card">
+          <div class="priority-card-top">
+            <span class="status-pill revision">${icon("message", 14)} 수정 필요 · 제출 v1.2</span>
+            <span class="autosave-state">${icon("check", 14)} 초안 자동 저장됨</span>
+          </div>
+          <div class="priority-copy">
+            <span class="eyebrow light">AI로 군수 수요 예측하기 · 미션 03</span>
+            <h2>피드백을 반영해<br />모델 선택 근거를 완성하세요.</h2>
+            <p>멘토와 동료가 같은 보완 지점을 짚었습니다. 계절성 변동이 큰 품목군의 검증 근거를 추가하면 재제출할 수 있어요.</p>
+          </div>
+          <div class="feedback-focus">
+            <span class="feedback-source mentor">멘토</span>
+            <p><strong>검증 구간을 품목군별로 분리해 주세요.</strong><small>루브릭 03 · 결과 해석의 타당성</small></p>
+            <span class="feedback-source peer">동료</span>
+            <p><strong>전체 MAPE만으로는 변동성이 가려집니다.</strong><small>동료평가 · 오늘 09:42</small></p>
+          </div>
+          <div class="priority-footer">
+            <div class="priority-actions">
+              <button class="primary-button light-button" data-action="continue-learning">피드백 반영하기 ${icon("arrow", 17)}</button>
+              <button class="outline-button light-outline" data-action="open-ai">AI 교관에게 먼저 묻기</button>
+            </div>
+            <div class="priority-progress">
+              <span><b>48%</b><small>프로젝트 진행률 · 3/6 미션</small></span>
+              ${progressBar(48, "프로젝트 진행률")}
             </div>
           </div>
-          <div class="terrain-lines" aria-hidden="true"></div>
+          <div class="field-visual" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
         </article>
-        <article class="panel task-panel">
-          <div class="section-heading"><div><span class="eyebrow">TODAY'S OBJECTIVE</span><h2>오늘의 할 일</h2></div><span class="count-badge">3</span></div>
-          <div class="task-list">
-            <button data-action="continue-learning"><span class="task-check urgent">!</span><span><b>예측 결과 해석 작성</b><small>군수 수요 예측 · 오늘 23:59</small></span>${icon("chevron", 18)}</button>
-            <button data-action="go-peer"><span class="task-check">02</span><span><b>동료 결과물 평가</b><small>장비 이상 탐지 · 내일</small></span>${icon("chevron", 18)}</button>
-            <button><span class="task-check done">${icon("check", 15)}</span><span><b>VOD 4강 학습</b><small>Python 데이터 분석 · 완료</small></span>${icon("chevron", 18)}</button>
+
+        <aside class="panel journey-card">
+          <div class="section-heading">
+            <div><span class="eyebrow">PROJECT JOURNEY</span><h2>프로젝트 여정</h2></div>
+            <button class="text-button" data-action="go-learning">전체 보기 ${icon("arrow", 14)}</button>
           </div>
-          <button class="full-link" data-action="go-learning">전체 일정 보기 ${icon("arrow", 15)}</button>
-        </article>
-        <article class="panel weekly-panel">
-          <div class="section-heading"><div><span class="eyebrow">WEEKLY PULSE</span><h2>주간 학습 현황</h2></div><span class="trend up">↗ 12%</span></div>
-          <div class="weekly-chart" aria-label="요일별 학습 시간 막대 차트">
-            ${[["월", 46], ["화", 72], ["수", 52], ["목", 88], ["금", 32], ["토", 18], ["일", 12]].map(([day, value], index) => `<div class="bar-item ${index === 3 ? "today" : ""}"><span style="height:${value}%"></span><small>${day}</small></div>`).join("")}
+          <p class="journey-summary"><strong>2개 완료</strong> · 1개 보완 중 · 3개 대기</p>
+          <ol class="journey-list">
+            <li class="complete"><span>${icon("check", 14)}</span><div><small>미션 01</small><b>문제와 조건 이해</b></div><em>완료</em></li>
+            <li class="complete"><span>${icon("check", 14)}</span><div><small>미션 02</small><b>데이터 품질 진단</b></div><em>완료</em></li>
+            <li class="current"><span>03</span><div><small>현재 미션</small><b>예측 모델 설계</b></div><em>보완 중</em></li>
+            <li class="locked"><span>${icon("shield", 13)}</span><div><small>미션 04</small><b>모델 성능 검증</b></div><em>03 통과 후</em></li>
+            <li class="locked compact-node"><span>+2</span><div><small>남은 미션</small><b>대시보드 · 최종 브리핑</b></div></li>
+          </ol>
+          <div class="unlock-note">${icon("shield", 15)} 미션 03이 통과되면 다음 미션이 열립니다.</div>
+        </aside>
+      </div>
+
+      <div class="home-insight-grid">
+        <article class="panel learning-flow-panel">
+          <div class="section-heading"><div><span class="eyebrow">TODAY'S FLOW</span><h2>오늘의 학습 흐름</h2></div><span class="count-badge">3</span></div>
+          <div class="flow-list">
+            <button class="is-priority" data-action="continue-learning"><span class="flow-time">지금</span><span class="flow-marker">01</span><span><b>미션 03 수정본 완성</b><small>멘토 피드백 2개 반영 · 예상 35분</small></span><em>우선</em>${icon("chevron", 16)}</button>
+            <button><span class="flow-time">이후</span><span class="flow-marker vod">02</span><span><b>시계열 검증 VOD 12분</b><small>현재 보완 항목과 연결된 선수학습</small></span>${icon("chevron", 16)}</button>
+            <button data-action="go-peer"><span class="flow-time">오늘</span><span class="flow-marker peer">03</span><span><b>동료 결과물 평가</b><small>익명 평가 · 오늘 23:59 마감</small></span>${icon("chevron", 16)}</button>
           </div>
-          <div class="weekly-stats"><div><strong>4<span>h</span> 32<span>m</span></strong><small>이번 주 학습</small></div><div><strong>72<span>%</span></strong><small>주간 목표</small></div><div><strong>3</strong><small>완료 미션</small></div></div>
         </article>
-        <article class="panel feedback-panel">
-          <div class="section-heading"><div><span class="eyebrow">NEW FEEDBACK</span><h2>새 피드백</h2></div><button class="icon-button">${icon("arrow", 18)}</button></div>
-          <div class="feedback-author"><span class="avatar coral">AI</span><div><b>AI 교관 피드백</b><small>미션 02 · 데이터 탐색</small></div><span>12분 전</span></div>
-          <blockquote>“결측치 처리 기준이 명확합니다. 다만 <mark>계절성 변화가 큰 품목군</mark>은 별도 검증 구간을 두어 보세요.”</blockquote>
-          <button class="secondary-button" data-action="open-ai">피드백 이어서 보기</button>
-        </article>
-        <article class="panel recommendations-panel">
-          <div class="section-heading"><div><span class="eyebrow">RECOMMENDED FOR YOU</span><h2>다음 역량을 준비하세요</h2></div><button class="text-button" data-action="go-explore">모두 보기 ${icon("arrow", 15)}</button></div>
-          <div class="mini-course-row">
-            ${projects.slice(1, 4).map((project) => miniCourse(project)).join("")}
+
+        <article class="panel ai-clue-card">
+          <div class="ai-clue-head"><span class="ai-clue-icon">${icon("sparkles", 19)}</span><div><span class="eyebrow">AI TUTOR · NEXT CLUE</span><h2>AI 교관의 다음 단서</h2></div><span class="verified-label">근거 2개</span></div>
+          <blockquote>“전체 평균을 다시 계산하기보다, 변동성이 큰 A·C 품목군을 별도 검증 구간으로 나눠 비교해 보세요.”</blockquote>
+          <div class="source-list">
+            <button><span>01</span><p><b>미션 가이드 3.2</b><small>검증 데이터 분할 기준 · v2.1</small></p>${icon("chevron", 14)}</button>
+            <button><span>02</span><p><b>수요 데이터 명세서</b><small>품목군별 계절성 지표 · v1.4</small></p>${icon("chevron", 14)}</button>
           </div>
+          <p class="ai-caution">${icon("shield", 14)} AI 답변은 제안입니다. 출처와 실제 데이터를 함께 확인하세요.</p>
+          <button class="text-button" data-action="open-ai">이 맥락으로 질문하기 ${icon("arrow", 14)}</button>
+        </article>
+
+        <article class="panel evidence-card">
+          <div class="section-heading"><div><span class="eyebrow">SKILL EVIDENCE</span><h2>이번 프로젝트의 역량 근거</h2></div><button class="icon-button" data-action="go-growth" aria-label="역량 근거 보기">${icon("arrow", 17)}</button></div>
+          <p>수강 완료가 아니라 제출물과 평가 결과가 근거로 반영됩니다.</p>
+          <div class="evidence-list">
+            <div><span class="evidence-icon confirmed">${icon("check", 14)}</span><p><b>데이터 품질 진단</b><small>미션 02 · 멘토 평가 통과</small></p><em>확인됨</em></div>
+            <div><span class="evidence-icon current">03</span><p><b>예측 모델 비교</b><small>수정본 평가 후 반영 예정</small></p><em>검토 중</em></div>
+            <div><span class="evidence-icon locked">${icon("shield", 13)}</span><p><b>의사결정 설명</b><small>미션 06 완료 후 확인</small></p><em>대기</em></div>
+          </div>
+          <button class="full-link" data-action="go-growth">역량 근거 전체 보기 ${icon("arrow", 14)}</button>
         </article>
       </div>
     </section>`;
@@ -458,21 +510,44 @@ function learningView() {
 }
 
 function workspaceView() {
-  const checklistItems = ["문제 정의 확인", "데이터 품질 점검", "기준선 모델 실행", "성능 비교표 첨부"];
+  const checklistItems = ["품목군별 검증 구간 추가", "MAPE 비교표 갱신", "선택 근거 3개 작성", "민감정보 포함 여부 확인"];
   return `
-    <section class="workspace-view">
-      <div class="workspace-header"><button class="icon-button" data-action="go-learning" aria-label="내 학습으로">←</button><div><span class="eyebrow">AI로 군수 수요 예측하기</span><h1>미션 03. 예측 모델 설계</h1></div><div class="workspace-status"><span>${icon("check", 14)} 저장됨</span><span class="deadline">D-09</span><button class="secondary-button compact" data-action="open-ai">${icon("sparkles", 16)} AI 교관</button></div></div>
+    <section class="workspace-view revision-workspace">
+      <div class="workspace-header"><button class="icon-button" data-action="go-home" aria-label="홈으로">←</button><div><span class="eyebrow">AI로 군수 수요 예측하기 · 결과물 v1.3</span><h1>미션 03. 예측 모델 설계</h1></div><div class="workspace-status"><span>${icon("check", 14)} 초안 저장됨</span><span class="deadline revision-deadline">수정 D-2</span><button class="secondary-button compact" data-action="open-ai">${icon("sparkles", 16)} AI 교관</button></div></div>
       <div class="workspace-grid">
-        <aside class="mission-sidebar"><span class="eyebrow">MISSION MAP · 48%</span>${progressBar(48)}<nav>${["문제 이해", "데이터 탐색", "모델 설계", "성능 검증", "대시보드", "최종 브리핑"].map((title, index) => `<button class="${index < 2 ? "complete" : index === 2 ? "active" : ""}"><span>${index < 2 ? icon("check", 14) : String(index + 1).padStart(2, "0")}</span><div><small>MISSION ${index + 1}</small><b>${title}</b></div></button>`).join("")}</nav><div class="team-mini"><div><span class="avatar">김</span><span class="avatar navy">박</span><span class="avatar coral">이</span></div><p><small>알파 2팀</small><b>팀 공간 열기 →</b></p></div></aside>
+        <aside class="mission-sidebar"><span class="eyebrow">MISSION FLOW · 48%</span>${progressBar(48)}<nav>${["문제 이해", "데이터 탐색", "모델 설계", "성능 검증", "대시보드", "최종 브리핑"].map((title, index) => `<button class="${index < 2 ? "complete" : index === 2 ? "active revision" : "locked"}"><span>${index < 2 ? icon("check", 14) : index > 2 ? icon("shield", 13) : "03"}</span><div><small>${index === 2 ? "보완 중" : index > 2 ? "잠김" : `MISSION ${index + 1}`}</small><b>${title}</b></div></button>`).join("")}</nav><div class="team-mini"><div><span class="avatar">김</span><span class="avatar navy">박</span><span class="avatar coral">이</span></div><p><small>알파 2팀</small><b>팀 공간 열기 →</b></p></div></aside>
         <article class="mission-content">
-          <nav class="workspace-tabs"><button class="active">미션 개요</button><button>수행 가이드</button><button>자료·데이터</button><button>결과물</button><button>피드백 <span>1</span></button></nav>
-          <div class="mission-document"><span class="eyebrow">MISSION OBJECTIVE</span><h2>기준선을 넘어서는 예측 모델을 설계하세요.</h2><p class="mission-lead">단순 이동평균 모델을 기준선으로 삼아 최소 두 가지 접근법을 비교하고, 선택한 모델이 현장 판단에 적합한 이유를 설명합니다.</p><div class="intel-box"><span>${icon("shield", 20)}</span><div><b>작전 요구사항</b><p>평균 절대 백분율 오차(MAPE) 18% 이하 · 추론 시간 2초 이내 · 선택 근거 3개 이상</p></div></div>
-            <h3><span>01</span> 수행 단계</h3><div class="step-grid"><div><em>STEP 01</em><b>기준선 설정</b><p>최근 4주 이동평균을 기준선으로 실행합니다.</p></div><div><em>STEP 02</em><b>후보 모델 비교</b><p>ARIMA와 Gradient Boosting의 성능을 비교합니다.</p></div><div><em>STEP 03</em><b>결과 해석</b><p>품목군별 오차와 작전상 위험을 설명합니다.</p></div></div>
-            <h3><span>02</span> 작업 노트</h3><div class="editor-shell"><div class="editor-toolbar"><button><b>B</b></button><button><i>I</i></button><button>☷</button><button>🔗</button><span></span><small>마지막 저장 18:41</small></div><textarea aria-label="작업 노트">기준선 모델의 MAPE는 23.7%였다. 계절성 변수를 추가한 Gradient Boosting 모델은 16.4%로 개선되었으며, 특히 정기 보급 품목군에서...</textarea></div>
+          <nav class="workspace-tabs"><button>미션 안내</button><button>자료·데이터</button><button class="active">결과물</button><button>버전 3</button><button>피드백 <span>2</span></button></nav>
+          ${state.submitted ? `
+            <div class="resubmit-success">
+              <span class="success-orbit">${icon("check", 25)}</span>
+              <span class="eyebrow">RESUBMITTED · VERSION 1.3</span>
+              <h2>더 선명해진 결과를 남겼습니다.</h2>
+              <p>수정본이 안전하게 제출됐습니다. 평가가 완료되면 알림으로 알려 드릴게요.</p>
+              <dl><div><dt>제출 버전</dt><dd>v1.3</dd></div><div><dt>제출 시각</dt><dd>2026.07.24 14:32</dd></div><div><dt>현재 상태</dt><dd><span class="status-pill waiting">평가 요청</span></dd></div></dl>
+              <div><button class="secondary-button" data-action="go-home">홈으로 돌아가기</button><button class="primary-button" data-action="open-ai">다음 미션 준비하기 ${icon("arrow", 16)}</button></div>
+            </div>` : `
+          <div class="revision-document">
+            <div class="revision-banner"><span>${icon("message", 19)}</span><div><small>수정 요청 · 루브릭 v2.1</small><strong>계절성 변동이 큰 품목군의 검증 근거를 보완해 주세요.</strong><p>현재 작성 내용은 보존되어 있습니다. 수정본은 새 버전으로 제출됩니다.</p></div><button class="text-button">피드백 원문 보기 ${icon("arrow", 14)}</button></div>
+            <div class="version-line"><span class="version-chip old">v1.2 제출본</span><i>${icon("arrow", 14)}</i><span class="version-chip current">v1.3 수정 중</span><em>${icon("check", 13)} 마지막 저장 14:21</em></div>
+
+            <section class="revision-section">
+              <div class="revision-title"><span>01</span><div><small>RESULT INTERPRETATION</small><h2>모델 선택 근거와 검증 결과</h2></div><button class="secondary-button compact">변경 내용 비교</button></div>
+              <div class="inline-feedback"><span class="feedback-source mentor">멘토</span><p>전체 MAPE 외에 변동성이 큰 품목군의 오차를 별도로 제시하면 선택 근거가 더 명확해집니다.</p><button aria-label="피드백 닫기">×</button></div>
+              <div class="editor-shell revision-editor"><div class="editor-toolbar"><button><b>B</b></button><button><i>I</i></button><button>☷</button><button>🔗</button><span></span><small>자동 저장 켜짐</small></div><textarea aria-label="수정 결과물">기준선 모델의 전체 MAPE는 23.7%였고, 계절성 변수를 추가한 Gradient Boosting 모델은 16.4%로 개선되었다.
+
+피드백을 반영해 변동성이 큰 A·C 품목군을 별도 검증했다. A 품목군은 29.1%에서 17.2%로, C 품목군은 26.8%에서 18.0%로 오차가 감소했다. 전체 평균뿐 아니라 품목군별 편차도 줄어 현장 적용 시 과소 예측 위험을 낮출 수 있다.</textarea></div>
+            </section>
+
+            <section class="revision-section evidence-attachment">
+              <div class="revision-title"><span>02</span><div><small>EVIDENCE</small><h2>검증 근거</h2></div><button class="secondary-button compact">${icon("upload", 15)} 근거 추가</button></div>
+              <div class="attachment-row"><span class="file-type">CSV</span><p><b>품목군별_성능비교_v3.csv</b><small>2.4 MB · 악성 파일 검사 완료 · 14:18</small></p><em class="validation-pass">${icon("check", 13)} 검증 완료</em><button class="icon-button" aria-label="파일 메뉴">•••</button></div>
+              <div class="attachment-row"><span class="file-type chart">PNG</span><p><b>모델오차_품목군비교.png</b><small>840 KB · 대체 텍스트 작성됨 · 14:19</small></p><em class="validation-pass">${icon("check", 13)} 검증 완료</em><button class="icon-button" aria-label="파일 메뉴">•••</button></div>
+            </section>
           </div>
-          <footer class="workspace-footer"><button class="secondary-button">임시저장</button><div><span>다음: 모델 성능 검증</span><button class="primary-button" data-action="submit-mission">${state.submitted ? "제출 완료" : "결과물 제출"} ${icon(state.submitted ? "check" : "arrow", 16)}</button></div></footer>
+          <footer class="workspace-footer revision-footer"><button class="secondary-button">미리보기</button><div><span>${state.checklist.size < checklistItems.length ? "확인 항목을 모두 완료하면 재제출할 수 있습니다." : "제출 후에는 v1.3이 평가 대상 버전으로 고정됩니다."}</span><button class="primary-button" data-action="resubmit-mission" ${state.checklist.size < checklistItems.length ? "disabled" : ""}>수정본 재제출 ${icon("arrow", 16)}</button></div></footer>`}
         </article>
-        <aside class="mission-tools"><div class="tools-head"><span class="eyebrow">MISSION CHECK</span><strong>${state.checklist.size} / ${checklistItems.length} 완료</strong></div>${progressBar((state.checklist.size / checklistItems.length) * 100)}<div class="checklist">${checklistItems.map((item) => `<label class="${state.checklist.has(item) ? "done" : ""}"><input type="checkbox" data-check="${item}" ${state.checklist.has(item) ? "checked" : ""}/><span>${state.checklist.has(item) ? icon("check", 13) : ""}</span>${item}</label>`).join("")}</div><div class="rubric"><span class="eyebrow">EVALUATION RUBRIC</span><div><b>모델 성능</b><span>40%</span></div><div><b>선택 근거</b><span>30%</span></div><div><b>결과 해석</b><span>30%</span></div><button>전체 평가 기준 보기 ${icon("arrow", 14)}</button></div><div class="resource-box"><span>${icon("file", 20)}</span><div><b>군수 수요 데이터.csv</b><small>12.4 MB · 보안등급 일반</small></div><button aria-label="파일 받기">↓</button></div><button class="ai-callout" data-action="open-ai"><span>${icon("sparkles", 19)}</span><div><b>막힌 부분이 있나요?</b><small>답 대신 해결의 실마리를 드려요.</small></div>${icon("arrow", 16)}</button></aside>
+        <aside class="mission-tools revision-tools"><div class="tools-head"><span class="eyebrow">RESUBMIT CHECK</span><strong>${state.checklist.size} / ${checklistItems.length} 확인</strong></div>${progressBar((state.checklist.size / checklistItems.length) * 100)}<div class="checklist">${checklistItems.map((item) => `<label class="${state.checklist.has(item) ? "done" : ""}"><input type="checkbox" data-check="${item}" ${state.checklist.has(item) ? "checked" : ""}/><span>${state.checklist.has(item) ? icon("check", 13) : ""}</span>${item}</label>`).join("")}</div><div class="rubric rubric-focus"><span class="eyebrow">FEEDBACK SOURCES</span><div><b>멘토 피드백</b><span>1건</span></div><div><b>동료 피드백</b><span>1건</span></div><div><b>AI 점검</b><span>제안</span></div><button>출처별 피드백 보기 ${icon("arrow", 14)}</button></div><div class="source-mini"><span>${icon("file", 18)}</span><p><b>적용 중인 평가 기준</b><small>루브릭 v2.1 · 게시 2026.07.01</small></p></div><button class="ai-callout" data-action="open-ai"><span>${icon("sparkles", 19)}</span><div><b>수정본을 함께 점검할까요?</b><small>현재 결과물과 근거 2개를 읽고 있어요.</small></div>${icon("arrow", 16)}</button><p class="privacy-microcopy">${icon("shield", 13)} AI 대화 원문은 평가 근거로 자동 사용되지 않습니다.</p></aside>
       </div>
     </section>`;
 }
@@ -605,11 +680,13 @@ document.addEventListener("click", (event) => {
     "go-explore": () => navigate("explore"),
     "go-learning": () => navigate("learning"),
     "go-peer": () => navigate("peer"),
+    "go-growth": () => navigate("growth"),
     "go-home": () => navigate(state.role === "learner" ? "home" : state.role),
     "continue-learning": () => navigate("workspace"),
     "start-project": () => { navigate("workspace"); toast("프로젝트 학습을 시작했습니다."); },
     "clear-filters": () => { state.filter = "전체"; state.search = ""; render(); },
     "submit-mission": () => { state.submitted = true; render(); toast("미션 결과물이 제출되었습니다. 동료평가를 요청할 수 있어요."); },
+    "resubmit-mission": () => { state.submitted = true; render(); toast("수정본 v1.3이 안전하게 제출되었습니다."); },
   };
   actions[actionTarget.dataset.action]?.();
 });
