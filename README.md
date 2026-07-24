@@ -1,5 +1,10 @@
 # AI 코드 중심 디자인 AX 실행 가이드
 
+## MILI AI 2.0 상세 IA
+
+ERD와 임시 IA를 기반으로 정리한 프론트엔드 화면 설계용 문서는
+[docs/ia/README.md](./docs/ia/README.md)에서 확인할 수 있다.
+
 > Codex·Figma 혼합 운영을 위한 팀용 101 가이드
 >
 > 대상: 디자이너 · 프론트엔드 개발자 · PM · AI 코딩 도구 사용자  
