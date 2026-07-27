@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ko" data-theme="digital-camouflage">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>VOD-01 · VOD 목록 · MILI AI</title><link rel="stylesheet" href="../src/design-system/foundation.css"><link rel="stylesheet" href="../src/design-system/themes/digital-camouflage.css"><link rel="stylesheet" href="./shared/screens.css"><script type="module" src="./shared/screens.js"></script></head>
+<body data-screen-id="VOD-01" data-ui-state="default"><mili-shell active="VOD-01" title="VOD">
+  <div class="default-state">
+    <section class="page-intro"><div class="page-intro__copy"><p class="kicker">ON-DEMAND LEARNING / 38 COURSES</p><h1>필요할 때 바로 배우는<br>실무 중심 VOD.</h1><p>짧은 개념 학습부터 단계별 심화 과정까지 현재 임무에 맞춰 선택합니다.</p></div></section>
+    <div class="control-bar"><div class="tabs" data-tabs><button class="tab" data-tab="all" aria-selected="true" type="button">전체 과정</button><button class="tab" data-tab="vod" aria-selected="false" type="button">AI 기초</button></div><span class="control-spacer"></span><button class="filter-chip" data-filter aria-pressed="false" type="button">Basic</button><button class="filter-chip" data-filter aria-pressed="false" type="button">Intermediate</button><button class="filter-chip" data-filter aria-pressed="false" type="button">수강 가능</button><select class="select-control" aria-label="정렬"><option>추천순</option><option>신규순</option></select></div>
+    <section class="section"><div class="section-heading"><h2>추천 과정</h2><p>현재 역량 기준</p></div><div class="grid-3">
+      <article class="content-card" data-type="vod"><div class="content-card__visual"><span class="ds-badge" data-tone="accent">우선 학습</span><strong>01</strong></div><p>Intermediate · 8강 · 2시간 40분</p><h3>업무를 바꾸는 생성형 AI 프롬프트</h3><p>명확한 지시와 출력 조건을 설계하는 실무 과정</p><div class="card-foot"><span class="task-meta">수료 기준 80%</span><button class="wishlist" aria-pressed="false" data-wishlist type="button">관심 저장</button></div></article>
+      <article class="content-card" data-type="vod"><div class="content-card__visual"><span class="ds-badge">신규</span><strong>02</strong></div><p>Basic · 5강 · 1시간 30분</p><h3>데이터를 안전하게 다루는 기본 원칙</h3><p>보안 환경에서 지켜야 할 데이터 처리 기준</p><div class="card-foot"><span class="task-meta">즉시 수강</span><button class="wishlist" aria-pressed="true" data-wishlist type="button">저장됨</button></div></article>
+      <article class="content-card" data-type="vod"><div class="content-card__visual"><span class="ds-badge">인기</span><strong>03</strong></div><p>Intermediate · 10강 · 3시간 10분</p><h3>Python으로 시작하는 데이터 분석</h3><p>업무 데이터를 정리하고 의미를 찾는 분석 입문</p><div class="card-foot"><span class="task-meta">수강생 1,248명</span><button class="wishlist" aria-pressed="false" data-wishlist type="button">관심 저장</button></div></article>
+      <article class="content-card" data-type="vod"><div class="content-card__visual"><span class="ds-badge">필수</span><strong>04</strong></div><p>Basic · 4강 · 55분</p><h3>생성형 AI 보안 수칙</h3><p>입력 금지 정보와 결과물 검증 절차를 익힙니다.</p><div class="card-foot"><span class="task-meta">연 1회 필수</span><button class="wishlist" aria-pressed="false" data-wishlist type="button">관심 저장</button></div></article>
+    </div></section>
+  </div>
+  <section class="state-panel" data-state="loading"><div><span class="state-code">LOADING / VOD-01</span><h2>과정 목록을 불러오고 있습니다.</h2><p>수강 가능 여부를 확인하는 중입니다.</p></div></section>
+  <section class="state-panel" data-state="empty"><div><span class="state-code">EMPTY / VOD-01</span><h2>조건에 맞는 과정이 없습니다.</h2><p>난이도 또는 상태 필터를 초기화해 보세요.</p></div></section>
+  <section class="state-panel" data-state="error"><div><span class="state-code">ERROR / VOD-01</span><h2>과정 목록을 불러오지 못했습니다.</h2><p>잠시 뒤 다시 시도해 주세요.</p></div></section>
+  <section class="state-panel" data-state="forbidden"><div><span class="state-code">403 / VOD-01</span><h2>VOD 열람 권한이 없습니다.</h2><p>교육 담당자에게 수강 권한을 요청해 주세요.</p></div></section>
+</mili-shell></body></html>

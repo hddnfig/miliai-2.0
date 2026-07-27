@@ -1,13 +1,16 @@
-const prototypeRoutes = new Map([
-  ["HOME-01", "home"],
-  ["EXP-01", "explore"],
-  ["PBL-02", "project"],
-  ["MYL-01", "learning"],
-  ["PBL-05", "workspace"],
-  ["PBL-09", "peer"],
-  ["GROW-01", "growth"],
-  ["CMD-01", "commander"],
-  ["ADM-01", "admin"],
+const screenLinks = new Map([
+  ["HOME-01", { href: "./screens/HOME-01.html", status: "verified", label: "검수 완료 · 독립 HTML" }],
+  ["EXP-01", { href: "./screens/EXP-01.html", status: "verified", label: "검수 완료 · 독립 HTML" }],
+  ["VOD-01", { href: "./screens/VOD-01.html", status: "verified", label: "검수 완료 · 독립 HTML" }],
+  ["PBL-01", { href: "./screens/PBL-01.html", status: "verified", label: "검수 완료 · 독립 HTML" }],
+  ["SRCH-01", { href: "./screens/SRCH-01.html", status: "verified", label: "검수 완료 · 독립 HTML" }],
+  ["PBL-02", { href: "./prototype.html#/project", status: "prototype", label: "내부 작업 중 · 통합 프로토타입" }],
+  ["MYL-01", { href: "./prototype.html#/learning", status: "prototype", label: "내부 작업 중 · 통합 프로토타입" }],
+  ["PBL-05", { href: "./prototype.html#/workspace", status: "prototype", label: "내부 작업 중 · 통합 프로토타입" }],
+  ["PBL-09", { href: "./prototype.html#/peer", status: "prototype", label: "내부 작업 중 · 통합 프로토타입" }],
+  ["GROW-01", { href: "./prototype.html#/growth", status: "prototype", label: "내부 작업 중 · 통합 프로토타입" }],
+  ["CMD-01", { href: "./prototype.html#/commander", status: "prototype", label: "내부 작업 중 · 통합 프로토타입" }],
+  ["ADM-01", { href: "./prototype.html#/admin", status: "prototype", label: "내부 작업 중 · 통합 프로토타입" }],
 ]);
 
 const state = {
@@ -36,16 +39,16 @@ function statusContent(screen) {
   wrapper.className = "screen-status";
 
   const badge = document.createElement("span");
-  const route = prototypeRoutes.get(screen.id);
-  badge.className = `screen-badge ${route ? "prototype" : "planned"}`;
-  badge.textContent = route ? "내부 작업 중 · 프로토타입" : "내부 작업 중";
+  const linkInfo = screenLinks.get(screen.id);
+  badge.className = `screen-badge ${linkInfo?.status ?? "planned"}`;
+  badge.textContent = linkInfo?.label ?? "내부 작업 중";
   wrapper.append(badge);
 
-  if (route) {
+  if (linkInfo) {
     const link = document.createElement("a");
-    link.href = `./prototype.html#/${route}`;
+    link.href = linkInfo.href;
     link.textContent = "화면 열기 →";
-    link.setAttribute("aria-label", `${screen.name} 프로토타입 열기`);
+    link.setAttribute("aria-label", `${screen.name} 화면 열기`);
     wrapper.append(link);
   } else {
     const note = document.createElement("small");
@@ -59,12 +62,10 @@ function statusContent(screen) {
 function render() {
   const query = state.search.trim().toLocaleLowerCase("ko");
   const filtered = state.screens.filter((screen) => {
-    const hasPrototype = prototypeRoutes.has(screen.id);
+    const status = screenLinks.get(screen.id)?.status ?? "planned";
     const matchesQuery = !query || `${screen.id} ${screen.name} ${screen.group}`.toLocaleLowerCase("ko").includes(query);
     const matchesGroup = state.group === "all" || screen.group === state.group;
-    const matchesStatus = state.status === "all"
-      || (state.status === "prototype" && hasPrototype)
-      || (state.status === "planned" && !hasPrototype);
+    const matchesStatus = state.status === "all" || state.status === status;
     return matchesQuery && matchesGroup && matchesStatus;
   });
 
@@ -91,7 +92,8 @@ function render() {
     list.append(row);
   }
 
-  result.textContent = `전체 ${state.screens.length}개 중 ${filtered.length}개 화면 표시 · 프로토타입 연결 ${prototypeRoutes.size}개`;
+  const verifiedCount = state.screens.filter((screen) => screen.status === "verified").length;
+  result.textContent = `전체 ${state.screens.length}개 중 ${filtered.length}개 화면 표시 · 검수 완료 ${verifiedCount}개 · 화면 연결 ${screenLinks.size}개`;
 }
 
 function populateGroups() {
@@ -111,7 +113,8 @@ async function loadRegistry() {
     const registry = await response.json();
     state.screens = registry.screens;
     document.querySelector("#total-count").textContent = registry.pageCount;
-    document.querySelector("#linked-count").textContent = prototypeRoutes.size;
+    document.querySelector("#linked-count").textContent = screenLinks.size;
+    document.querySelector("#verified-count").textContent = registry.screens.filter(({ status }) => status === "verified").length;
     populateGroups();
     render();
   } catch (error) {

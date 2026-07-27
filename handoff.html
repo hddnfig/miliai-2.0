@@ -70,7 +70,7 @@
         <dl class="handoff-summary" aria-label="전달 현황">
           <div><dt>화면 원장</dt><dd id="total-count">70</dd></div>
           <div><dt>연결된 프로토타입</dt><dd id="linked-count">9</dd></div>
-          <div><dt>최종 승인</dt><dd>0</dd></div>
+          <div><dt>검수 완료</dt><dd id="verified-count">5</dd></div>
           <div><dt>기준 버전</dt><dd>0.1.0</dd></div>
         </dl>
       </section>
@@ -89,6 +89,7 @@
           <a class="document-card ds-surface" href="./docs/README_HTML_COLLABORATION_GUIDE.md"><span>GUIDE</span><h3>HTML 협업 가이드</h3><p>브랜치, 작업 범위, 메타 주석, TBD 및 외부 전달 원칙</p></a>
           <a class="document-card ds-surface" href="./docs/ia/README.md"><span>IA</span><h3>상세 정보 구조</h3><p>70개 화면의 목적, 흐름, 상태와 데이터 추적 관계</p></a>
           <a class="document-card ds-surface" href="./docs/design/README.md"><span>DESIGN</span><h3>화면 디자인 기반</h3><p>화면 원장, 시맨틱 토큰과 후보 디자인 컨셉 상태</p></a>
+          <a class="document-card ds-surface" href="./docs/design/design-execution-order.md"><span>ORDER</span><h3>디자인 실행 원장</h3><p>70개 화면의 우선순위, 진행 순서와 완료 체크리스트</p></a>
           <a class="document-card ds-surface" href="./docs/mili-ai-worldbuilding.md"><span>CONTENT</span><h3>세계관 및 콘텐츠 원칙</h3><p>표현 레벨, 카피 방향과 사용 범위</p></a>
         </div>
       </section>
@@ -98,7 +99,7 @@
         <div class="screen-controls">
           <label class="screen-search"><span>화면 검색</span><input class="ds-input" id="screen-search" type="search" placeholder="화면 ID 또는 화면명" /></label>
           <label><span>영역</span><select class="ds-input" id="group-filter"><option value="all">전체 영역</option></select></label>
-          <label><span>상태</span><select class="ds-input" id="status-filter"><option value="all">전체 상태</option><option value="prototype">프로토타입 연결</option><option value="planned">내부 작업 중</option></select></label>
+          <label><span>상태</span><select class="ds-input" id="status-filter"><option value="all">전체 상태</option><option value="verified">검수 완료</option><option value="prototype">통합 프로토타입</option><option value="planned">내부 작업 중</option></select></label>
         </div>
         <p class="screen-result" id="screen-result" role="status">화면 원장을 불러오는 중입니다.</p>
         <div class="screen-table-wrap ds-surface">

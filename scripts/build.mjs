@@ -15,6 +15,13 @@ const required = [
   "system/index.html",
   "system/system.css",
   "system/system.js",
+  "screens/HOME-01.html",
+  "screens/EXP-01.html",
+  "screens/VOD-01.html",
+  "screens/PBL-01.html",
+  "screens/SRCH-01.html",
+  "screens/shared/screens.css",
+  "screens/shared/screens.js",
   "src/design-system/foundation.css",
   "src/design-system/themes/digital-camouflage.css",
   "assets/concepts/digital-camouflage/terrain-network-v1.png",
@@ -31,7 +38,8 @@ await cp(resolve(root, "handoff.html"), resolve(output, "handoff.html"));
 await cp(resolve(root, "prototype.html"), resolve(output, "prototype.html"));
 await cp(resolve(root, "src"), resolve(output, "src"), { recursive: true });
 await cp(resolve(root, "system"), resolve(output, "system"), { recursive: true });
+await cp(resolve(root, "screens"), resolve(output, "screens"), { recursive: true });
 await cp(resolve(root, "assets"), resolve(output, "assets"), { recursive: true });
 await cp(resolve(root, "docs"), resolve(output, "docs"), { recursive: true });
 
-console.log(`Built design foundation and prototype assets into ${output}`);
+console.log(`Built design foundation, first design group, and prototype assets into ${output}`);

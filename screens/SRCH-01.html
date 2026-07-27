@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ko" data-theme="digital-camouflage">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>SRCH-01 · 통합 검색 · MILI AI</title><link rel="stylesheet" href="../src/design-system/foundation.css"><link rel="stylesheet" href="../src/design-system/themes/digital-camouflage.css"><link rel="stylesheet" href="./shared/screens.css"><script type="module" src="./shared/screens.js"></script></head>
+<body data-screen-id="SRCH-01" data-ui-state="default"><mili-shell active="SRCH-01" title="통합 검색">
+  <div class="default-state">
+    <section class="search-hero"><p class="kicker">GLOBAL SEARCH / ALL KNOWLEDGE</p><h1>무엇을 배우고<br>해결하고 싶으신가요?</h1><form class="search-box" onsubmit="event.preventDefault()"><input class="ds-input" data-live-search value="생성형 AI" aria-label="검색어" placeholder="과정, 프로젝트, 게시글 검색"><button class="ds-button" type="submit">검색</button></form></section>
+    <div class="control-bar"><div class="tabs" data-tabs><button class="tab" data-tab="all" aria-selected="true" type="button">전체 18</button><button class="tab" data-tab="vod" aria-selected="false" type="button">VOD 8</button><button class="tab" data-tab="pbl" aria-selected="false" type="button">PBL 4</button><button class="tab" data-tab="community" aria-selected="false" type="button">커뮤니티 6</button></div><span class="control-spacer"></span><button class="filter-chip" data-filter aria-pressed="false" type="button">수강 가능</button></div>
+    <section class="ds-surface surface-card">
+      <div class="section-heading"><h2>‘생성형 AI’ 검색 결과</h2><p>정확도순</p></div>
+      <article class="result-row" data-type="vod" data-search-item><span class="result-code">VOD / 01</span><div><h3>업무를 바꾸는 생성형 AI 프롬프트</h3><p class="muted">Intermediate · 8강 · 2시간 40분</p></div><a class="link-inline" href="./VOD-01.html">과정 보기</a></article>
+      <article class="result-row" data-type="pbl" data-search-item><span class="result-code">PBL / 02</span><div><h3>생성형 AI로 반복 보고업무 자동화</h3><p class="muted">Basic · 개인 프로젝트 · 모집 D-5</p></div><a class="link-inline" href="./PBL-01.html">프로젝트 보기</a></article>
+      <article class="result-row" data-type="community" data-search-item><span class="result-code">COM / 03</span><div><h3>생성형 AI 결과물 검토 기준을 공유합니다</h3><p class="muted">Q&A · 답변 8 · 2일 전</p></div><button class="link-inline" data-toast="커뮤니티 상세는 5단계에서 연결합니다." type="button">게시글 보기</button></article>
+      <article class="result-row" data-type="vod" data-search-item><span class="result-code">VOD / 04</span><div><h3>안전한 생성형 AI 활용과 데이터 보안</h3><p class="muted">Basic · 4강 · 55분</p></div><a class="link-inline" href="./VOD-01.html">과정 보기</a></article>
+    </section>
+  </div>
+  <section class="state-panel" data-state="loading"><div><span class="state-code">LOADING / SRCH-01</span><h2>전체 영역을 검색하고 있습니다.</h2><p>과정, 프로젝트, 게시글 결과를 묶는 중입니다.</p></div></section>
+  <section class="state-panel" data-state="empty"><div><span class="state-code">EMPTY / SRCH-01</span><h2>일치하는 검색 결과가 없습니다.</h2><p>검색어를 줄이거나 다른 표현으로 검색해 보세요.</p></div></section>
+  <section class="state-panel" data-state="error"><div><span class="state-code">ERROR / SRCH-01</span><h2>검색을 완료하지 못했습니다.</h2><p>연결 상태를 확인한 뒤 다시 시도해 주세요.</p></div></section>
+  <section class="state-panel" data-state="forbidden"><div><span class="state-code">403 / SRCH-01</span><h2>검색할 수 없는 영역입니다.</h2><p>현재 역할에 허용된 콘텐츠만 검색할 수 있습니다.</p></div></section>
+</mili-shell></body></html>
