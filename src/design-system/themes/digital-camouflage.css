@@ -1,0 +1,41 @@
+@layer tokens {
+  [data-theme="digital-camouflage"] {
+    color-scheme: dark;
+
+    --ds-bg-canvas: #050705;
+    --ds-bg-shell: #080d08;
+    --ds-bg-surface: rgba(17, 20, 17, 0.94);
+    --ds-bg-elevated: #1a1d1a;
+    --ds-bg-muted: #242824;
+    --ds-bg-inset: #0d100d;
+
+    --ds-text-primary: #f4f7f2;
+    --ds-text-secondary: #c2c8c0;
+    --ds-text-tertiary: #858d82;
+    --ds-text-inverse: #102000;
+
+    --ds-accent: #a8ff1a;
+    --ds-accent-hover: #94ea08;
+    --ds-accent-muted: rgba(168, 255, 26, 0.13);
+    --ds-accent-text: #c5ff66;
+
+    --ds-border-subtle: rgba(255, 255, 255, 0.07);
+    --ds-border-strong: rgba(255, 255, 255, 0.16);
+    --ds-focus-ring: rgba(168, 255, 26, 0.58);
+
+    --ds-action-primary: #a8ff1a;
+    --ds-action-primary-hover: #94ea08;
+    --ds-action-primary-text: #102000;
+
+    --ds-status-info: #72b9ff;
+    --ds-status-success: #87dc67;
+    --ds-status-warning: #ffd16a;
+    --ds-status-danger: #ff786a;
+
+    --ds-shadow-overlay: 0 24px 80px rgba(0, 0, 0, 0.48);
+
+    --ds-asset-background: url("../../../assets/concepts/digital-camouflage/terrain-network-v1.png");
+    --ds-asset-texture: url("../../../assets/concepts/digital-camouflage/camo-texture-v1.png");
+    --ds-asset-scrim: rgba(0, 0, 0, 0.28);
+  }
+}

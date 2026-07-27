@@ -1,0 +1,1268 @@
+{
+  "source": "docs/ia/02-screen-inventory.md",
+  "generatedBy": "scripts/generate-screen-registry.mjs",
+  "pageCount": 70,
+  "stateRule": "Dynamic UI states stay inside the owning HTML page and may be selected with a state query parameter.",
+  "screens": [
+    {
+      "id": "PUB-01",
+      "name": "서비스 홈",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "PUB",
+      "group": "공통·인증",
+      "iaPath": "/",
+      "artifactPath": "/screens/PUB-01.html",
+      "shell": "public",
+      "pattern": "content",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "PUB-02",
+      "name": "서비스 소개",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "PUB",
+      "group": "공통·인증",
+      "iaPath": "/about",
+      "artifactPath": "/screens/PUB-02.html",
+      "shell": "public",
+      "pattern": "content",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "AUTH-01",
+      "name": "로그인",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "AUTH",
+      "group": "공통·인증",
+      "iaPath": "/login",
+      "artifactPath": "/screens/AUTH-01.html",
+      "shell": "auth",
+      "pattern": "form-flow",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "AUTH-02",
+      "name": "회원가입",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "AUTH",
+      "group": "공통·인증",
+      "iaPath": "/signup",
+      "artifactPath": "/screens/AUTH-02.html",
+      "shell": "auth",
+      "pattern": "form-flow",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "AUTH-03",
+      "name": "온보딩",
+      "priority": "P0",
+      "certainty": "I",
+      "domain": "AUTH",
+      "group": "공통·인증",
+      "iaPath": "/onboarding",
+      "artifactPath": "/screens/AUTH-03.html",
+      "shell": "auth",
+      "pattern": "form-flow",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "AUTH-04",
+      "name": "계정 찾기",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "AUTH",
+      "group": "공통·인증",
+      "iaPath": "/account/recovery",
+      "artifactPath": "/screens/AUTH-04.html",
+      "shell": "auth",
+      "pattern": "form-flow",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "AUTH-05",
+      "name": "접근 제한",
+      "priority": "P1",
+      "certainty": "I",
+      "domain": "AUTH",
+      "group": "공통·인증",
+      "iaPath": "/forbidden",
+      "artifactPath": "/screens/AUTH-05.html",
+      "shell": "auth",
+      "pattern": "content",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "HOME-01",
+      "name": "학습자 홈",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "HOME",
+      "group": "홈·탐색",
+      "iaPath": "/home",
+      "artifactPath": "/screens/HOME-01.html",
+      "shell": "learner",
+      "pattern": "content",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "SRCH-01",
+      "name": "통합 검색",
+      "priority": "P0",
+      "certainty": "I",
+      "domain": "SRCH",
+      "group": "홈·탐색",
+      "iaPath": "/search?q=",
+      "artifactPath": "/screens/SRCH-01.html",
+      "shell": "learner",
+      "pattern": "catalog",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "EXP-01",
+      "name": "학습 탐색",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "EXP",
+      "group": "홈·탐색",
+      "iaPath": "/explore",
+      "artifactPath": "/screens/EXP-01.html",
+      "shell": "learner",
+      "pattern": "catalog",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "VOD-01",
+      "name": "VOD 목록",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "VOD",
+      "group": "홈·탐색",
+      "iaPath": "/vod",
+      "artifactPath": "/screens/VOD-01.html",
+      "shell": "learner",
+      "pattern": "catalog",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "PBL-01",
+      "name": "PBL 목록",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "PBL",
+      "group": "홈·탐색",
+      "iaPath": "/projects",
+      "artifactPath": "/screens/PBL-01.html",
+      "shell": "learner",
+      "pattern": "catalog",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "NOTICE-01",
+      "name": "알림 센터",
+      "priority": "P1",
+      "certainty": "I",
+      "domain": "NOTICE",
+      "group": "홈·탐색",
+      "iaPath": "/notifications",
+      "artifactPath": "/screens/NOTICE-01.html",
+      "shell": "learner",
+      "pattern": "content",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "VOD-02",
+      "name": "VOD 상세",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "VOD",
+      "group": "VOD 학습",
+      "iaPath": "/vod/:courseId",
+      "artifactPath": "/screens/VOD-02.html",
+      "shell": "learner",
+      "pattern": "detail",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "VOD-03",
+      "name": "수강 신청 결과",
+      "priority": "P0",
+      "certainty": "I",
+      "domain": "VOD",
+      "group": "VOD 학습",
+      "iaPath": "/vod/:courseId/enroll",
+      "artifactPath": "/screens/VOD-03.html",
+      "shell": "learner",
+      "pattern": "detail",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "VOD-04",
+      "name": "VOD 플레이어",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "VOD",
+      "group": "VOD 학습",
+      "iaPath": "/vod/:courseId/learn/:itemId",
+      "artifactPath": "/screens/VOD-04.html",
+      "shell": "focus",
+      "pattern": "focus-workspace",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "VOD-05",
+      "name": "퀴즈",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "VOD",
+      "group": "VOD 학습",
+      "iaPath": "/vod/:courseId/quiz/:quizId",
+      "artifactPath": "/screens/VOD-05.html",
+      "shell": "focus",
+      "pattern": "form-flow",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "VOD-06",
+      "name": "코딩 실습",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "VOD",
+      "group": "VOD 학습",
+      "iaPath": "/vod/:courseId/coding/:codingId",
+      "artifactPath": "/screens/VOD-06.html",
+      "shell": "focus",
+      "pattern": "focus-workspace",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "VOD-07",
+      "name": "설문",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "VOD",
+      "group": "VOD 학습",
+      "iaPath": "/vod/:courseId/survey/:surveyId",
+      "artifactPath": "/screens/VOD-07.html",
+      "shell": "focus",
+      "pattern": "form-flow",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "VOD-08",
+      "name": "과정 완료",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "VOD",
+      "group": "VOD 학습",
+      "iaPath": "/vod/:courseId/complete",
+      "artifactPath": "/screens/VOD-08.html",
+      "shell": "learner",
+      "pattern": "detail",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "PBL-02",
+      "name": "PBL 상세",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "PBL",
+      "group": "PBL 학습",
+      "iaPath": "/projects/:projectId",
+      "artifactPath": "/screens/PBL-02.html",
+      "shell": "learner",
+      "pattern": "detail",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "PBL-03",
+      "name": "참여 신청",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "PBL",
+      "group": "PBL 학습",
+      "iaPath": "/projects/:projectId/enroll",
+      "artifactPath": "/screens/PBL-03.html",
+      "shell": "learner",
+      "pattern": "form-flow",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "PBL-04",
+      "name": "팀 구성",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "PBL",
+      "group": "PBL 학습",
+      "iaPath": "/projects/:projectId/team",
+      "artifactPath": "/screens/PBL-04.html",
+      "shell": "learner",
+      "pattern": "form-flow",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "PBL-05",
+      "name": "프로젝트 워크스페이스",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "PBL",
+      "group": "PBL 학습",
+      "iaPath": "/projects/:projectId/workspace",
+      "artifactPath": "/screens/PBL-05.html",
+      "shell": "focus",
+      "pattern": "workspace",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "PBL-06",
+      "name": "미션 상세",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "PBL",
+      "group": "PBL 학습",
+      "iaPath": "/projects/:projectId/missions/:missionId",
+      "artifactPath": "/screens/PBL-06.html",
+      "shell": "focus",
+      "pattern": "workspace",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "PBL-07",
+      "name": "문제 수행",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "PBL",
+      "group": "PBL 학습",
+      "iaPath": "/projects/:projectId/problems/:problemId",
+      "artifactPath": "/screens/PBL-07.html",
+      "shell": "focus",
+      "pattern": "focus-workspace",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "PBL-08",
+      "name": "미션 제출",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "PBL",
+      "group": "PBL 학습",
+      "iaPath": "/projects/:projectId/missions/:missionId/submit",
+      "artifactPath": "/screens/PBL-08.html",
+      "shell": "focus",
+      "pattern": "workspace",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "PBL-09",
+      "name": "동료평가 허브",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "PBL",
+      "group": "PBL 학습",
+      "iaPath": "/peer-reviews",
+      "artifactPath": "/screens/PBL-09.html",
+      "shell": "learner",
+      "pattern": "catalog",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "PBL-10",
+      "name": "동료평가 작성",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "PBL",
+      "group": "PBL 학습",
+      "iaPath": "/peer-reviews/:requestId",
+      "artifactPath": "/screens/PBL-10.html",
+      "shell": "learner",
+      "pattern": "form-flow",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "PBL-11",
+      "name": "결과/회고",
+      "priority": "P1",
+      "certainty": "I",
+      "domain": "PBL",
+      "group": "PBL 학습",
+      "iaPath": "/projects/:projectId/result",
+      "artifactPath": "/screens/PBL-11.html",
+      "shell": "learner",
+      "pattern": "detail",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "COM-01",
+      "name": "커뮤니티 허브",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "COM",
+      "group": "커뮤니티",
+      "iaPath": "/community",
+      "artifactPath": "/screens/COM-01.html",
+      "shell": "learner",
+      "pattern": "catalog",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "COM-02",
+      "name": "게시판 목록",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "COM",
+      "group": "커뮤니티",
+      "iaPath": "/community/:boardId",
+      "artifactPath": "/screens/COM-02.html",
+      "shell": "learner",
+      "pattern": "catalog",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "COM-03",
+      "name": "게시글 상세",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "COM",
+      "group": "커뮤니티",
+      "iaPath": "/community/:boardId/:postId",
+      "artifactPath": "/screens/COM-03.html",
+      "shell": "learner",
+      "pattern": "detail",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "COM-04",
+      "name": "게시글 작성·수정",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "COM",
+      "group": "커뮤니티",
+      "iaPath": "/community/:boardId/write",
+      "artifactPath": "/screens/COM-04.html",
+      "shell": "learner",
+      "pattern": "structured-editor",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "MYL-01",
+      "name": "내 학습",
+      "priority": "P0",
+      "certainty": "C",
+      "domain": "MYL",
+      "group": "내 학습·성장·MY",
+      "iaPath": "/me/learning",
+      "artifactPath": "/screens/MYL-01.html",
+      "shell": "learner",
+      "pattern": "content",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "GROW-01",
+      "name": "성장 대시보드",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "GROW",
+      "group": "내 학습·성장·MY",
+      "iaPath": "/growth",
+      "artifactPath": "/screens/GROW-01.html",
+      "shell": "learner",
+      "pattern": "dashboard",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "GROW-02",
+      "name": "역량 맵",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "GROW",
+      "group": "내 학습·성장·MY",
+      "iaPath": "/growth/skills",
+      "artifactPath": "/screens/GROW-02.html",
+      "shell": "learner",
+      "pattern": "dashboard",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "GROW-03",
+      "name": "역량진단",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "GROW",
+      "group": "내 학습·성장·MY",
+      "iaPath": "/assessment",
+      "artifactPath": "/screens/GROW-03.html",
+      "shell": "learner",
+      "pattern": "form-flow",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "GROW-04",
+      "name": "로드맵",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "GROW",
+      "group": "내 학습·성장·MY",
+      "iaPath": "/roadmap",
+      "artifactPath": "/screens/GROW-04.html",
+      "shell": "learner",
+      "pattern": "content",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "GROW-05",
+      "name": "수료증",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "GROW",
+      "group": "내 학습·성장·MY",
+      "iaPath": "/me/certificates",
+      "artifactPath": "/screens/GROW-05.html",
+      "shell": "learner",
+      "pattern": "catalog",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "MY-01",
+      "name": "프로필",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "MY",
+      "group": "내 학습·성장·MY",
+      "iaPath": "/me/profile",
+      "artifactPath": "/screens/MY-01.html",
+      "shell": "learner",
+      "pattern": "form-flow",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "MY-02",
+      "name": "관심 콘텐츠",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "MY",
+      "group": "내 학습·성장·MY",
+      "iaPath": "/me/wishlist",
+      "artifactPath": "/screens/MY-02.html",
+      "shell": "learner",
+      "pattern": "catalog",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "MY-03",
+      "name": "내 활동",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "MY",
+      "group": "내 학습·성장·MY",
+      "iaPath": "/me/activity",
+      "artifactPath": "/screens/MY-03.html",
+      "shell": "learner",
+      "pattern": "catalog",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "MY-04",
+      "name": "크레딧",
+      "priority": "P2",
+      "certainty": "P",
+      "domain": "MY",
+      "group": "내 학습·성장·MY",
+      "iaPath": "/me/credits",
+      "artifactPath": "/screens/MY-04.html",
+      "shell": "learner",
+      "pattern": "content",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "MY-05",
+      "name": "계정 설정",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "MY",
+      "group": "내 학습·성장·MY",
+      "iaPath": "/me/settings",
+      "artifactPath": "/screens/MY-05.html",
+      "shell": "learner",
+      "pattern": "form-flow",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "CMD-01",
+      "name": "현황",
+      "priority": "P1",
+      "certainty": "I",
+      "domain": "CMD",
+      "group": "지휘관/교육담당자",
+      "iaPath": "/command",
+      "artifactPath": "/screens/CMD-01.html",
+      "shell": "commander",
+      "pattern": "dashboard",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "CMD-02",
+      "name": "부대 학습",
+      "priority": "P1",
+      "certainty": "I",
+      "domain": "CMD",
+      "group": "지휘관/교육담당자",
+      "iaPath": "/command/unit",
+      "artifactPath": "/screens/CMD-02.html",
+      "shell": "commander",
+      "pattern": "content",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "CMD-03",
+      "name": "구성원 상세",
+      "priority": "P1",
+      "certainty": "P",
+      "domain": "CMD",
+      "group": "지휘관/교육담당자",
+      "iaPath": "/command/members/:memberId",
+      "artifactPath": "/screens/CMD-03.html",
+      "shell": "commander",
+      "pattern": "detail",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "CMD-04",
+      "name": "교육 프로그램",
+      "priority": "P1",
+      "certainty": "I",
+      "domain": "CMD",
+      "group": "지휘관/교육담당자",
+      "iaPath": "/command/programs",
+      "artifactPath": "/screens/CMD-04.html",
+      "shell": "commander",
+      "pattern": "content",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "CMD-05",
+      "name": "역량 분석",
+      "priority": "P1",
+      "certainty": "I",
+      "domain": "CMD",
+      "group": "지휘관/교육담당자",
+      "iaPath": "/command/skills",
+      "artifactPath": "/screens/CMD-05.html",
+      "shell": "commander",
+      "pattern": "dashboard",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "CMD-06",
+      "name": "지원 대상",
+      "priority": "P1",
+      "certainty": "P",
+      "domain": "CMD",
+      "group": "지휘관/교육담당자",
+      "iaPath": "/command/support",
+      "artifactPath": "/screens/CMD-06.html",
+      "shell": "commander",
+      "pattern": "content",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "CMD-07",
+      "name": "리포트",
+      "priority": "P2",
+      "certainty": "I",
+      "domain": "CMD",
+      "group": "지휘관/교육담당자",
+      "iaPath": "/command/reports",
+      "artifactPath": "/screens/CMD-07.html",
+      "shell": "commander",
+      "pattern": "content",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-01",
+      "name": "운영 대시보드",
+      "priority": "P1",
+      "certainty": "I",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin",
+      "artifactPath": "/screens/ADM-01.html",
+      "shell": "admin",
+      "pattern": "dashboard",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-PBL-01",
+      "name": "프로젝트 목록",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/pbl/projects",
+      "artifactPath": "/screens/ADM-PBL-01.html",
+      "shell": "admin",
+      "pattern": "catalog",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-PBL-02",
+      "name": "프로젝트 편집",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/pbl/projects/:id",
+      "artifactPath": "/screens/ADM-PBL-02.html",
+      "shell": "admin",
+      "pattern": "structured-editor",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-PBL-03",
+      "name": "PBL 차수",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/pbl/offerings",
+      "artifactPath": "/screens/ADM-PBL-03.html",
+      "shell": "admin",
+      "pattern": "operations",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-PBL-04",
+      "name": "PBL 운영",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/pbl/operations/:id",
+      "artifactPath": "/screens/ADM-PBL-04.html",
+      "shell": "admin",
+      "pattern": "operations",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-PBL-05",
+      "name": "AI 교관",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/pbl/agents",
+      "artifactPath": "/screens/ADM-PBL-05.html",
+      "shell": "admin",
+      "pattern": "content",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-VOD-01",
+      "name": "과정 목록",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/vod/courses",
+      "artifactPath": "/screens/ADM-VOD-01.html",
+      "shell": "admin",
+      "pattern": "catalog",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-VOD-02",
+      "name": "과정 편집",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/vod/courses/:id",
+      "artifactPath": "/screens/ADM-VOD-02.html",
+      "shell": "admin",
+      "pattern": "structured-editor",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-VOD-03",
+      "name": "학습 아이템 편집",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/vod/items/:id",
+      "artifactPath": "/screens/ADM-VOD-03.html",
+      "shell": "admin",
+      "pattern": "structured-editor",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-VOD-04",
+      "name": "VOD 차수·수강",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/vod/offerings/:id",
+      "artifactPath": "/screens/ADM-VOD-04.html",
+      "shell": "admin",
+      "pattern": "operations",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-USER-01",
+      "name": "회원 목록",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/users",
+      "artifactPath": "/screens/ADM-USER-01.html",
+      "shell": "admin",
+      "pattern": "catalog",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-USER-02",
+      "name": "회원 상세",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/users/:id",
+      "artifactPath": "/screens/ADM-USER-02.html",
+      "shell": "admin",
+      "pattern": "detail",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-ORG-01",
+      "name": "부대·계급",
+      "priority": "P2",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/organization",
+      "artifactPath": "/screens/ADM-ORG-01.html",
+      "shell": "admin",
+      "pattern": "operations",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-COM-01",
+      "name": "게시판 관리",
+      "priority": "P1",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/community",
+      "artifactPath": "/screens/ADM-COM-01.html",
+      "shell": "admin",
+      "pattern": "operations",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-GROW-01",
+      "name": "역량·진단",
+      "priority": "P2",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/skills",
+      "artifactPath": "/screens/ADM-GROW-01.html",
+      "shell": "admin",
+      "pattern": "structured-editor",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-SYS-01",
+      "name": "역할·메뉴 권한",
+      "priority": "P2",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/system/access",
+      "artifactPath": "/screens/ADM-SYS-01.html",
+      "shell": "admin",
+      "pattern": "content",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-SYS-02",
+      "name": "공통 콘텐츠",
+      "priority": "P2",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/content",
+      "artifactPath": "/screens/ADM-SYS-02.html",
+      "shell": "admin",
+      "pattern": "structured-editor",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "ADM-SYS-03",
+      "name": "로그·보안",
+      "priority": "P2",
+      "certainty": "C",
+      "domain": "ADM",
+      "group": "운영자",
+      "iaPath": "/admin/system/logs",
+      "artifactPath": "/screens/ADM-SYS-03.html",
+      "shell": "admin",
+      "pattern": "operations",
+      "statePolicy": "inline",
+      "themeSupport": [
+        "neutral",
+        "digital-camouflage"
+      ],
+      "status": "planned"
+    }
+  ]
+}
