@@ -1,0 +1,836 @@
+/*
+ * MILI AI platform theme
+ * Visual calibration based on the approved digital-camouflage direction.
+ * Product structure, copy, state and interaction remain owned by src/app.js.
+ */
+
+:root {
+  --platform-canvas: #050705;
+  --platform-shell: rgba(8, 13, 8, 0.9);
+  --platform-surface: rgba(16, 18, 16, 0.94);
+  --platform-surface-strong: #141714;
+  --platform-surface-muted: #1b1f1b;
+  --platform-surface-inset: #0b0e0b;
+  --platform-text: #f4f7f2;
+  --platform-text-secondary: #bcc3b9;
+  --platform-text-muted: #7f887c;
+  --platform-accent: #b4ff39;
+  --platform-accent-hover: #a1ef24;
+  --platform-accent-muted: rgba(180, 255, 57, 0.11);
+  --platform-border: rgba(255, 255, 255, 0.08);
+  --platform-border-strong: rgba(255, 255, 255, 0.16);
+  --platform-shadow: 0 22px 66px rgba(0, 0, 0, 0.46);
+  --platform-glow: 0 0 24px rgba(180, 255, 57, 0.11);
+  --sidebar-width: 264px;
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 14px;
+  --radius-xl: 24px;
+}
+
+html {
+  color-scheme: dark;
+  background: var(--platform-canvas);
+}
+
+body {
+  color: var(--platform-text);
+  background: var(--platform-canvas);
+}
+
+body::before {
+  position: fixed;
+  z-index: -2;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5, 7, 5, 0.18), var(--platform-canvas) 76%),
+    url("../assets/concepts/digital-camouflage/terrain-network-v1.png") center top / cover no-repeat;
+  content: "";
+  opacity: 0.34;
+  pointer-events: none;
+}
+
+body::after {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  background:
+    radial-gradient(circle at 73% 14%, rgba(180, 255, 57, 0.065), transparent 24%),
+    linear-gradient(90deg, rgba(5, 7, 5, 0.98) 0, rgba(5, 7, 5, 0.66) 35%, rgba(5, 7, 5, 0.88) 100%);
+  content: "";
+  pointer-events: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline-color: rgba(180, 255, 57, 0.64);
+}
+
+::selection {
+  color: #102000;
+  background: var(--platform-accent);
+}
+
+.skip-link {
+  color: #102000;
+  background: var(--platform-accent);
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.sidebar {
+  top: 16px;
+  bottom: 16px;
+  left: 16px;
+  width: 232px;
+  padding: 0 16px 16px;
+  border: 1px solid var(--platform-border);
+  border-radius: 28px;
+  color: var(--platform-text-secondary);
+  background:
+    linear-gradient(rgba(8, 13, 8, 0.91), rgba(8, 13, 8, 0.96)),
+    url("../assets/concepts/digital-camouflage/camo-texture-v1.png") center / cover;
+  box-shadow: var(--platform-shadow), inset 0 1px rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(22px);
+}
+
+.brand {
+  height: 88px;
+  padding-inline: 4px;
+}
+
+.brand-mark {
+  width: 36px;
+  height: 32px;
+  border: 1px solid rgba(180, 255, 57, 0.5);
+  border-radius: 2px;
+  color: var(--platform-accent);
+  background: transparent;
+  font-size: 16px;
+  box-shadow: inset 0 0 18px rgba(180, 255, 57, 0.05);
+}
+
+.brand-copy strong {
+  color: var(--platform-text);
+  font-weight: 800;
+}
+
+.brand-copy small,
+.nav-caption,
+.sidebar-profile small,
+.sidebar-support span {
+  color: var(--platform-text-muted);
+}
+
+.environment-badge {
+  margin: 0 0 20px;
+  border-color: var(--platform-border);
+  border-radius: 8px;
+  color: var(--platform-text-muted);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.environment-badge span,
+.live-label i,
+.ops-status > span i {
+  background: var(--platform-accent);
+  box-shadow: 0 0 8px rgba(180, 255, 57, 0.62);
+}
+
+.environment-badge b {
+  color: var(--platform-accent);
+  background: var(--platform-accent-muted);
+}
+
+.nav-item {
+  min-height: 42px;
+  margin-block: 2px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--platform-text-secondary);
+}
+
+.nav-item:hover {
+  color: var(--platform-text);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.nav-item.active {
+  color: var(--platform-accent);
+  border-color: rgba(180, 255, 57, 0.18);
+  background: var(--platform-accent-muted);
+  box-shadow: inset 2px 0 var(--platform-accent);
+}
+
+.nav-item.active::before {
+  left: -1px;
+  width: 12px;
+  height: 12px;
+  border-top: 1px solid var(--platform-accent);
+  border-left: 1px solid var(--platform-accent);
+  border-radius: 0;
+  background: transparent;
+}
+
+.nav-item em {
+  color: #102000;
+  background: var(--platform-accent);
+}
+
+.sidebar-support {
+  border-color: var(--platform-border);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.sidebar-support strong,
+.sidebar-profile strong {
+  color: var(--platform-text);
+}
+
+.support-icon,
+.avatar,
+.count-badge,
+.ai-avatar,
+.mini-avatar,
+.send-button {
+  color: #102000;
+  background: var(--platform-accent);
+}
+
+.sidebar-profile {
+  border-top-color: var(--platform-border);
+}
+
+.icon-button {
+  border-color: var(--platform-border-strong);
+  color: var(--platform-text-secondary);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.icon-button:hover {
+  color: var(--platform-text);
+  border-color: rgba(180, 255, 57, 0.28);
+  background: rgba(180, 255, 57, 0.07);
+}
+
+.icon-button.dark {
+  color: var(--platform-text-secondary);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.app-body {
+  min-height: 100vh;
+  margin-left: var(--sidebar-width);
+  background: transparent;
+}
+
+.topbar {
+  height: 68px;
+  border-bottom: 1px solid var(--platform-border);
+  background: rgba(5, 7, 5, 0.72);
+  backdrop-filter: blur(20px);
+}
+
+.breadcrumb span,
+.breadcrumb b {
+  color: var(--platform-text-muted);
+}
+
+.breadcrumb strong {
+  color: var(--platform-text-secondary);
+}
+
+.search-trigger,
+.role-switch {
+  border-color: var(--platform-border);
+  color: var(--platform-text-muted);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.search-trigger:hover,
+.role-switch:hover {
+  border-color: var(--platform-border-strong);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.search-trigger kbd {
+  border-color: var(--platform-border);
+  color: var(--platform-text-muted);
+  background: var(--platform-surface-inset);
+}
+
+.has-dot::after {
+  border-color: var(--platform-canvas);
+  background: var(--platform-accent);
+  box-shadow: 0 0 6px rgba(180, 255, 57, 0.75);
+}
+
+.top-avatar {
+  border-color: var(--platform-border-strong);
+  outline-color: transparent;
+  color: #102000;
+  background: #d9e6d2;
+}
+
+.view {
+  width: min(100%, 1540px);
+  padding-top: 44px;
+}
+
+.page-header h1,
+.welcome-row h1,
+.section-heading h2,
+.project-info h3,
+.empty-state h2,
+.empty-state h3 {
+  color: var(--platform-text);
+}
+
+.page-header p,
+.welcome-row p,
+.project-info > p,
+.empty-state,
+.result-meta,
+.learning-meta,
+.privacy-note,
+.notice-list small {
+  color: var(--platform-text-muted);
+}
+
+.eyebrow {
+  color: var(--platform-accent);
+}
+
+.panel,
+.project-card,
+.catalog-search,
+.learning-card,
+.assignment,
+.kpi,
+.command-filter,
+.floating-panel,
+.generic-view .empty-state.large {
+  color: var(--platform-text);
+  border-color: var(--platform-border);
+  background: var(--platform-surface);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.18);
+}
+
+.panel:hover,
+.project-card:hover {
+  border-color: rgba(180, 255, 57, 0.22);
+}
+
+.primary-button,
+.light-button {
+  color: #102000;
+  background: var(--platform-accent);
+  box-shadow: 0 0 0 1px rgba(180, 255, 57, 0.12);
+}
+
+.primary-button:hover,
+.light-button:hover {
+  color: #102000;
+  background: var(--platform-accent-hover);
+  box-shadow: var(--platform-glow);
+}
+
+.secondary-button,
+.filter-button,
+.outline-button {
+  color: var(--platform-text-secondary);
+  border-color: var(--platform-border-strong);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.secondary-button:hover,
+.filter-button:hover,
+.outline-button:hover {
+  color: var(--platform-text);
+  border-color: rgba(180, 255, 57, 0.28);
+  background: rgba(180, 255, 57, 0.07);
+}
+
+.text-button,
+.full-link {
+  color: var(--platform-text-secondary);
+}
+
+.text-button:hover,
+.full-link:hover,
+.text-button.light {
+  color: var(--platform-accent);
+}
+
+.chip,
+.tag-row span,
+.soft-count,
+.status-label,
+.type-badge,
+.version-chip {
+  color: var(--platform-text-secondary);
+  background: var(--platform-surface-muted);
+}
+
+.chip.green,
+.chip.blue,
+.chip.yellow,
+.chip.orange {
+  color: var(--platform-text-secondary);
+  background: var(--platform-surface-muted);
+}
+
+.progress-wrap,
+.progress-line > span,
+.table-progress span {
+  background: var(--platform-surface-muted);
+}
+
+.progress-wrap > span,
+.progress-line i,
+.table-progress i {
+  background: var(--platform-accent);
+}
+
+.catalog-search input,
+.ai-input textarea,
+.editor-shell textarea,
+select,
+input,
+textarea {
+  color: var(--platform-text);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--platform-text-muted);
+}
+
+.result-meta select,
+.header-controls select,
+.content-status select {
+  color: var(--platform-text-secondary);
+  border-color: var(--platform-border);
+  background: var(--platform-surface-inset);
+}
+
+.filter-chips button,
+.quick-prompts button,
+.content-tabs button,
+.detail-tabs button,
+.workspace-tabs button {
+  color: var(--platform-text-secondary);
+  border-color: var(--platform-border);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.filter-chips button:hover,
+.filter-chips button.active,
+.content-tabs button.active,
+.detail-tabs button.active,
+.workspace-tabs button.active {
+  color: #102000;
+  border-color: var(--platform-accent);
+  background: var(--platform-accent);
+}
+
+.project-card {
+  border-radius: 12px;
+}
+
+.project-cover {
+  background-color: #0d100d;
+}
+
+.project-cover.lime,
+.project-cover.blue,
+.project-cover.orange,
+.project-cover.purple,
+.project-cover.teal,
+.project-cover.navy {
+  color: var(--platform-text);
+  background:
+    linear-gradient(135deg, rgba(180, 255, 57, 0.12), rgba(5, 7, 5, 0.8)),
+    var(--platform-surface-inset);
+}
+
+.project-cover.lime {
+  color: var(--platform-accent);
+}
+
+.project-info footer,
+.summary-strip > div,
+.content-split,
+.notice-panel > .full-link,
+.notice-list button,
+.revision-tools,
+.sidebar-profile {
+  border-color: var(--platform-border);
+}
+
+.project-info footer button {
+  color: #102000;
+  background: var(--platform-accent);
+}
+
+.empty-state {
+  border-color: var(--platform-border-strong);
+}
+
+.project-hero,
+.continue-card,
+.priority-card,
+.next-skill-card {
+  color: var(--platform-text);
+  background:
+    linear-gradient(100deg, rgba(5, 7, 5, 0.96) 20%, rgba(8, 13, 8, 0.7)),
+    url("../assets/concepts/digital-camouflage/terrain-network-v1.png") center / cover;
+  box-shadow: inset 0 0 0 1px rgba(180, 255, 57, 0.13), var(--platform-shadow);
+}
+
+.priority-home::before {
+  background: radial-gradient(circle, rgba(180, 255, 57, 0.12), transparent 68%);
+}
+
+.priority-card::after,
+.continue-card::after,
+.project-hero::after {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(180, 255, 57, 0.17);
+  border-radius: inherit;
+  background:
+    linear-gradient(var(--platform-accent), var(--platform-accent)) left top / 22px 2px no-repeat,
+    linear-gradient(var(--platform-accent), var(--platform-accent)) left top / 2px 22px no-repeat,
+    linear-gradient(var(--platform-accent), var(--platform-accent)) right bottom / 22px 2px no-repeat,
+    linear-gradient(var(--platform-accent), var(--platform-accent)) right bottom / 2px 22px no-repeat;
+  content: "";
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.today-signal,
+.journey-card,
+.learning-flow-panel,
+.ai-clue-card,
+.evidence-card,
+.revision-document,
+.revision-editor,
+.mission-document,
+.mission-sidebar,
+.mission-tools,
+.enroll-card,
+.detail-main,
+.peer-guide,
+.competency-card,
+.growth-log,
+.badges-card,
+.participation-chart,
+.risk-panel,
+.unit-table,
+.review-queue,
+.operation-alerts,
+.content-status,
+.service-log {
+  color: var(--platform-text);
+  border-color: var(--platform-border);
+  background: var(--platform-surface);
+}
+
+.flow-list button,
+.evidence-list > div,
+.source-list li,
+.revision-banner,
+.inline-feedback,
+.attachment-row,
+.resource-box,
+.intel-box,
+.step-grid > div,
+.queue-list button,
+.alert-list > div,
+.risk-list > div {
+  color: var(--platform-text-secondary);
+  border-color: var(--platform-border);
+  background: var(--platform-surface-inset);
+}
+
+.flow-list button:hover,
+.queue-list button:hover,
+.notice-list button:hover {
+  background: rgba(180, 255, 57, 0.055);
+}
+
+.status-pill,
+.verified-label,
+.validation-pass,
+.positive,
+.live-label {
+  color: var(--platform-accent);
+}
+
+.status-pill,
+.verified-label,
+.validation-pass {
+  background: var(--platform-accent-muted);
+}
+
+.journey-list::before {
+  background: var(--platform-border-strong);
+}
+
+.journey-list li,
+.journey-list .current {
+  color: var(--platform-text-secondary);
+}
+
+.journey-list .current {
+  border-color: rgba(180, 255, 57, 0.22);
+  background: var(--platform-accent-muted);
+}
+
+.field-visual,
+.success-orbit,
+.radar-chart {
+  filter: saturate(0.85) brightness(1.08);
+}
+
+.editor-shell,
+.ai-input {
+  border-color: var(--platform-border-strong);
+  background: var(--platform-surface-inset);
+  box-shadow: none;
+}
+
+.editor-toolbar,
+.workspace-header,
+.workspace-footer,
+.revision-footer {
+  color: var(--platform-text-secondary);
+  border-color: var(--platform-border);
+  background: var(--platform-surface-strong);
+}
+
+.workspace-view,
+.revision-workspace {
+  background: transparent;
+}
+
+.ai-callout,
+.ops-status,
+.log-list {
+  color: var(--platform-text);
+  border: 1px solid var(--platform-border);
+  background: var(--platform-surface-inset);
+}
+
+.privacy-note,
+.context-card {
+  color: var(--platform-text-secondary);
+  border-color: rgba(180, 255, 57, 0.17);
+  background: var(--platform-accent-muted);
+}
+
+.grid-lines {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+
+.area {
+  fill: rgba(180, 255, 57, 0.05);
+}
+
+.start-line {
+  stroke: var(--platform-text-secondary);
+}
+
+.finish-line,
+.radar-value {
+  stroke: var(--platform-accent);
+}
+
+.radar-value {
+  fill: rgba(180, 255, 57, 0.16);
+}
+
+.ai-fab {
+  border: 1px solid rgba(180, 255, 57, 0.52);
+  border-radius: 999px;
+  color: #102000;
+  background: var(--platform-accent);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.46), 0 0 18px rgba(180, 255, 57, 0.13);
+}
+
+.drawer-scrim,
+.sidebar-scrim {
+  background: rgba(0, 0, 0, 0.58);
+  backdrop-filter: blur(4px);
+}
+
+.ai-drawer {
+  color: var(--platform-text);
+  border-color: var(--platform-border);
+  background: #080b08;
+  box-shadow: -24px 0 70px rgba(0, 0, 0, 0.5);
+}
+
+.ai-head {
+  color: var(--platform-text);
+  border-bottom: 1px solid var(--platform-border);
+  background: var(--platform-surface-strong);
+}
+
+.ai-bubble > div {
+  color: #102000;
+  background: var(--platform-accent);
+}
+
+.ai-bubble.tutor > div {
+  color: var(--platform-text-secondary);
+  border-color: var(--platform-border);
+  background: var(--platform-surface-muted);
+}
+
+.floating-panel {
+  backdrop-filter: blur(22px);
+}
+
+.toast {
+  color: var(--platform-text);
+  border-color: rgba(180, 255, 57, 0.22);
+  background: var(--platform-surface-strong);
+  box-shadow: var(--platform-shadow);
+}
+
+.toast > span {
+  color: var(--platform-accent);
+  background: var(--platform-accent-muted);
+}
+
+.mobile-nav {
+  border-color: var(--platform-border);
+  background: rgba(8, 11, 8, 0.94);
+  box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(20px);
+}
+
+.mobile-nav a,
+.mobile-nav button {
+  color: var(--platform-text-muted);
+}
+
+.mobile-nav a.active,
+.mobile-nav a.active .icon {
+  color: var(--platform-accent);
+}
+
+@media (max-width: 1200px) {
+  :root {
+    --sidebar-width: 240px;
+  }
+
+  .sidebar {
+    width: 208px;
+  }
+}
+
+@media (max-width: 980px) {
+  :root {
+    --sidebar-width: 0px;
+  }
+
+  .sidebar {
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    width: min(280px, calc(100vw - 20px));
+    transform: translateX(calc(-100% - 20px));
+  }
+
+  .sidebar.is-open {
+    transform: translateX(0);
+  }
+
+  .app-body {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  body::before {
+    background-position: 64% top;
+    opacity: 0.16;
+  }
+
+  body::after {
+    background: linear-gradient(rgba(5, 7, 5, 0.88), rgba(5, 7, 5, 0.98));
+  }
+
+  .topbar {
+    background: rgba(5, 7, 5, 0.9);
+  }
+
+  .view {
+    padding-top: 30px;
+  }
+
+  .page-header h1,
+  .welcome-row h1 {
+    font-size: 30px;
+  }
+
+  .project-hero,
+  .continue-card,
+  .priority-card,
+  .next-skill-card {
+    background-position: 68% center;
+  }
+
+  .panel,
+  .project-card,
+  .learning-card,
+  .assignment,
+  .kpi {
+    box-shadow: none;
+  }
+
+  .command-grid,
+  .admin-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .participation-chart,
+  .risk-panel,
+  .unit-table,
+  .review-queue,
+  .operation-alerts,
+  .content-status,
+  .service-log {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .queue-list,
+  .alert-list,
+  .risk-list,
+  .line-chart,
+  .section-heading {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .sidebar {
+    border-radius: 22px;
+  }
+
+  .page-header h1,
+  .welcome-row h1 {
+    font-size: 27px;
+  }
+}
