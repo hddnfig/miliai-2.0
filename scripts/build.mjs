@@ -5,9 +5,11 @@ const root = resolve(import.meta.dirname, "..");
 const output = resolve(root, "dist");
 const required = [
   "index.html",
+  "handoff.html",
   "prototype.html",
   "src/handoff.js",
   "src/handoff.css",
+  "src/platform-theme.css",
   "src/app.js",
   "src/styles.css",
   "system/index.html",
@@ -32,6 +34,7 @@ await Promise.all(required.map((file) => readFile(resolve(root, file), "utf8")))
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 await cp(resolve(root, "index.html"), resolve(output, "index.html"));
+await cp(resolve(root, "handoff.html"), resolve(output, "handoff.html"));
 await cp(resolve(root, "prototype.html"), resolve(output, "prototype.html"));
 await cp(resolve(root, "src"), resolve(output, "src"), { recursive: true });
 await cp(resolve(root, "system"), resolve(output, "system"), { recursive: true });

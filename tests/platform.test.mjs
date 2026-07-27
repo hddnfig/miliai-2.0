@@ -2,26 +2,46 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const [html, prototype, handoff, app, css] = await Promise.all([
+const [html, handoffHtml, prototype, handoff, app, css, platformTheme] = await Promise.all([
   readFile(new URL("../index.html", import.meta.url), "utf8"),
+  readFile(new URL("../handoff.html", import.meta.url), "utf8"),
   readFile(new URL("../prototype.html", import.meta.url), "utf8"),
   readFile(new URL("../src/handoff.js", import.meta.url), "utf8"),
   readFile(new URL("../src/app.js", import.meta.url), "utf8"),
   readFile(new URL("../src/styles.css", import.meta.url), "utf8"),
+  readFile(new URL("../src/platform-theme.css", import.meta.url), "utf8"),
 ]);
 
-test("entry document is the accessible handoff index", () => {
-  assert.match(html, /외부 개발사 전달용/);
-  assert.match(html, /id="screen-index"/);
-  assert.match(html, /docs\/design\/README\.md/);
-  assert.match(html, /src="\.\/src\/handoff\.js"/);
+test("entry document opens the platform prototype", () => {
+  assert.match(html, /id="app"/);
+  assert.match(html, /본문으로 건너뛰기/);
+  assert.match(html, /src="\.\/src\/app\.js"/);
+  assert.match(html, /data-theme="digital-camouflage"/);
+  assert.match(html, /src\/platform-theme\.css/);
+});
+
+test("handoff index remains available as a separate page", () => {
+  assert.match(handoffHtml, /외부 개발사 전달용/);
+  assert.match(handoffHtml, /id="screen-index"/);
+  assert.match(handoffHtml, /docs\/design\/README\.md/);
+  assert.match(handoffHtml, /src="\.\/src\/handoff\.js"/);
 });
 
 test("prototype keeps the existing app entry", () => {
   assert.match(prototype, /id="app"/);
   assert.match(prototype, /본문으로 건너뛰기/);
   assert.match(prototype, /src="\.\/src\/app\.js"/);
+  assert.match(prototype, /data-theme="digital-camouflage"/);
+  assert.match(prototype, /src\/platform-theme\.css/);
   assert.doesNotMatch(prototype, /fonts\.googleapis\.com/);
+});
+
+test("platform theme reuses the shared design tokens and local concept assets", () => {
+  assert.match(platformTheme, /--platform-accent: #b4ff39/);
+  assert.match(platformTheme, /terrain-network-v1\.png/);
+  assert.match(platformTheme, /camo-texture-v1\.png/);
+  assert.match(platformTheme, /@media \(max-width: 760px\)/);
+  assert.match(platformTheme, /color-scheme: dark/);
 });
 
 test("core learner, commander, and operator views are registered", () => {

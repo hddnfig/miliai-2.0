@@ -1,0 +1,126 @@
+<!--
+화면명: 외부 개발사 전달 인덱스
+화면 ID: HANDOFF-INDEX-001
+버전: 0.1.0
+상태: 내부 작업 중
+담당: 기획 / 디자인
+최종 수정일: 2026-07-27
+
+지원 화면:
+- Desktop: 1440px 기준
+- Tablet: 768px 이상
+- Mobile: 360px 이상
+
+주요 인터랙션:
+- 화면 상태 및 역할 필터
+- 화면명과 화면 ID 검색
+- 구현된 통합 프로토타입 화면 이동
+- 기획·디자인 전달 문서 이동
+
+포함 상태:
+- 내부 작업 중
+- 검토 필요
+- 구현 예정
+- 화면 원장 로딩
+- 화면 원장 오류
+
+미확정 사항:
+- 개별 화면의 최종 승인 상태
+- 70개 독립 HTML 화면의 제작 일정
+- 최종 브랜드 및 디자인 컨셉 승인
+
+참고:
+- 본 HTML은 화면, 정책 및 인터랙션 전달용입니다.
+- 실제 API, 인증, 데이터베이스 및 운영 로직은 포함하지 않습니다.
+-->
+<!doctype html>
+<html lang="ko" data-theme="digital-camouflage">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="MILI AI 기획·디자인 HTML 외부 전달 인덱스" />
+    <meta name="theme-color" content="#050705" />
+    <title>MILI AI · 화면 전달 인덱스</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23a8ff1a'/%3E%3Cpath d='M15 45V19h8l9 13 9-13h8v26h-8V31L32 43 23 31v14z' fill='%23102000'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./src/design-system/foundation.css" />
+    <link rel="stylesheet" href="./src/design-system/themes/digital-camouflage.css" />
+    <link rel="stylesheet" href="./src/handoff.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#screen-index">화면 목록으로 건너뛰기</a>
+    <header class="handoff-header">
+      <a class="handoff-brand" href="./handoff.html" aria-label="MILI AI 전달 인덱스 홈">
+        <span>M</span>
+        <div><strong>MILI AI</strong><small>HTML HANDOFF INDEX</small></div>
+      </a>
+      <span class="handoff-state">내부 작업 중 · 2026-07-27</span>
+    </header>
+
+    <main>
+      <section class="handoff-hero ds-concept-asset">
+        <div>
+          <span class="ds-badge" data-tone="accent">PLANNING · DESIGN · HTML</span>
+          <h1>외부 개발사 전달용<br />화면 인덱스</h1>
+          <p>이 저장소는 운영 코드가 아닙니다. 화면 구조, UI, 기획 정책, 반응형 동작과 주요 인터랙션을 확인하기 위한 HTML 프로토타입입니다.</p>
+          <div class="hero-actions">
+            <a class="ds-button" href="./prototype.html#/home">통합 프로토타입 열기</a>
+            <a class="ds-button" data-variant="secondary" href="./system/index.html">디자인 시스템 후보안</a>
+          </div>
+        </div>
+        <dl class="handoff-summary" aria-label="전달 현황">
+          <div><dt>화면 원장</dt><dd id="total-count">70</dd></div>
+          <div><dt>연결된 프로토타입</dt><dd id="linked-count">9</dd></div>
+          <div><dt>검수 완료</dt><dd id="verified-count">5</dd></div>
+          <div><dt>기준 버전</dt><dd>0.1.0</dd></div>
+        </dl>
+      </section>
+
+      <section class="handoff-notice" aria-labelledby="handoff-notice-title">
+        <div>
+          <span class="notice-mark">!</span>
+          <div><h2 id="handoff-notice-title">전달 전 확인</h2><p>현재 화면은 모두 내부 검토 단계입니다. 구현 화면도 실제 API·인증·권한 로직을 포함하지 않으며, 미연결 버튼은 시연용 UI입니다.</p></div>
+        </div>
+        <span>POLICY-TBD · DESIGN-TBD · CONTENT-TBD 확인 필요</span>
+      </section>
+
+      <section class="handoff-section" aria-labelledby="document-title">
+        <header class="section-heading"><div><p class="section-kicker">HANDOFF DOCUMENTS</p><h2 id="document-title">전달 문서</h2></div><p>작업 기준과 화면 근거를 함께 확인합니다.</p></header>
+        <div class="document-grid">
+          <a class="document-card ds-surface" href="./docs/README_HTML_COLLABORATION_GUIDE.md"><span>GUIDE</span><h3>HTML 협업 가이드</h3><p>브랜치, 작업 범위, 메타 주석, TBD 및 외부 전달 원칙</p></a>
+          <a class="document-card ds-surface" href="./docs/ia/README.md"><span>IA</span><h3>상세 정보 구조</h3><p>70개 화면의 목적, 흐름, 상태와 데이터 추적 관계</p></a>
+          <a class="document-card ds-surface" href="./docs/design/README.md"><span>DESIGN</span><h3>화면 디자인 기반</h3><p>화면 원장, 시맨틱 토큰과 후보 디자인 컨셉 상태</p></a>
+          <a class="document-card ds-surface" href="./docs/design/design-execution-order.md"><span>ORDER</span><h3>디자인 실행 원장</h3><p>70개 화면의 우선순위, 진행 순서와 완료 체크리스트</p></a>
+          <a class="document-card ds-surface" href="./docs/mili-ai-worldbuilding.md"><span>CONTENT</span><h3>세계관 및 콘텐츠 원칙</h3><p>표현 레벨, 카피 방향과 사용 범위</p></a>
+        </div>
+      </section>
+
+      <section class="handoff-section" id="screen-index" aria-labelledby="screen-title">
+        <header class="section-heading"><div><p class="section-kicker">SCREEN REGISTRY</p><h2 id="screen-title">전체 화면 목록</h2></div><p>독립 HTML이 없는 화면도 누락하지 않고 내부 작업 중으로 표시합니다.</p></header>
+        <div class="screen-controls">
+          <label class="screen-search"><span>화면 검색</span><input class="ds-input" id="screen-search" type="search" placeholder="화면 ID 또는 화면명" /></label>
+          <label><span>영역</span><select class="ds-input" id="group-filter"><option value="all">전체 영역</option></select></label>
+          <label><span>상태</span><select class="ds-input" id="status-filter"><option value="all">전체 상태</option><option value="verified">검수 완료</option><option value="prototype">통합 프로토타입</option><option value="planned">내부 작업 중</option></select></label>
+        </div>
+        <p class="screen-result" id="screen-result" role="status">화면 원장을 불러오는 중입니다.</p>
+        <div class="screen-table-wrap ds-surface">
+          <table>
+            <thead><tr><th>화면 ID</th><th>화면명</th><th>영역</th><th>우선순위</th><th>확정도</th><th>지원 화면</th><th>상태 / 접근</th></tr></thead>
+            <tbody id="screen-list"><tr><td colspan="7" class="registry-message">화면 원장을 불러오는 중입니다.</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="handoff-section tbd-section" aria-labelledby="tbd-title">
+        <header class="section-heading"><div><p class="section-kicker">OPEN DECISIONS</p><h2 id="tbd-title">미확정 항목</h2></div><p>확정 전까지 현재 구현을 운영 정책으로 해석하지 않습니다.</p></header>
+        <div class="tbd-grid">
+          <article class="ds-surface"><span>POLICY-TBD</span><h3>기획 정책</h3><ul><li>신청 승인과 실제 학습 진입 조건</li><li>재제출·철회·평가 대상 버전</li><li>역할별 권한과 집계 정보 범위</li></ul></article>
+          <article class="ds-surface"><span>DESIGN-TBD</span><h3>디자인</h3><ul><li>Digital Camouflage 후보안 최종 승인</li><li>전체 화면의 반응형 상세 정책</li><li>모달·바텀시트와 접근성 동작</li></ul></article>
+          <article class="ds-surface"><span>CONTENT-TBD</span><h3>콘텐츠</h3><ul><li>화면 내 이름·날짜·지표·파일명</li><li>AI 답변과 출처 샘플 문구</li><li>빈 상태·오류 상태 최종 카피</li></ul></article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="handoff-footer"><p>MILI AI HTML PROTOTYPE · 내부 검토용</p><a href="./prototype.html#/home">통합 프로토타입으로 이동 →</a></footer>
+    <script type="module" src="./src/handoff.js"></script>
+  </body>
+</html>

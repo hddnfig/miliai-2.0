@@ -6,8 +6,9 @@
 [기획·디자인 HTML 협업 가이드](./docs/README_HTML_COLLABORATION_GUIDE.md)를 우선 적용한다.
 아래의 AX 실행 가이드는 일반적인 탐색·제품화 협업 참고 문서로 유지한다.
 
-- 전달 인덱스: `index.html`
-- 현재 통합 프로토타입: `prototype.html`
+- 플랫폼 기본 진입: `index.html`
+- 외부 전달 인덱스: `handoff.html`
+- 통합 프로토타입 직접 링크: `prototype.html`
 - 디자인 시스템 후보안: `system/index.html`
 - 화면 원장: `docs/design/screen-registry.json`
 - 기준 원본: 추적되는 HTML과 `src/`, `system/`, `assets/`, `docs/`
@@ -19,7 +20,8 @@
 npm start
 ```
 
-브라우저에서 `http://localhost:4173/`을 열어 전달 인덱스에서 화면과 문서를 확인한다.
+브라우저에서 `http://localhost:4173/`을 열면 플랫폼에 바로 진입한다.
+화면과 전달 문서 목록은 `http://localhost:4173/handoff.html`에서 확인한다.
 외부 모듈 스크립트와 화면 원장 JSON을 사용하므로 `file://`로 직접 열지 않는다.
 
 ## MILI AI 2.0 상세 IA
