@@ -4,7 +4,7 @@ These raster assets belong only to the provisional `digital-camouflage` theme. T
 
 ## `terrain-network-v1.png`
 
-- Use: full-bleed Public/Home background
+- Use: hero, search, focus, and high-priority kinetic backgrounds from the first screen-build pass
 - Size: 1717 × 916
 - Method: built-in image generation
 - Reference role: the three user-provided images were style references only
@@ -17,7 +17,7 @@ Create a cinematic black digital terrain visualization made of extremely fine wh
 
 ## `camo-texture-v1.png`
 
-- Use: subtle theme surface texture
+- Use: page canvas and card media-slot pattern from the first screen-build pass
 - Size: 1672 × 941
 - Method: built-in image generation
 - Reference role: the three user-provided images were style references only
@@ -31,3 +31,5 @@ Create a flat abstract texture from irregular large pixel blocks and stepped rec
 ## Replacement rule
 
 Final supplied assets should replace these files through the theme's asset tokens. Screen and component files must not reference these paths directly.
+
+These assets are intentionally used during initial screen construction. The final graphic phase refines or replaces them after visual preference review; it does not postpone their first use.

@@ -132,7 +132,7 @@ test("design execution checklist covers all 70 IA pages exactly once", async () 
   assert.equal(new Set(checklistIds).size, 70);
   assert.deepEqual(new Set(checklistIds), new Set(registry.screens.map(({ id }) => id)));
   assert.match(checklist, /실사 인물·사물 이미지는 사용하지 않는다/);
-  assert.match(checklist, /그래픽 시스템 고도화/);
+  assert.match(checklist, /그래픽 시스템 최종 고도화/);
 });
 
 test("first design group ships as independent state-complete pages", async () => {
@@ -146,4 +146,20 @@ test("first design group ships as independent state-complete pages", async () =>
       assert.match(screen, new RegExp(`data-state="${state}"`));
     }
   }
+});
+
+test("initial screens actively use replaceable abstract and kinetic assets", async () => {
+  const [theme, screens, order] = await Promise.all([
+    readFile(new URL("../src/design-system/themes/digital-camouflage.css", import.meta.url), "utf8"),
+    readFile(new URL("../screens/shared/screens.css", import.meta.url), "utf8"),
+    readFile(new URL("../docs/design/design-execution-order.md", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(theme, /--ds-asset-ambient-duration/);
+  assert.match(screens, /background-image: var\(--ds-asset-background\)/);
+  assert.match(screens, /background-image: var\(--ds-asset-texture\)/);
+  assert.match(screens, /@keyframes asset-drift/);
+  assert.match(screens, /@keyframes texture-drift/);
+  assert.match(order, /모든 화면의 1차 구축부터 추상 그래픽·패턴·키네틱 에셋을 적극 사용/);
+  assert.match(order, /에셋을 처음 추가하는 단계가 아니라/);
 });

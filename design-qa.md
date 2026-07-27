@@ -71,10 +71,30 @@ This implementation is a design-system calibration catalog, not a 1:1 recreation
 - Fix: converted it to a link to the concept specification.
 - Post-fix evidence: final DOM exposes it as a link and desktop/mobile captures retain correct button styling.
 
+## Current first-group kinetic asset update
+
+- Source visual truth: the same three user-provided Digital Camouflage conversation attachments listed above.
+- Implementation target: `screens/HOME-01.html`, `screens/EXP-01.html`, `screens/VOD-01.html`, `screens/PBL-01.html`, `screens/SRCH-01.html`.
+- Intended viewport: desktop 1440 × 1000 CSS px and mobile 390 × 844 CSS px, device scale factor 1.
+- State: default, with replaceable terrain and camouflage assets active from the initial build.
+- Implementation screenshot: unavailable in this pass because no in-app or Chrome browser connection was exposed.
+- Full-view comparison evidence: blocked; the updated kinetic backgrounds could not be captured after implementation.
+- Focused region comparison evidence: blocked for the same reason.
+- Automated evidence: `npm run check`, `npm test` (11/11), and `npm run build` passed.
+- Required follow-up: reconnect the browser, capture HOME-01 and SRCH-01 at the intended desktop/mobile viewports, verify text contrast and pattern density, check reduced-motion behavior and console errors, then return this result to `passed`.
+
+**Findings**
+
+- [P1] Updated kinetic assets lack browser-rendered evidence.
+  Location: first-group hero and card media slots in `screens/shared/screens.css`.
+  Evidence: asset tokens and animations are present in code, but no current rendered capture is available.
+  Impact: visual density, crop, and legibility cannot be accepted from code inspection alone.
+  Fix: complete the required same-viewport browser capture and visual comparison.
+
 ## Follow-up polish
 
 - P3: replace fallback typography when the official brand font is supplied.
 - P3: replace the text product name with the official logo asset when available.
 - P3: repeat visual calibration against the final selected concept before rolling out 70 screens.
 
-final result: passed
+final result: blocked
