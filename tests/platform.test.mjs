@@ -49,9 +49,11 @@ test("responsive navigation rules are present", () => {
 });
 
 test("handoff index maps implemented screens without hiding planned screens", () => {
-  for (const id of ["HOME-01", "EXP-01", "PBL-02", "MYL-01", "PBL-05", "PBL-09", "GROW-01", "CMD-01", "ADM-01"]) {
+  for (const id of ["HOME-01", "EXP-01", "VOD-01", "PBL-01", "SRCH-01", "PBL-02", "MYL-01", "PBL-05", "PBL-09", "GROW-01", "CMD-01", "ADM-01"]) {
     assert.match(handoff, new RegExp(`\\[\"${id}\"`));
   }
+  assert.match(handoff, /\.\/screens\/HOME-01\.html/);
+  assert.match(handoff, /검수 완료 · 독립 HTML/);
   assert.match(handoff, /내부 작업 중/);
   assert.match(handoff, /screen-registry\.json/);
 });
@@ -83,5 +85,35 @@ test("screen registry tracks every IA page as an independent HTML artifact", asy
     assert.equal(screen.artifactPath, `/screens/${screen.id}.html`);
     assert.equal(screen.statePolicy, "inline");
     assert.ok(screen.themeSupport.includes("digital-camouflage"));
+  }
+});
+
+test("design execution checklist covers all 70 IA pages exactly once", async () => {
+  const checklist = await readFile(
+    new URL("../docs/design/design-execution-order.md", import.meta.url),
+    "utf8",
+  );
+  const registry = JSON.parse(
+    await readFile(new URL("../docs/design/screen-registry.json", import.meta.url), "utf8"),
+  );
+
+  const checklistIds = [...checklist.matchAll(/^- \[[ x]\] \*\*([A-Z0-9-]+) ·/gm)].map((match) => match[1]);
+  assert.equal(checklistIds.length, 70);
+  assert.equal(new Set(checklistIds).size, 70);
+  assert.deepEqual(new Set(checklistIds), new Set(registry.screens.map(({ id }) => id)));
+  assert.match(checklist, /실사 인물·사물 이미지는 사용하지 않는다/);
+  assert.match(checklist, /그래픽 시스템 고도화/);
+});
+
+test("first design group ships as independent state-complete pages", async () => {
+  const group = ["HOME-01", "EXP-01", "VOD-01", "PBL-01", "SRCH-01"];
+  for (const id of group) {
+    const screen = await readFile(new URL(`../screens/${id}.html`, import.meta.url), "utf8");
+    assert.match(screen, new RegExp(`data-screen-id="${id}"`));
+    assert.match(screen, /shared\/screens\.css/);
+    assert.match(screen, /shared\/screens\.js/);
+    for (const state of ["loading", "empty", "error", "forbidden"]) {
+      assert.match(screen, new RegExp(`data-state="${state}"`));
+    }
   }
 });

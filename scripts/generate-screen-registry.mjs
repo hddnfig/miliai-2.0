@@ -8,6 +8,12 @@ const outputPath = resolve(root, "docs/design/screen-registry.json");
 
 const inventory = await readFile(inventoryPath, "utf8");
 const lines = inventory.split(/\r?\n/);
+const existingRegistry = await readFile(outputPath, "utf8")
+  .then((value) => JSON.parse(value))
+  .catch(() => ({ screens: [] }));
+const priorStatusById = new Map(
+  existingRegistry.screens.map(({ id, status }) => [id, status]),
+);
 
 let group = "";
 const screens = [];
@@ -48,7 +54,7 @@ for (const line of lines) {
     pattern: inferPattern(name),
     statePolicy: "inline",
     themeSupport: ["neutral", "digital-camouflage"],
-    status: "planned",
+    status: priorStatusById.get(id) ?? "planned",
   });
 }
 
