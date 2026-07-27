@@ -21,6 +21,7 @@
   --platform-border-strong: rgba(255, 255, 255, 0.16);
   --platform-shadow: 0 22px 66px rgba(0, 0, 0, 0.46);
   --platform-glow: 0 0 24px rgba(180, 255, 57, 0.11);
+  --home-bg-scale: 1;
   --sidebar-width: 264px;
   --radius-sm: 8px;
   --radius: 12px;
@@ -48,6 +49,13 @@ body::before {
   content: "";
   opacity: 0.34;
   pointer-events: none;
+  transform: scale(1);
+  transform-origin: 62% 42%;
+}
+
+html[data-route="home"] body::before {
+  transform: scale(var(--home-bg-scale));
+  will-change: transform;
 }
 
 body::after {
@@ -821,6 +829,13 @@ textarea::placeholder {
   .line-chart,
   .section-heading {
     min-width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-route="home"] body::before {
+    transform: none;
+    will-change: auto;
   }
 }
 

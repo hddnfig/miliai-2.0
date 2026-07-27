@@ -44,6 +44,16 @@ test("platform theme reuses the shared design tokens and local concept assets", 
   assert.match(platformTheme, /color-scheme: dark/);
 });
 
+test("learner home background zoom follows scroll without overriding reduced motion", () => {
+  assert.match(app, /updateHomeBackgroundMotion/);
+  assert.match(app, /requestAnimationFrame/);
+  assert.match(app, /window\.addEventListener\("scroll", updateHomeBackgroundMotion, \{ passive: true \}\)/);
+  assert.match(app, /prefers-reduced-motion: reduce/);
+  assert.match(platformTheme, /html\[data-route="home"\] body::before/);
+  assert.match(platformTheme, /scale\(var\(--home-bg-scale\)\)/);
+  assert.match(platformTheme, /@media \(prefers-reduced-motion: reduce\)/);
+});
+
 test("core learner, commander, and operator views are registered", () => {
   for (const view of ["home", "explore", "learning", "workspace", "peer", "growth", "commander", "admin"]) {
     assert.match(app, new RegExp(`${view}:`));
