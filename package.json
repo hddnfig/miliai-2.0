@@ -8,7 +8,7 @@
     "dev": "python3 -m http.server",
     "start": "python3 -m http.server 4173",
     "generate:screens": "node scripts/generate-screen-registry.mjs",
-    "check": "node --check src/app.js && node --check system/system.js && node --check scripts/build.mjs && node --check scripts/generate-screen-registry.mjs",
+    "check": "node --check src/app.js && node --check system/system.js && node --check screens/shared/screens.js && node --check scripts/build.mjs && node --check scripts/generate-screen-registry.mjs",
     "test": "node --test tests/platform.test.mjs",
     "build": "node scripts/build.mjs"
   },
