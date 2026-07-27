@@ -4,6 +4,13 @@ const screenLinks = new Map([
   ["VOD-01", { href: "./screens/VOD-01.html", status: "verified", label: "검수 완료 · 독립 HTML" }],
   ["PBL-01", { href: "./screens/PBL-01.html", status: "verified", label: "검수 완료 · 독립 HTML" }],
   ["SRCH-01", { href: "./screens/SRCH-01.html", status: "verified", label: "검수 완료 · 독립 HTML" }],
+  ["VOD-02", { href: "./screens/VOD-02.html", status: "review", label: "디자인 완료 · 시각 검수 대기" }],
+  ["VOD-03", { href: "./screens/VOD-03.html", status: "review", label: "디자인 완료 · 시각 검수 대기" }],
+  ["VOD-04", { href: "./screens/VOD-04.html", status: "review", label: "디자인 완료 · 시각 검수 대기" }],
+  ["VOD-05", { href: "./screens/VOD-05.html", status: "review", label: "디자인 완료 · 시각 검수 대기" }],
+  ["VOD-06", { href: "./screens/VOD-06.html", status: "review", label: "디자인 완료 · 시각 검수 대기" }],
+  ["VOD-07", { href: "./screens/VOD-07.html", status: "review", label: "디자인 완료 · 시각 검수 대기" }],
+  ["VOD-08", { href: "./screens/VOD-08.html", status: "review", label: "디자인 완료 · 시각 검수 대기" }],
   ["PBL-02", { href: "./prototype.html#/project", status: "prototype", label: "내부 작업 중 · 통합 프로토타입" }],
   ["MYL-01", { href: "./prototype.html#/learning", status: "prototype", label: "내부 작업 중 · 통합 프로토타입" }],
   ["PBL-05", { href: "./prototype.html#/workspace", status: "prototype", label: "내부 작업 중 · 통합 프로토타입" }],
@@ -93,7 +100,8 @@ function render() {
   }
 
   const verifiedCount = state.screens.filter((screen) => screen.status === "verified").length;
-  result.textContent = `전체 ${state.screens.length}개 중 ${filtered.length}개 화면 표시 · 검수 완료 ${verifiedCount}개 · 화면 연결 ${screenLinks.size}개`;
+  const reviewCount = state.screens.filter((screen) => screen.status === "review").length;
+  result.textContent = `전체 ${state.screens.length}개 중 ${filtered.length}개 화면 표시 · 검수 완료 ${verifiedCount}개 · 시각 검수 대기 ${reviewCount}개 · 화면 연결 ${screenLinks.size}개`;
 }
 
 function populateGroups() {

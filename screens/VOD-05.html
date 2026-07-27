@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko" data-theme="digital-camouflage">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>VOD-05 · 퀴즈 · MILI AI</title><link rel="stylesheet" href="../src/design-system/foundation.css"><link rel="stylesheet" href="../src/design-system/themes/digital-camouflage.css"><link rel="stylesheet" href="./shared/screens.css"><script type="module" src="./shared/screens.js"></script></head>
+<body data-screen-id="VOD-05" data-ui-state="default"><mili-shell mode="focus" active="VOD-01" eyebrow="VOD / CHECKPOINT" title="이해도 퀴즈">
+  <div class="default-state">
+    <div class="focus-toolbar"><span class="ds-badge" data-tone="accent">문항 02 / 05</span><span class="task-meta">업무를 바꾸는 생성형 AI 프롬프트 · 통과 기준 70점</span><span class="control-spacer"></span><span class="task-meta">남은 시간 07:42</span></div>
+    <div class="progress-track" role="progressbar" aria-label="퀴즈 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40"><span style="width:40%"></span></div>
+    <section class="assessment-layout section">
+      <form class="ds-surface assessment-card" data-demo-form data-result-target="quiz-result" data-success-message="답안을 채점했습니다.">
+        <span class="eyebrow">QUESTION 02 · SINGLE CHOICE</span>
+        <h1>재사용 가능한 프롬프트를<br>만드는 가장 적절한 방법은?</h1>
+        <p class="muted">강의에서 학습한 목표, 맥락, 출력 형식의 역할을 기준으로 답해 주세요.</p>
+        <fieldset class="choice-list"><legend class="sr-only">정답 선택</legend>
+          <label class="choice"><input type="radio" name="answer" required><span><strong>모든 정보를 한 문장에 압축한다.</strong><br><small class="muted">요청을 짧게 만드는 데 집중한다.</small></span></label>
+          <label class="choice"><input type="radio" name="answer"><span><strong>목표·맥락·출력 형식을 구분해 작성한다.</strong><br><small class="muted">변경 가능한 조건을 모듈처럼 분리한다.</small></span></label>
+          <label class="choice"><input type="radio" name="answer"><span><strong>예시 없이 결과 분량만 지정한다.</strong><br><small class="muted">출력 길이를 유일한 성공 기준으로 둔다.</small></span></label>
+          <label class="choice"><input type="radio" name="answer"><span><strong>모호한 표현을 사용해 AI의 자유도를 높인다.</strong><br><small class="muted">판단 기준을 AI에게 위임한다.</small></span></label>
+        </fieldset>
+        <div class="status-actions"><a class="ds-button" data-variant="secondary" href="./VOD-04.html">강의 다시 보기</a><button class="ds-button" type="submit">답안 제출</button></div>
+        <div id="quiz-result" class="result-panel ds-surface" hidden><span class="ds-badge" data-tone="accent">정답 · 20점 획득</span><h2>구조를 분리하면 조건을 쉽게 교체할 수 있습니다.</h2><p class="muted">목표는 성공 기준, 맥락은 판단 배경, 출력 형식은 결과의 형태를 담당합니다. 각 요소를 분리하면 다른 업무에서도 프롬프트를 재사용하기 쉽습니다.</p><a class="ds-button" href="./VOD-06.html">다음: 코딩 실습</a></div>
+      </form>
+      <aside class="focus-side">
+        <section class="ds-surface focus-panel"><div class="section-heading"><h2>문항 탐색</h2><p>2 / 5</p></div><div class="question-nav" aria-label="퀴즈 문항"><button type="button" data-toast="1번 문항으로 이동합니다.">01</button><button type="button" aria-current="step">02</button><button type="button" data-toast="현재 문항을 제출한 뒤 이동할 수 있습니다.">03</button><button type="button" data-toast="현재 문항을 제출한 뒤 이동할 수 있습니다.">04</button><button type="button" data-toast="현재 문항을 제출한 뒤 이동할 수 있습니다.">05</button></div></section>
+        <section class="ds-surface ai-panel"><span class="ds-badge">평가 안내</span><h2>답안은 자동 저장됩니다.</h2><p>과정을 나가도 제한 시간 안에는 현재 문항부터 다시 시작할 수 있습니다.</p><button class="link-inline" data-toast="이 문항에 표시를 남겼습니다." type="button">나중에 다시 보기</button></section>
+      </aside>
+    </section>
+  </div>
+  <section class="state-panel" data-state="loading"><div><span class="state-code">LOADING / VOD-05</span><h2>퀴즈 문항을 준비하고 있습니다.</h2><p>저장된 답안과 남은 시간을 불러옵니다.</p></div></section>
+  <section class="state-panel" data-state="empty"><div><span class="state-code">EMPTY / VOD-05</span><h2>출제된 퀴즈가 없습니다.</h2><p>학습 과정으로 돌아가 다음 항목을 확인해 주세요.</p><a class="ds-button" href="./VOD-04.html">학습으로 돌아가기</a></div></section>
+  <section class="state-panel" data-state="error"><div><span class="state-code">SUBMIT ERROR / VOD-05</span><h2>답안을 제출하지 못했습니다.</h2><p>작성한 답안은 기기에 보관했습니다. 연결을 확인한 뒤 다시 제출해 주세요.</p><button class="ds-button" data-toast="저장된 답안을 다시 제출합니다." type="button">다시 제출</button></div></section>
+  <section class="state-panel" data-state="forbidden"><div><span class="state-code">LOCKED / VOD-05</span><h2>아직 응시할 수 없습니다.</h2><p>선행 강의를 완료하면 퀴즈가 열립니다.</p><a class="ds-button" href="./VOD-04.html">선행 강의 확인</a></div></section>
+</mili-shell></body></html>

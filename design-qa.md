@@ -97,4 +97,23 @@ This implementation is a design-system calibration catalog, not a 1:1 recreation
 - P3: replace the text product name with the official logo asset when available.
 - P3: repeat visual calibration against the final selected concept before rolling out 70 screens.
 
+## VOD learning journey · group 2
+
+- Source visual truth: the same three user-provided Digital Camouflage conversation attachments listed above.
+- Implementation target: `screens/VOD-02.html` through `screens/VOD-08.html`.
+- Intended viewport: desktop 1440 × 1000 CSS px and mobile 390 × 844 CSS px, device scale factor 1.
+- States included in every page: default, loading, empty, error, forbidden.
+- Interaction coverage: enrollment handoff, learning progress save, quiz submit/result, code run/result, survey submit/result, and completion actions.
+- Asset policy: no photoreal people or objects were added. All atmosphere uses the existing replaceable terrain/camouflage raster assets through semantic theme tokens and lightweight kinetic background motion.
+- Automated evidence: `npm run check`, `npm test` (16/16), `npm run build`, and `git diff --check` passed.
+- Browser evidence: blocked. Browser discovery returned no available in-app or Chrome connection, so same-viewport captures and combined reference comparison could not be completed.
+
+**Findings**
+
+- [P1] VOD group 2 lacks browser-rendered desktop/mobile comparison evidence.
+  Location: `screens/VOD-02.html` through `screens/VOD-08.html`.
+  Evidence: structural, state, interaction-hook, build, and asset-policy checks pass; rendered capture is unavailable.
+  Impact: final crop, responsive density, text wrapping, and live interaction feedback remain visually unaccepted.
+  Fix: reconnect an available browser, capture representative detail/focus/completion screens at both target viewports, compare them with the supplied reference direction, and promote the seven registry entries from `review` to `verified`.
+
 final result: blocked

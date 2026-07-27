@@ -11,6 +11,7 @@ class MiliShell extends HTMLElement {
     const active = this.getAttribute("active");
     const title = this.getAttribute("title") ?? "";
     const eyebrow = this.getAttribute("eyebrow") ?? "LEARNER";
+    const mode = this.getAttribute("mode") ?? "standard";
     const content = this.innerHTML;
     const nav = NAV_ITEMS.map(
       ([id, label]) =>
@@ -19,7 +20,7 @@ class MiliShell extends HTMLElement {
 
     this.innerHTML = `
       <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
-      <div class="learner-shell">
+      <div class="learner-shell learner-shell--${mode}">
         <aside class="shell-rail" aria-label="주요 메뉴">
           <a class="wordmark" href="./HOME-01.html" aria-label="MILI AI 홈">MILI <b>AI</b></a>
           <nav class="shell-nav">${nav}</nav>
@@ -32,7 +33,8 @@ class MiliShell extends HTMLElement {
           <header class="shell-header">
             <div><span class="eyebrow">${eyebrow}</span><strong>${title}</strong></div>
             <div class="shell-actions">
-              <a class="text-action" href="./SRCH-01.html">검색</a>
+              <a class="text-action screen-index-action" href="../handoff.html">전체 화면</a>
+              ${mode === "focus" ? '<a class="text-action" href="./VOD-01.html">학습 종료</a>' : '<a class="text-action" href="./SRCH-01.html">검색</a>'}
               <button class="text-action" type="button" data-toast="새 알림이 없습니다.">알림 <span class="notification-dot" aria-hidden="true"></span></button>
               <button class="profile-chip" type="button" data-toast="프로필 화면은 후속 단계에서 설계합니다.">김철수 <span>상병</span></button>
             </div>
@@ -99,6 +101,47 @@ class MiliShell extends HTMLElement {
 
     this.querySelectorAll("[data-toast]").forEach((button) => {
       button.addEventListener("click", () => this.showToast(button.dataset.toast));
+    });
+
+    this.querySelectorAll("[data-toggle-target]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const target = this.querySelector(`#${button.dataset.toggleTarget}`);
+        if (!target) return;
+        const willOpen = target.hidden;
+        target.hidden = !willOpen;
+        button.setAttribute("aria-expanded", String(willOpen));
+      });
+    });
+
+    this.querySelectorAll("[data-reveal-target]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const target = this.querySelector(`#${button.dataset.revealTarget}`);
+        if (!target) return;
+        target.hidden = false;
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        this.showToast(button.dataset.successMessage ?? "결과를 확인했습니다.");
+      });
+    });
+
+    this.querySelectorAll("[data-progress-action]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const target = this.querySelector(button.dataset.progressAction);
+        if (!target) return;
+        const value = Number(target.getAttribute("aria-valuenow") ?? 0);
+        const next = Math.min(value + 20, 100);
+        target.setAttribute("aria-valuenow", String(next));
+        target.querySelector("span").style.width = `${next}%`;
+        this.showToast(next === 100 ? "학습 항목을 완료했습니다." : `진도를 ${next}%로 저장했습니다.`);
+      });
+    });
+
+    this.querySelectorAll("form[data-demo-form]").forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const target = this.querySelector(`#${form.dataset.resultTarget}`);
+        if (target) target.hidden = false;
+        this.showToast(form.dataset.successMessage ?? "응답을 저장했습니다.");
+      });
     });
 
     const searchInput = this.querySelector("[data-live-search]");

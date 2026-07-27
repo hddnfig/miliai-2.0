@@ -1,5 +1,5 @@
 <!--
-화면명: 외부 개발사 전달 인덱스
+화면명: 전체 페이지 디자인 목록 및 외부 개발사 전달 인덱스
 화면 ID: HANDOFF-INDEX-001
 버전: 0.1.0
 상태: 내부 작업 중
@@ -38,9 +38,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="MILI AI 기획·디자인 HTML 외부 전달 인덱스" />
+    <meta name="description" content="MILI AI 전체 페이지 디자인 목록과 HTML 산출물 인덱스" />
     <meta name="theme-color" content="#050705" />
-    <title>MILI AI · 화면 전달 인덱스</title>
+    <title>MILI AI · 전체 페이지 목록</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23a8ff1a'/%3E%3Cpath d='M15 45V19h8l9 13 9-13h8v26h-8V31L32 43 23 31v14z' fill='%23102000'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="./src/design-system/foundation.css" />
     <link rel="stylesheet" href="./src/design-system/themes/digital-camouflage.css" />
@@ -60,16 +60,17 @@
       <section class="handoff-hero ds-concept-asset">
         <div>
           <span class="ds-badge" data-tone="accent">PLANNING · DESIGN · HTML</span>
-          <h1>외부 개발사 전달용<br />화면 인덱스</h1>
-          <p>이 저장소는 운영 코드가 아닙니다. 화면 구조, UI, 기획 정책, 반응형 동작과 주요 인터랙션을 확인하기 위한 HTML 프로토타입입니다.</p>
+          <h1>전체 페이지<br />디자인 목록</h1>
+          <p>IA에 정의된 70개 페이지의 ID, 우선순위, 디자인 상태와 독립 HTML 산출물을 한곳에서 확인합니다. 구현된 화면은 목록에서 바로 열 수 있습니다.</p>
           <div class="hero-actions">
-            <a class="ds-button" href="./prototype.html#/home">통합 프로토타입 열기</a>
+            <a class="ds-button" href="#screen-index">전체 70개 화면 보기</a>
+            <a class="ds-button" data-variant="secondary" href="./prototype.html#/home">통합 프로토타입</a>
             <a class="ds-button" data-variant="secondary" href="./system/index.html">디자인 시스템 후보안</a>
           </div>
         </div>
         <dl class="handoff-summary" aria-label="전달 현황">
           <div><dt>화면 원장</dt><dd id="total-count">70</dd></div>
-          <div><dt>연결된 프로토타입</dt><dd id="linked-count">9</dd></div>
+          <div><dt>연결된 프로토타입</dt><dd id="linked-count">19</dd></div>
           <div><dt>검수 완료</dt><dd id="verified-count">5</dd></div>
           <div><dt>기준 버전</dt><dd>0.1.0</dd></div>
         </dl>
@@ -95,11 +96,11 @@
       </section>
 
       <section class="handoff-section" id="screen-index" aria-labelledby="screen-title">
-        <header class="section-heading"><div><p class="section-kicker">SCREEN REGISTRY</p><h2 id="screen-title">전체 화면 목록</h2></div><p>독립 HTML이 없는 화면도 누락하지 않고 내부 작업 중으로 표시합니다.</p></header>
+        <header class="section-heading"><div><p class="section-kicker">70-PAGE SCREEN REGISTRY</p><h2 id="screen-title">전체 페이지 목록</h2></div><p>페이지 ID를 기준으로 디자인 상태를 관리하며, 독립 HTML이 없는 화면도 누락하지 않습니다.</p></header>
         <div class="screen-controls">
           <label class="screen-search"><span>화면 검색</span><input class="ds-input" id="screen-search" type="search" placeholder="화면 ID 또는 화면명" /></label>
           <label><span>영역</span><select class="ds-input" id="group-filter"><option value="all">전체 영역</option></select></label>
-          <label><span>상태</span><select class="ds-input" id="status-filter"><option value="all">전체 상태</option><option value="verified">검수 완료</option><option value="prototype">통합 프로토타입</option><option value="planned">내부 작업 중</option></select></label>
+          <label><span>상태</span><select class="ds-input" id="status-filter"><option value="all">전체 상태</option><option value="verified">검수 완료</option><option value="review">디자인 완료 · 시각 검수 대기</option><option value="prototype">통합 프로토타입</option><option value="planned">내부 작업 중</option></select></label>
         </div>
         <p class="screen-result" id="screen-result" role="status">화면 원장을 불러오는 중입니다.</p>
         <div class="screen-table-wrap ds-surface">

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ko" data-theme="digital-camouflage">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>VOD-03 · 수강 신청 결과 · MILI AI</title><link rel="stylesheet" href="../src/design-system/foundation.css"><link rel="stylesheet" href="../src/design-system/themes/digital-camouflage.css"><link rel="stylesheet" href="./shared/screens.css"><script type="module" src="./shared/screens.js"></script></head>
+<body data-screen-id="VOD-03" data-ui-state="default"><mili-shell active="VOD-01" title="수강 신청">
+  <div class="default-state">
+    <nav class="breadcrumb" aria-label="현재 위치"><a href="./VOD-01.html">VOD</a><span>/</span><a href="./VOD-02.html">과정 상세</a><span>/</span><span>신청 결과</span></nav>
+    <section class="status-hero"><span class="ds-badge" data-tone="accent">신청 완료 · 즉시 승인</span><h1>수강 준비가<br>완료되었습니다.</h1><p>‘업무를 바꾸는 생성형 AI 프롬프트’ 과정을 지금 시작할 수 있습니다. 학습 기간은 첫 학습일부터 30일입니다.</p><div class="status-actions"><a class="ds-button" href="./VOD-04.html">첫 학습 시작</a><a class="ds-button" data-variant="secondary" href="./VOD-02.html">과정 상세 보기</a></div></section>
+    <section class="section layout-2">
+      <article class="ds-surface surface-card"><div class="section-heading"><h2>신청 정보</h2><span class="result-code">ENROLL / 2026-0727-0142</span></div><dl class="definition-list"><div><dt>과정</dt><dd>업무를 바꾸는 생성형 AI 프롬프트</dd></div><div><dt>학습 기간</dt><dd>2026.07.27 – 2026.08.25</dd></div><div><dt>승인 상태</dt><dd>자동 승인 완료</dd></div><div><dt>수료 조건</dt><dd>진도 80% · 퀴즈 70점 이상</dd></div></dl></article>
+      <aside class="ds-surface surface-card"><div class="section-heading"><h2>신청 관리</h2><p>학습 시작 전</p></div><p class="muted">학습을 시작하면 수강 취소 대신 학습 중단으로 처리됩니다.</p><button class="ds-button" data-variant="secondary" data-toggle-target="cancel-policy" aria-expanded="false" type="button">취소 정책 확인</button><div id="cancel-policy" class="result-panel ds-surface" hidden><h2>취소 가능</h2><p class="muted">첫 학습 시작 전까지 이 화면에서 취소할 수 있습니다.</p><button class="link-inline" data-toast="시연 화면에서는 신청을 유지합니다." type="button">수강 신청 취소</button></div></aside>
+    </section>
+    <section class="section"><div class="section-heading"><h2>다음 단계</h2><p>학습 시작 안내</p></div><div class="step-list ds-surface"><div class="step-item"><span class="step-item__index">01</span><div><strong>보안 수칙 확인</strong><p class="muted">실습에 사용할 수 없는 데이터 범위를 확인합니다.</p></div><span class="ds-badge" data-tone="accent">필수</span></div><div class="step-item"><span class="step-item__index">02</span><div><strong>첫 강의 시작</strong><p class="muted">18분 분량의 ‘좋은 프롬프트의 구조’부터 시작합니다.</p></div><span class="task-meta">약 18분</span></div><div class="step-item"><span class="step-item__index">03</span><div><strong>진도 자동 저장</strong><p class="muted">종료 후 홈에서 이어 학습할 수 있습니다.</p></div><span class="task-meta">자동</span></div></div></section>
+  </div>
+  <section class="state-panel" data-state="loading"><div><span class="state-code">LOADING / VOD-03</span><h2>신청 결과를 확인하고 있습니다.</h2><p>승인 상태와 학습 기간을 계산합니다.</p></div></section>
+  <section class="state-panel" data-state="empty"><div><span class="state-code">EMPTY / VOD-03</span><h2>확인할 신청 내역이 없습니다.</h2><p>과정 상세에서 수강을 신청해 주세요.</p><a class="ds-button" href="./VOD-02.html">과정 상세</a></div></section>
+  <section class="state-panel" data-state="error"><div><span class="state-code">ERROR / VOD-03</span><h2>신청 결과를 확인하지 못했습니다.</h2><p>중복 신청하지 말고 잠시 뒤 상태를 다시 확인해 주세요.</p></div></section>
+  <section class="state-panel" data-state="forbidden"><div><span class="state-code">403 / VOD-03</span><h2>신청 내역 접근 권한이 없습니다.</h2><p>본인의 계정으로 다시 확인해 주세요.</p></div></section>
+</mili-shell></body></html>

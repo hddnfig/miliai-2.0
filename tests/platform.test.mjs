@@ -21,7 +21,7 @@ test("entry document opens the platform prototype", () => {
 });
 
 test("handoff index remains available as a separate page", () => {
-  assert.match(handoffHtml, /외부 개발사 전달용/);
+  assert.match(handoffHtml, /전체 페이지 디자인 목록/);
   assert.match(handoffHtml, /id="screen-index"/);
   assert.match(handoffHtml, /docs\/design\/README\.md/);
   assert.match(handoffHtml, /src="\.\/src\/handoff\.js"/);
@@ -79,11 +79,13 @@ test("responsive navigation rules are present", () => {
 });
 
 test("handoff index maps implemented screens without hiding planned screens", () => {
-  for (const id of ["HOME-01", "EXP-01", "VOD-01", "PBL-01", "SRCH-01", "PBL-02", "MYL-01", "PBL-05", "PBL-09", "GROW-01", "CMD-01", "ADM-01"]) {
+  for (const id of ["HOME-01", "EXP-01", "VOD-01", "PBL-01", "SRCH-01", "VOD-02", "VOD-03", "VOD-04", "VOD-05", "VOD-06", "VOD-07", "VOD-08", "PBL-02", "MYL-01", "PBL-05", "PBL-09", "GROW-01", "CMD-01", "ADM-01"]) {
     assert.match(handoff, new RegExp(`\\[\"${id}\"`));
   }
   assert.match(handoff, /\.\/screens\/HOME-01\.html/);
+  assert.match(handoff, /\.\/screens\/VOD-08\.html/);
   assert.match(handoff, /검수 완료 · 독립 HTML/);
+  assert.match(handoff, /디자인 완료 · 시각 검수 대기/);
   assert.match(handoff, /내부 작업 중/);
   assert.match(handoff, /screen-registry\.json/);
 });
@@ -146,6 +148,44 @@ test("first design group ships as independent state-complete pages", async () =>
       assert.match(screen, new RegExp(`data-state="${state}"`));
     }
   }
+});
+
+test("VOD journey ships as independent state-complete pages", async () => {
+  const group = ["VOD-02", "VOD-03", "VOD-04", "VOD-05", "VOD-06", "VOD-07", "VOD-08"];
+  const registry = JSON.parse(
+    await readFile(new URL("../docs/design/screen-registry.json", import.meta.url), "utf8"),
+  );
+  for (const id of group) {
+    const screen = await readFile(new URL(`../screens/${id}.html`, import.meta.url), "utf8");
+    assert.match(screen, new RegExp(`data-screen-id="${id}"`));
+    assert.match(screen, /shared\/screens\.css/);
+    assert.match(screen, /shared\/screens\.js/);
+    for (const state of ["loading", "empty", "error", "forbidden"]) {
+      assert.match(screen, new RegExp(`data-state="${state}"`));
+    }
+    assert.equal(registry.screens.find((item) => item.id === id)?.status, "review");
+  }
+});
+
+test("VOD journey includes focus mode and primary task interactions", async () => {
+  const [player, quiz, coding, survey] = await Promise.all(
+    ["VOD-04", "VOD-05", "VOD-06", "VOD-07"].map((id) =>
+      readFile(new URL(`../screens/${id}.html`, import.meta.url), "utf8"),
+    ),
+  );
+
+  for (const screen of [player, quiz, coding, survey]) {
+    assert.match(screen, /mode="focus"/);
+  }
+  assert.match(player, /data-progress-action/);
+  assert.match(quiz, /data-demo-form/);
+  assert.match(coding, /data-reveal-target/);
+  assert.match(survey, /data-demo-form/);
+});
+
+test("every independent design screen exposes the complete page registry", async () => {
+  const shell = await readFile(new URL("../screens/shared/screens.js", import.meta.url), "utf8");
+  assert.match(shell, /href="\.\.\/handoff\.html">전체 화면/);
 });
 
 test("initial screens actively use replaceable abstract and kinetic assets", async () => {

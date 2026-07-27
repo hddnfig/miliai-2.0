@@ -377,6 +377,12 @@ tbody tr:hover {
   background: var(--ds-accent);
 }
 
+.screen-badge.review {
+  border: 1px solid var(--ds-accent);
+  color: var(--ds-accent-text);
+  background: var(--ds-accent-muted);
+}
+
 .screen-badge.planned {
   color: var(--ds-text-secondary);
   background: var(--ds-bg-muted);

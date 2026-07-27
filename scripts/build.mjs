@@ -20,6 +20,13 @@ const required = [
   "screens/VOD-01.html",
   "screens/PBL-01.html",
   "screens/SRCH-01.html",
+  "screens/VOD-02.html",
+  "screens/VOD-03.html",
+  "screens/VOD-04.html",
+  "screens/VOD-05.html",
+  "screens/VOD-06.html",
+  "screens/VOD-07.html",
+  "screens/VOD-08.html",
   "screens/shared/screens.css",
   "screens/shared/screens.js",
   "src/design-system/foundation.css",
@@ -42,4 +49,4 @@ await cp(resolve(root, "screens"), resolve(output, "screens"), { recursive: true
 await cp(resolve(root, "assets"), resolve(output, "assets"), { recursive: true });
 await cp(resolve(root, "docs"), resolve(output, "docs"), { recursive: true });
 
-console.log(`Built design foundation, first design group, and prototype assets into ${output}`);
+console.log(`Built design foundation, completed learner screen groups, and prototype assets into ${output}`);

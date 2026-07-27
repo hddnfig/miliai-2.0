@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko" data-theme="digital-camouflage">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>VOD-06 · 코딩 실습 · MILI AI</title><link rel="stylesheet" href="../src/design-system/foundation.css"><link rel="stylesheet" href="../src/design-system/themes/digital-camouflage.css"><link rel="stylesheet" href="./shared/screens.css"><script type="module" src="./shared/screens.js"></script></head>
+<body data-screen-id="VOD-06" data-ui-state="default"><mili-shell mode="focus" active="VOD-01" eyebrow="VOD / LAB" title="프롬프트 변수 분리 실습">
+  <div class="default-state">
+    <div class="focus-toolbar"><span class="ds-badge" data-tone="accent">실습 01 / 02</span><span class="task-meta">Python · 자동 채점</span><span class="control-spacer"></span><span class="task-meta">남은 시간 18:24</span><button class="filter-chip" data-toggle-target="practice-hint" aria-expanded="false" type="button">힌트</button></div>
+    <div class="code-layout">
+      <section class="focus-main">
+        <article class="ds-surface focus-panel"><span class="eyebrow">MISSION / VARIABLE MAP</span><h1>업무 요청을 구조화하는<br>프롬프트 함수를 완성하세요.</h1><p class="muted">목표, 맥락, 출력 형식을 각각 매개변수로 받아 하나의 프롬프트 문자열로 반환해야 합니다.</p><div id="practice-hint" class="result-panel ds-surface" hidden><h2>힌트</h2><p class="muted">세 개의 매개변수가 결과 문자열 안에 모두 포함되는지 확인하세요. 레이블을 붙이면 출력 구조가 더 명확해집니다.</p></div></article>
+        <label class="eyebrow" for="code-input">EDITOR / MAIN.PY</label>
+        <textarea id="code-input" class="code-editor" spellcheck="false" aria-label="Python 코드 편집기">def build_prompt(goal, context, output_format):
+    prompt = f"""
+    목표: {goal}
+    맥락: {context}
+    출력 형식: {output_format}
+    """
+    return prompt.strip()
+
+print(build_prompt(
+    "작전 보고서 요약",
+    "지휘관이 3분 안에 읽을 수 있어야 함",
+    "핵심 판단 3개와 후속 조치 목록"
+))</textarea>
+        <div class="status-actions"><button class="ds-button" data-variant="secondary" data-reveal-target="code-result" data-success-message="코드를 실행했습니다." type="button">코드 실행</button><button class="ds-button" data-toast="제출본을 저장했습니다. 모든 테스트를 통과했습니다." type="button">채점 제출</button><a class="ds-button" data-variant="secondary" href="./VOD-07.html">다음: 설문</a></div>
+      </section>
+      <aside class="focus-side">
+        <section class="ds-surface focus-panel"><div class="section-heading"><h2>테스트 조건</h2><p>3개</p></div><div class="test-list"><div class="test-row"><span>인자 3개 선언</span><strong>PASS</strong></div><div class="test-row"><span>모든 값 포함</span><strong>PASS</strong></div><div class="test-row"><span>문자열 반환</span><strong>PASS</strong></div></div></section>
+        <section id="code-result" class="ds-surface focus-panel" hidden><div class="section-heading"><h2>실행 결과</h2><span class="ds-badge" data-tone="accent">EXIT 0</span></div><pre class="terminal">목표: 작전 보고서 요약
+맥락: 지휘관이 3분 안에 읽을 수 있어야 함
+출력 형식: 핵심 판단 3개와 후속 조치 목록
+
+✓ 실행 시간 0.04s</pre></section>
+        <section class="ds-surface ai-panel"><span class="ds-badge">AI 교관</span><h2>오류 맥락을 유지합니다.</h2><p>실행 결과와 현재 코드를 기준으로 한 단계씩 수정 방향을 제안합니다.</p><button class="link-inline" data-toast="현재 코드 기준으로 AI 도움말을 준비했습니다." type="button">코드 도움 요청</button></section>
+      </aside>
+    </div>
+  </div>
+  <section class="state-panel" data-state="loading"><div><span class="state-code">LOADING / VOD-06</span><h2>실습 환경을 준비하고 있습니다.</h2><p>편집기와 마지막 저장 코드를 불러옵니다.</p></div></section>
+  <section class="state-panel" data-state="empty"><div><span class="state-code">EMPTY / VOD-06</span><h2>배정된 코딩 실습이 없습니다.</h2><p>과정 커리큘럼에서 다음 학습 항목을 확인해 주세요.</p><a class="ds-button" href="./VOD-04.html">커리큘럼 확인</a></div></section>
+  <section class="state-panel" data-state="error"><div><span class="state-code">RUNTIME ERROR / VOD-06</span><h2>실행 환경에 연결하지 못했습니다.</h2><p>작성 코드는 자동 저장되었습니다. 잠시 뒤 실행을 다시 시도해 주세요.</p><button class="ds-button" data-toast="실행 환경에 다시 연결합니다." type="button">환경 다시 연결</button></div></section>
+  <section class="state-panel" data-state="forbidden"><div><span class="state-code">LAB LOCKED / VOD-06</span><h2>실습 접근 권한이 없습니다.</h2><p>퀴즈 통과 후 실습 환경을 사용할 수 있습니다.</p><a class="ds-button" href="./VOD-05.html">퀴즈 확인</a></div></section>
+</mili-shell></body></html>

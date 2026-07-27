@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ko" data-theme="digital-camouflage">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>VOD-07 · 설문 · MILI AI</title><link rel="stylesheet" href="../src/design-system/foundation.css"><link rel="stylesheet" href="../src/design-system/themes/digital-camouflage.css"><link rel="stylesheet" href="./shared/screens.css"><script type="module" src="./shared/screens.js"></script></head>
+<body data-screen-id="VOD-07" data-ui-state="default"><mili-shell mode="focus" active="VOD-01" eyebrow="VOD / FEEDBACK" title="학습 경험 설문">
+  <div class="default-state">
+    <div class="focus-toolbar"><span class="ds-badge" data-tone="accent">필수 설문</span><span class="task-meta">3문항 · 약 2분</span><span class="control-spacer"></span><span class="task-meta">응답은 익명으로 집계됩니다.</span></div>
+    <div class="progress-track" role="progressbar" aria-label="설문 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="66"><span style="width:66%"></span></div>
+    <section class="assessment-layout section">
+      <form class="ds-surface assessment-card" data-demo-form data-result-target="survey-result" data-success-message="설문 응답을 제출했습니다.">
+        <span class="eyebrow">COURSE REVIEW / REQUIRED</span><h1>이번 학습 경험을<br>다음 과정에 반영합니다.</h1><p class="muted">별표가 있는 항목은 필수입니다. 응답 내용은 과정 개선 목적으로만 사용됩니다.</p>
+        <fieldset class="survey-question"><legend><strong>01. 학습 내용이 실제 업무에 도움이 되었나요? *</strong></legend><div class="survey-scale"><label><input type="radio" name="useful" value="1" required><span>1</span></label><label><input type="radio" name="useful" value="2"><span>2</span></label><label><input type="radio" name="useful" value="3"><span>3</span></label><label><input type="radio" name="useful" value="4"><span>4</span></label><label><input type="radio" name="useful" value="5"><span>5</span></label></div><div class="meta-list"><span>전혀 아님</span><span>매우 도움됨</span></div></fieldset>
+        <fieldset class="survey-question"><legend><strong>02. 가장 유용했던 학습 방식은 무엇인가요? *</strong></legend><div class="choice-list"><label class="choice"><input type="radio" name="method" required><span>개념 강의와 예시</span></label><label class="choice"><input type="radio" name="method"><span>이해도 퀴즈와 해설</span></label><label class="choice"><input type="radio" name="method"><span>코딩 실습과 자동 채점</span></label></div></fieldset>
+        <div class="survey-question"><label for="survey-note"><strong>03. 개선이 필요한 점을 알려주세요.</strong></label><textarea id="survey-note" class="ds-textarea" placeholder="선택 사항 · 최대 500자"></textarea></div>
+        <div class="status-actions"><a class="ds-button" data-variant="secondary" href="./VOD-06.html">이전 실습</a><button class="ds-button" type="submit">응답 제출</button></div>
+        <div id="survey-result" class="result-panel ds-surface" hidden><span class="ds-badge" data-tone="accent">제출 완료</span><h2>의견을 남겨주셔서 감사합니다.</h2><p class="muted">응답이 안전하게 저장되었습니다. 과정 완료 결과를 확인해 주세요.</p><a class="ds-button" href="./VOD-08.html">과정 완료 확인</a></div>
+      </form>
+      <aside class="focus-side"><section class="ds-surface focus-panel"><div class="section-heading"><h2>응답 현황</h2><p>2 / 3</p></div><div class="step-list"><div class="step-item"><span class="step-item__index">01</span><strong>업무 활용도</strong><span class="ds-badge" data-tone="accent">필수</span></div><div class="step-item"><span class="step-item__index">02</span><strong>학습 방식</strong><span class="ds-badge" data-tone="accent">필수</span></div><div class="step-item"><span class="step-item__index">03</span><strong>개선 의견</strong><span class="task-meta">선택</span></div></div></section><section class="ds-surface ai-panel"><span class="ds-badge">응답 정책</span><h2>개인 식별 정보는 제외됩니다.</h2><p>교육 담당자는 개인 응답이 아닌 과정 단위 집계 결과를 확인합니다.</p></section></aside>
+    </section>
+  </div>
+  <section class="state-panel" data-state="loading"><div><span class="state-code">LOADING / VOD-07</span><h2>설문을 불러오고 있습니다.</h2><p>필수 문항과 임시 저장 응답을 확인합니다.</p></div></section>
+  <section class="state-panel" data-state="empty"><div><span class="state-code">EMPTY / VOD-07</span><h2>진행할 설문이 없습니다.</h2><p>과정 완료 조건을 바로 확인할 수 있습니다.</p><a class="ds-button" href="./VOD-08.html">완료 결과 확인</a></div></section>
+  <section class="state-panel" data-state="error"><div><span class="state-code">SUBMIT ERROR / VOD-07</span><h2>응답을 제출하지 못했습니다.</h2><p>작성한 응답은 임시 저장했습니다. 연결을 확인한 뒤 다시 제출해 주세요.</p><button class="ds-button" data-toast="임시 저장한 설문을 다시 제출합니다." type="button">다시 제출</button></div></section>
+  <section class="state-panel" data-state="forbidden"><div><span class="state-code">LOCKED / VOD-07</span><h2>설문 참여 조건을 충족하지 못했습니다.</h2><p>필수 학습 항목을 완료한 뒤 참여할 수 있습니다.</p><a class="ds-button" href="./VOD-04.html">학습 현황 확인</a></div></section>
+</mili-shell></body></html>
