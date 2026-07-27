@@ -2,16 +2,26 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const [html, app, css] = await Promise.all([
+const [html, prototype, handoff, app, css] = await Promise.all([
   readFile(new URL("../index.html", import.meta.url), "utf8"),
+  readFile(new URL("../prototype.html", import.meta.url), "utf8"),
+  readFile(new URL("../src/handoff.js", import.meta.url), "utf8"),
   readFile(new URL("../src/app.js", import.meta.url), "utf8"),
   readFile(new URL("../src/styles.css", import.meta.url), "utf8"),
 ]);
 
-test("entry document exposes an accessible app root", () => {
-  assert.match(html, /id="app"/);
-  assert.match(html, /본문으로 건너뛰기/);
-  assert.match(html, /src="\.\/src\/app\.js"/);
+test("entry document is the accessible handoff index", () => {
+  assert.match(html, /외부 개발사 전달용/);
+  assert.match(html, /id="screen-index"/);
+  assert.match(html, /docs\/design\/README\.md/);
+  assert.match(html, /src="\.\/src\/handoff\.js"/);
+});
+
+test("prototype keeps the existing app entry", () => {
+  assert.match(prototype, /id="app"/);
+  assert.match(prototype, /본문으로 건너뛰기/);
+  assert.match(prototype, /src="\.\/src\/app\.js"/);
+  assert.doesNotMatch(prototype, /fonts\.googleapis\.com/);
 });
 
 test("core learner, commander, and operator views are registered", () => {
@@ -35,6 +45,17 @@ test("responsive navigation rules are present", () => {
   assert.match(css, /@media \(max-width: 760px\)/);
   assert.match(css, /:focus-visible/);
   assert.match(css, /prefers-reduced-motion/);
+  assert.match(css, /\.revision-workspace \.revision-tools/);
+});
+
+test("handoff index maps implemented screens without hiding planned screens", () => {
+  for (const id of ["HOME-01", "EXP-01", "VOD-01", "PBL-01", "SRCH-01", "PBL-02", "MYL-01", "PBL-05", "PBL-09", "GROW-01", "CMD-01", "ADM-01"]) {
+    assert.match(handoff, new RegExp(`\\[\"${id}\"`));
+  }
+  assert.match(handoff, /\.\/screens\/HOME-01\.html/);
+  assert.match(handoff, /검수 완료 · 독립 HTML/);
+  assert.match(handoff, /내부 작업 중/);
+  assert.match(handoff, /screen-registry\.json/);
 });
 
 test("design foundation keeps the provisional concept behind semantic tokens", async () => {
