@@ -625,11 +625,36 @@ const views = {
   admin: adminView,
 };
 
+const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+let backgroundMotionFrame = 0;
+
+function updateHomeBackgroundMotion() {
+  if (backgroundMotionFrame) return;
+  backgroundMotionFrame = window.requestAnimationFrame(() => {
+    backgroundMotionFrame = 0;
+    const isHome = state.role === "learner" && state.route === "home";
+    const root = document.documentElement;
+
+    if (!isHome || reducedMotionQuery.matches) {
+      root.style.setProperty("--home-bg-scale", "1");
+      return;
+    }
+
+    const availableScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+    const motionRange = Math.max(Math.min(availableScroll, window.innerHeight * 1.35), 1);
+    const progress = Math.min(Math.max(window.scrollY / motionRange, 0), 1);
+    const maxZoom = window.innerWidth <= 760 ? 0.1 : 0.18;
+    root.style.setProperty("--home-bg-scale", (1 + progress * maxZoom).toFixed(4));
+  });
+}
+
 function render() {
   state.route = routeFromHash();
+  document.documentElement.dataset.route = state.route;
   const view = views[state.route] || genericView;
   document.querySelector("#app").innerHTML = shell(view());
   document.title = `${labels[state.route] || "MILI AI"} · MILI AI`;
+  updateHomeBackgroundMotion();
 }
 
 function toast(message, type = "success") {
@@ -734,6 +759,10 @@ window.addEventListener("hashchange", () => {
   render();
   window.scrollTo({ top: 0, behavior: "instant" });
 });
+
+window.addEventListener("scroll", updateHomeBackgroundMotion, { passive: true });
+window.addEventListener("resize", updateHomeBackgroundMotion);
+reducedMotionQuery.addEventListener("change", updateHomeBackgroundMotion);
 
 if (!window.location.hash) window.location.hash = "#/home";
 render();
