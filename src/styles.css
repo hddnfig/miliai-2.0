@@ -242,6 +242,45 @@ select:focus-visible {
   flex-direction: column;
 }
 
+.nav-branch {
+  display: block;
+}
+
+.nav-branch .nav-item > .icon:last-child {
+  margin-left: auto;
+  transition: transform 160ms ease;
+}
+
+.nav-branch.is-active .nav-item > .icon:last-child {
+  transform: rotate(90deg);
+}
+
+.subnav {
+  display: grid;
+  gap: 2px;
+  margin: 2px 0 7px 28px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.subnav a {
+  padding: 6px 8px;
+  border-radius: 6px;
+  color: #81968f;
+  font-size: 11px;
+  transition: 160ms ease;
+}
+
+.subnav a:hover,
+.subnav a.active {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.subnav a.active {
+  color: var(--lime);
+}
+
 .nav-item {
   position: relative;
   display: flex;
@@ -297,6 +336,91 @@ select:focus-visible {
   border: 1px solid rgba(199, 242, 91, 0.12);
   border-radius: var(--radius);
   background: rgba(199, 242, 91, 0.065);
+}
+
+.hub-panel {
+  margin-top: 24px;
+  padding: 24px;
+}
+
+.hub-list {
+  display: grid;
+  margin-top: 18px;
+}
+
+.hub-list > button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 4px;
+  border-top: 1px solid var(--ink-150);
+  background: transparent;
+  text-align: left;
+}
+
+.hub-list > button p {
+  display: grid;
+  flex: 1;
+  gap: 2px;
+}
+
+.hub-list > button small {
+  color: var(--ink-500);
+}
+
+.profile-hero {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 20px;
+  padding: 24px;
+}
+
+.profile-hero .avatar {
+  width: 58px;
+  height: 58px;
+  font-size: 18px;
+}
+
+.profile-hero > div {
+  flex: 1;
+}
+
+.hub-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.hub-card {
+  position: relative;
+  display: grid;
+  min-height: 160px;
+  align-content: start;
+  gap: 8px;
+  padding: 22px;
+}
+
+.hub-card > span {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+  place-items: center;
+  border-radius: 10px;
+  color: var(--ink-900);
+  background: var(--lime);
+}
+
+.hub-card > .icon:last-child {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
+.hub-card p {
+  color: var(--ink-500);
+  font-size: 12px;
 }
 
 .support-icon {

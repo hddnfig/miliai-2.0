@@ -61,13 +61,23 @@ test("core learner, commander, and operator views are registered", () => {
 });
 
 test("priority learner journey follows the architecture documents", () => {
-  for (const label of ["홈", "탐색", "내 학습", "함께 학습", "나의 성장"]) {
+  for (const label of ["홈", "학습 탐색", "내 학습", "동료학습", "커뮤니티", "나의 성장", "MY"]) {
     assert.match(app, new RegExp(`\\[\\\"[^\\\"]+\\\", \\\"[^\\\"]+\\\", \\\"${label}\\\"`));
   }
 
   for (const copy of ["피드백을 반영해", "수정본 재제출", "프로젝트 여정", "AI 교관의 다음 단서", "역량 근거"]) {
     assert.match(app, new RegExp(copy));
   }
+});
+
+test("role navigation follows the remote IA hierarchy", () => {
+  for (const label of ["VOD", "PBL 프로젝트", "평가 필요", "역량진단", "AI 대화 기록", "차수/운영", "댓글/첨부/신고", "OAuth2 클라이언트"]) {
+    assert.ok(app.includes(`, "${label}"]`));
+  }
+  assert.match(app, /class="subnav"/);
+  assert.match(app, /search: searchView/);
+  assert.match(app, /community: communityView/);
+  assert.match(app, /my: myView/);
 });
 
 test("learner home visualizes the existing journey over the terrain background", () => {

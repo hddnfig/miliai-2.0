@@ -130,10 +130,12 @@ const state = {
 const navByRole = {
   learner: [
     ["home", "home", "홈"],
-    ["explore", "compass", "탐색"],
+    ["explore", "compass", "학습 탐색"],
     ["learning", "book", "내 학습"],
-    ["peer", "users", "함께 학습", "3"],
+    ["peer", "users", "동료학습", "3"],
+    ["community", "message", "커뮤니티"],
     ["growth", "growth", "나의 성장"],
+    ["my", "user", "MY"],
   ],
   commander: [
     ["commander", "home", "현황"],
@@ -145,22 +147,42 @@ const navByRole = {
   ],
   admin: [
     ["admin", "grid", "운영 대시보드"],
-    ["project-admin", "folder", "프로젝트 관리"],
+    ["project-admin", "folder", "PBL 관리"],
     ["vod-admin", "play", "VOD 관리"],
-    ["operations", "chart", "교육 운영"],
-    ["ai-admin", "sparkles", "AI 교관 관리"],
     ["users-admin", "users", "사용자·조직"],
+    ["community-admin", "message", "커뮤니티 관리"],
+    ["content-admin", "file", "공통 콘텐츠"],
     ["system", "settings", "시스템"],
   ],
 };
 
+const navChildren = {
+  explore: [["explore", "전체"], ["vod", "VOD"], ["projects", "PBL 프로젝트"]],
+  learning: [["learning", "학습 중"], ["learning-upcoming", "예정"], ["learning-complete", "완료"], ["learning-review", "평가 필요"]],
+  peer: [["peer-requests", "평가 요청"], ["peer", "내가 할 평가"], ["peer-received", "받은 평가"]],
+  community: [["community", "공지사항"], ["community-qna", "Q&A"], ["community-faq", "FAQ"], ["community-news", "뉴스"]],
+  growth: [["growth", "학습 현황"], ["growth-map", "역량 맵"], ["growth-assessment", "역량진단"], ["certificates", "수료증"], ["roadmap", "로드맵"]],
+  my: [["my", "프로필"], ["wishlist", "관심 콘텐츠"], ["my-posts", "작성한 글"], ["ai-history", "AI 대화 기록"], ["credits", "크레딧"], ["account-settings", "계정 설정"]],
+  unit: [["unit", "인원별 현황"], ["unit-courses", "과정별 현황"], ["unit-risk", "미참여/위험군"]],
+  programs: [["programs", "배정/추천"], ["program-schedule", "운영 일정"]],
+  "project-admin": [["project-admin", "프로젝트"], ["pbl-runs", "차수/운영"], ["pbl-teams", "팀/미션 진행"], ["pbl-reviews", "동료평가"], ["pbl-ai", "AI 교관"]],
+  "vod-admin": [["vod-categories", "카테고리"], ["vod-admin", "과정/차수"], ["vod-items", "목차/학습 아이템"], ["vod-media", "동영상"], ["vod-assessments", "퀴즈/코딩"], ["vod-surveys", "설문"], ["vod-certificates", "수료증"]],
+  "users-admin": [["users-admin", "회원"], ["units-admin", "부대/계급"], ["roles-admin", "역할/권한"], ["onboarding-admin", "온보딩/역량진단"], ["credits-admin", "크레딧"]],
+  "community-admin": [["community-admin", "게시판/게시글"], ["comments-admin", "댓글/첨부/신고"], ["mentor-posts", "멘토 게시글"]],
+  "content-admin": [["content-admin", "로드맵"], ["static-pages", "정적 페이지"], ["message-templates", "메시지 템플릿"], ["files-admin", "첨부 파일"]],
+  system: [["system", "메뉴/권한"], ["allowed-ip", "접근 허용 IP"], ["logs", "로그"], ["oauth", "OAuth2 클라이언트"]],
+};
+
 const labels = {
   home: "홈",
-  explore: "탐색",
+  explore: "학습 탐색",
+  vod: "VOD",
+  projects: "PBL 프로젝트",
+  search: "통합 검색",
   project: "프로젝트 상세",
   learning: "내 학습",
   workspace: "미션 수행",
-  peer: "함께 학습",
+  peer: "동료학습",
   community: "커뮤니티",
   growth: "나의 성장",
   my: "MY",
@@ -171,13 +193,17 @@ const labels = {
   support: "지원 대상",
   reports: "리포트",
   admin: "운영 대시보드",
-  "project-admin": "프로젝트 관리",
+  "project-admin": "PBL 관리",
   "vod-admin": "VOD 관리",
   operations: "교육 운영",
   "ai-admin": "AI 교관 관리",
   "users-admin": "사용자·조직",
+  "community-admin": "커뮤니티 관리",
+  "content-admin": "공통 콘텐츠",
   system: "시스템",
 };
+
+Object.values(navChildren).flat().forEach(([route, label]) => { labels[route] ||= label; });
 
 const roleLabels = {
   learner: ["학습자", "김밀리 상병"],
@@ -187,9 +213,10 @@ const roleLabels = {
 
 function routeFromHash() {
   const next = window.location.hash.replace("#/", "").split("?")[0];
-  if (navByRole.commander.some(([route]) => route === next)) state.role = "commander";
-  if (navByRole.admin.some(([route]) => route === next)) state.role = "admin";
-  if (["home", "explore", "project", "learning", "workspace", "peer", "community", "growth", "my"].includes(next)) state.role = "learner";
+  const roleRoutes = (role) => navByRole[role].flatMap(([route]) => [route, ...(navChildren[route] || []).map(([child]) => child)]);
+  if (roleRoutes("commander").includes(next)) state.role = "commander";
+  if (roleRoutes("admin").includes(next)) state.role = "admin";
+  if ([...roleRoutes("learner"), "project", "workspace", "search"].includes(next)) state.role = "learner";
   return labels[next] ? next : state.role === "learner" ? "home" : state.role;
 }
 
@@ -199,6 +226,7 @@ function navigate(route) {
 
 function sidebar() {
   const items = navByRole[state.role];
+  const isBranchActive = (route) => route === state.route || (navChildren[route] || []).some(([child]) => child === state.route);
   return `
     <aside class="sidebar ${state.sidebarOpen ? "is-open" : ""}" aria-label="주 메뉴">
       <div class="brand">
@@ -209,14 +237,16 @@ function sidebar() {
       <div class="environment-badge"><span></span> MILI AI 학습 플랫폼 <b>MVP</b></div>
       <nav class="nav-list">
         <p class="nav-caption">WORKSPACE</p>
-        ${items
-          .map(
-            ([route, iconName, label, count]) => `
-              <a href="#/${route}" class="nav-item ${state.route === route ? "active" : ""}" data-route="${route}">
-                ${icon(iconName)}<span>${label}</span>${count ? `<em>${count}</em>` : ""}
-              </a>`,
-          )
-          .join("")}
+        ${items.map(([route, iconName, label, count]) => {
+          const active = isBranchActive(route);
+          const children = navChildren[route] || [];
+          return `<div class="nav-branch ${active ? "is-active" : ""}">
+            <a href="#/${route}" class="nav-item ${active ? "active" : ""}" data-route="${route}">
+              ${icon(iconName)}<span>${label}</span>${count ? `<em>${count}</em>` : ""}${children.length ? icon("chevron", 13) : ""}
+            </a>
+            ${active && children.length ? `<div class="subnav">${children.map(([child, childLabel]) => `<a href="#/${child}" class="${state.route === child ? "active" : ""}">${childLabel}</a>`).join("")}</div>` : ""}
+          </div>`;
+        }).join("")}
       </nav>
       <div class="sidebar-support">
         <div class="support-icon">${icon("sparkles", 19)}</div>
@@ -478,15 +508,22 @@ function projectCard(project) {
 }
 
 function exploreView() {
-  const filtered = projects.filter((project) => {
+  const catalogMode = state.route === "vod" ? "VOD" : state.route === "projects" ? "PBL" : "ALL";
+  const catalogProjects = projects.filter((project) => catalogMode === "ALL" || (catalogMode === "VOD" ? project.eyebrow.includes("VOD") : !project.eyebrow.includes("VOD")));
+  const filtered = catalogProjects.filter((project) => {
     const query = state.search.toLowerCase();
     const matchesQuery = !query || `${project.title} ${project.description} ${project.skills.join(" ")}`.toLowerCase().includes(query);
     const matchesFilter = state.filter === "전체" || project.level === state.filter || project.mode.includes(state.filter) || project.eyebrow.includes(state.filter);
     return matchesQuery && matchesFilter;
   });
+  const catalogCopy = catalogMode === "VOD"
+    ? ["VOD COURSES", "필요한 지식을 원하는 속도로", "짧은 개념 학습부터 실무 과정까지, 지금 필요한 VOD를 찾아 이어서 학습하세요."]
+    : catalogMode === "PBL"
+      ? ["PBL PROJECTS", "실제 임무로 완성하는 AI 역량", "팀 또는 개인 프로젝트에 참여해 실제 문제를 해결하고 역량 근거를 만드세요."]
+      : ["LEARNING CATALOG", "임무에서 출발하는 AI 학습", "나의 직무와 역량에 맞는 프로젝트를 찾아 실제 문제를 해결해 보세요."];
   return `
     <section class="view explore-view">
-      ${pageHeader("LEARNING CATALOG", "임무에서 출발하는 AI 학습", "나의 직무와 역량에 맞는 프로젝트를 찾아 실제 문제를 해결해 보세요.", '<button class="secondary-button">♡ 찜한 학습 <span class="soft-count">4</span></button>')}
+      ${pageHeader(...catalogCopy, '<button class="secondary-button">♡ 찜한 학습 <span class="soft-count">4</span></button>')}
       <div class="catalog-search">
         <label>${icon("search", 20)}<input id="catalog-search" type="search" value="${escapeHtml(state.search)}" placeholder="배우고 싶은 기술이나 해결하고 싶은 문제를 검색하세요" /></label>
         <button class="filter-button">${icon("filter", 18)} 상세 필터 <span>2</span></button>
@@ -498,6 +535,19 @@ function exploreView() {
         <div class="result-meta"><span><b>${filtered.length}</b>개의 학습</span><select aria-label="정렬"><option>추천순</option><option>최신순</option><option>짧은 학습순</option></select></div>
       </div>
       ${filtered.length ? `<div class="project-grid">${filtered.map(projectCard).join("")}</div>` : `<div class="empty-state">${icon("search", 36)}<h3>조건에 맞는 학습이 없습니다.</h3><p>검색어나 필터를 바꾸어 다시 찾아보세요.</p><button class="secondary-button" data-action="clear-filters">필터 초기화</button></div>`}
+    </section>`;
+}
+
+function searchView() {
+  return `
+    <section class="view explore-view search-view">
+      ${pageHeader("UNIFIED SEARCH", "통합 검색", "VOD, PBL 프로젝트, 게시글을 한 번에 찾아보세요.")}
+      <div class="catalog-search search-primary">
+        <label>${icon("search", 20)}<input id="catalog-search" type="search" value="${escapeHtml(state.search)}" placeholder="검색어를 입력하세요" autofocus /></label>
+        <button class="primary-button">검색</button>
+      </div>
+      <div class="content-tabs"><button class="active">전체 <span>8</span></button><button>VOD <span>2</span></button><button>PBL <span>4</span></button><button>게시글 <span>2</span></button></div>
+      <div class="panel hub-panel"><div class="section-heading"><div><span class="eyebrow">RECENT SEARCH</span><h2>최근 검색</h2></div><button class="text-button">전체 삭제</button></div><div class="tag-row"><span>데이터 분석</span><span>RAG</span><span>군수 수요 예측</span><span>AI 보안</span></div></div>
     </section>`;
 }
 
@@ -604,6 +654,31 @@ function growthView() {
     </section>`;
 }
 
+function communityView() {
+  const board = state.route.includes("qna") ? "Q&A" : state.route.includes("faq") ? "FAQ" : state.route.includes("news") ? "뉴스" : "공지사항";
+  return `
+    <section class="view generic-view">
+      ${pageHeader("COMMUNITY", board, "학습 운영 소식과 질문, 현장 활용 사례를 한곳에서 확인하세요.", board === "Q&A" ? '<button class="primary-button">질문 작성</button>' : "")}
+      <div class="content-tabs">${["공지사항", "Q&A", "FAQ", "뉴스"].map((label) => `<button class="${label === board ? "active" : ""}">${label}</button>`).join("")}</div>
+      <div class="panel hub-panel"><div class="section-heading"><div><span class="eyebrow">${board.toUpperCase()}</span><h2>${board} 최신 글</h2></div><button class="secondary-button compact">전체 보기</button></div>
+        <div class="hub-list">${[
+          ["필독", "2026년 8월 MILI AI 정기 운영 안내", "운영팀 · 2시간 전"],
+          ["학습", "PBL 프로젝트 제출 전 보안 체크리스트", "교육센터 · 어제"],
+          ["업데이트", "AI 교관 출처 표시 기능이 개선되었습니다", "플랫폼팀 · 7월 24일"],
+        ].map(([tag, title, meta]) => `<button><span class="chip green">${tag}</span><p><b>${title}</b><small>${meta}</small></p>${icon("chevron", 16)}</button>`).join("")}</div>
+      </div>
+    </section>`;
+}
+
+function myView() {
+  return `
+    <section class="view generic-view">
+      ${pageHeader("MY", labels[state.route], "내 정보와 학습 활동, 관심 콘텐츠, AI 대화 기록을 안전하게 관리하세요.")}
+      <div class="profile-hero panel"><span class="avatar">김</span><div><span class="eyebrow">LEARNER PROFILE</span><h2>김밀리 상병</h2><p>제7기동군단 · 군수 데이터 분석 직무</p></div><button class="secondary-button">프로필 수정</button></div>
+      <div class="hub-card-grid">${navChildren.my.map(([route, label], index) => `<a href="#/${route}" class="panel hub-card ${state.route === route ? "active" : ""}"><span>${icon(["user", "folder", "message", "sparkles", "growth", "settings"][index], 21)}</span><h3>${label}</h3><p>${["소속과 관심 분야 관리", "저장한 VOD·PBL 4개", "질문과 답변 7개", "학습 맥락별 대화", "잔액과 적립 내역", "보안·알림 설정"][index]}</p>${icon("arrow", 16)}</a>`).join("")}</div>
+    </section>`;
+}
+
 function commanderView() {
   return `
     <section class="view commander-view">
@@ -635,17 +710,55 @@ function adminView() {
 
 function genericView() {
   const title = labels[state.route] || "준비 중인 메뉴";
-  return `<section class="view generic-view">${pageHeader("MILI AI WORKSPACE", title, "기획 문서의 메뉴 구조를 반영한 다음 확장 화면입니다.")}<div class="empty-state large">${icon("folder", 40)}<span class="eyebrow">NEXT ITERATION</span><h2>${title} 화면은 다음 구축 단계에서 연결됩니다.</h2><p>현재 MVP에서는 핵심 학습 흐름과 역할별 대시보드 탐색을 우선 제공합니다.</p><button class="primary-button" data-action="go-home">대시보드로 돌아가기</button></div></section>`;
+  const workspace = state.role === "admin" ? "OPERATIONS" : state.role === "commander" ? "COMMAND" : "LEARNING";
+  const description = state.role === "admin"
+    ? "권한 범위 안에서 운영 현황을 확인하고 필요한 항목을 검토·관리하세요."
+    : state.role === "commander"
+      ? "소속 부대 범위의 집계 데이터를 바탕으로 학습 지원이 필요한 지점을 확인하세요."
+      : "현재 상태와 다음 행동을 확인하고 학습 흐름을 이어가세요.";
+  return `<section class="view generic-view">
+    ${pageHeader(`${workspace} WORKSPACE`, title, description, '<button class="primary-button">+ 새 항목</button>')}
+    <div class="kpi-grid"><div class="kpi dark"><span>전체 항목</span><strong>128</strong><em>이번 달 +12</em></div><div class="kpi"><span>진행 중</span><strong>24</strong><em class="positive">정상 처리 중</em></div><div class="kpi alert"><span>확인 필요</span><strong>7</strong><em>오늘 처리 3건</em></div><div class="kpi"><span>완료</span><strong>97</strong><em class="positive">완료율 75.8%</em></div></div>
+    <div class="panel hub-panel"><div class="section-heading"><div><span class="eyebrow">RECENT ACTIVITY</span><h2>${title} 최근 항목</h2></div><div class="header-controls"><select aria-label="상태 필터"><option>전체 상태</option><option>확인 필요</option><option>완료</option></select><button class="secondary-button compact">내보내기</button></div></div>
+      <div class="hub-list">${[
+        ["확인 필요", `${title} 운영 기준 검토`, "담당자 김운영 · 18분 전"],
+        ["진행 중", `${title} 7월 정기 업데이트`, "담당자 이교육 · 오늘 14:20"],
+        ["완료", `${title} 권한 및 공개 범위 점검`, "시스템 · 어제"],
+      ].map(([tag, rowTitle, meta], index) => `<button><span class="chip ${index === 0 ? "orange" : index === 2 ? "green" : "blue"}">${tag}</span><p><b>${rowTitle}</b><small>${meta}</small></p>${icon("chevron", 16)}</button>`).join("")}</div>
+    </div>
+  </section>`;
 }
 
 const views = {
   home: homeView,
   explore: exploreView,
+  vod: exploreView,
+  projects: exploreView,
+  search: searchView,
   project: projectDetailView,
   learning: learningView,
+  "learning-upcoming": learningView,
+  "learning-complete": learningView,
+  "learning-review": learningView,
   workspace: workspaceView,
   peer: peerView,
+  "peer-requests": peerView,
+  "peer-received": peerView,
+  community: communityView,
+  "community-qna": communityView,
+  "community-faq": communityView,
+  "community-news": communityView,
   growth: growthView,
+  "growth-map": growthView,
+  "growth-assessment": growthView,
+  certificates: growthView,
+  roadmap: growthView,
+  my: myView,
+  wishlist: myView,
+  "my-posts": myView,
+  "ai-history": myView,
+  credits: myView,
+  "account-settings": myView,
   commander: commanderView,
   admin: adminView,
 };
@@ -726,7 +839,7 @@ document.addEventListener("click", (event) => {
     "open-ai": () => { state.aiOpen = true; state.notificationsOpen = false; render(); },
     "close-ai": () => { state.aiOpen = false; render(); },
     "toggle-notifications": () => { state.notificationsOpen = !state.notificationsOpen; state.aiOpen = false; render(); },
-    "go-search": () => navigate("explore"),
+    "go-search": () => navigate("search"),
     "go-explore": () => navigate("explore"),
     "go-learning": () => navigate("learning"),
     "go-peer": () => navigate("peer"),
@@ -766,7 +879,7 @@ document.addEventListener("submit", (event) => {
 document.addEventListener("keydown", (event) => {
   if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
     event.preventDefault();
-    navigate("explore");
+    navigate("search");
     window.setTimeout(() => document.querySelector("#catalog-search")?.focus(), 40);
   }
   if (event.key === "Escape") {
