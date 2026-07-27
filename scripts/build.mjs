@@ -5,6 +5,9 @@ const root = resolve(import.meta.dirname, "..");
 const output = resolve(root, "dist");
 const required = [
   "index.html",
+  "prototype.html",
+  "src/handoff.js",
+  "src/handoff.css",
   "src/app.js",
   "src/styles.css",
   "system/index.html",
@@ -14,14 +17,18 @@ const required = [
   "src/design-system/themes/digital-camouflage.css",
   "assets/concepts/digital-camouflage/terrain-network-v1.png",
   "assets/concepts/digital-camouflage/camo-texture-v1.png",
+  "docs/design/screen-registry.json",
+  "docs/README_HTML_COLLABORATION_GUIDE.md",
 ];
 
 await Promise.all(required.map((file) => readFile(resolve(root, file), "utf8")));
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 await cp(resolve(root, "index.html"), resolve(output, "index.html"));
+await cp(resolve(root, "prototype.html"), resolve(output, "prototype.html"));
 await cp(resolve(root, "src"), resolve(output, "src"), { recursive: true });
 await cp(resolve(root, "system"), resolve(output, "system"), { recursive: true });
 await cp(resolve(root, "assets"), resolve(output, "assets"), { recursive: true });
+await cp(resolve(root, "docs"), resolve(output, "docs"), { recursive: true });
 
 console.log(`Built design foundation and prototype assets into ${output}`);

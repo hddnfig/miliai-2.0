@@ -1,5 +1,27 @@
 # AI 코드 중심 디자인 AX 실행 가이드
 
+## HTML 프로토타입 협업 및 외부 전달
+
+이 저장소의 HTML 산출물 작업과 외부 개발사 전달에는
+[기획·디자인 HTML 협업 가이드](./docs/README_HTML_COLLABORATION_GUIDE.md)를 우선 적용한다.
+아래의 AX 실행 가이드는 일반적인 탐색·제품화 협업 참고 문서로 유지한다.
+
+- 전달 인덱스: `index.html`
+- 현재 통합 프로토타입: `prototype.html`
+- 디자인 시스템 후보안: `system/index.html`
+- 화면 원장: `docs/design/screen-registry.json`
+- 기준 원본: 추적되는 HTML과 `src/`, `system/`, `assets/`, `docs/`
+- `dist/`: 승인된 버전 태그 전달 시 `npm run build`로 생성하는 비추적 산출물
+
+로컬 확인 방법:
+
+```bash
+npm start
+```
+
+브라우저에서 `http://localhost:4173/`을 열어 전달 인덱스에서 화면과 문서를 확인한다.
+외부 모듈 스크립트와 화면 원장 JSON을 사용하므로 `file://`로 직접 열지 않는다.
+
 ## MILI AI 2.0 상세 IA
 
 ERD와 임시 IA를 기반으로 정리한 프론트엔드 화면 설계용 문서는

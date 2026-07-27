@@ -37,7 +37,7 @@
 
 @layer tokens {
   :root {
-    --ds-font-sans: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+    --ds-font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
     --ds-font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
 
     --ds-space-1: 4px;
@@ -83,6 +83,11 @@
     outline-offset: 3px;
   }
 }
+
+/* DESIGN-TBD:
+Pretendard 파일은 현재 전달 저장소에 포함하지 않습니다.
+최종 전달 전 자체 호스팅 폰트 파일과 라이선스 고지 포함 여부를 확인해야 합니다.
+*/
 
 @layer components {
   .ds-button {
