@@ -70,6 +70,14 @@ test("priority learner journey follows the architecture documents", () => {
   }
 });
 
+test("learner home visualizes the existing journey over the terrain background", () => {
+  assert.match(app, /class="home-terrain-stage"/);
+  assert.match(app, /class="terrain-roadmap" aria-hidden="true"/);
+  assert.equal((app.match(/class="terrain-roadmap-step/g) || []).length, 5);
+  assert.match(platformTheme, /\.terrain-roadmap-step\.is-current/);
+  assert.match(platformTheme, /html\[data-route="home"\] body::after/);
+});
+
 test("responsive navigation rules are present", () => {
   assert.match(css, /\.mobile-nav/);
   assert.match(css, /@media \(max-width: 760px\)/);

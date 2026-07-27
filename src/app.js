@@ -341,7 +341,8 @@ function progressBar(value, label = "") {
 function homeView() {
   return `
     <section class="view dashboard-view priority-home">
-      <header class="home-intro">
+      <div class="home-terrain-stage">
+        <header class="home-intro">
         <div>
           <span class="eyebrow">FRIDAY · 2026. 07. 24</span>
           <h1>오늘 연결할 지식이, <br />내일 해결할 문제의 길이 됩니다.</h1>
@@ -352,9 +353,32 @@ function homeView() {
           <div><small>오늘의 우선순위</small><strong>수정 필요 1건</strong></div>
           <em>D-2</em>
         </div>
-      </header>
+        </header>
 
-      <div class="priority-grid">
+        <div class="terrain-roadmap" aria-hidden="true">
+          <div class="terrain-roadmap-step is-complete">
+            <span class="terrain-node">${icon("check", 17)}</span>
+            <p><small>미션 01</small><strong>문제와 조건 이해</strong></p>
+          </div>
+          <div class="terrain-roadmap-step is-complete">
+            <span class="terrain-node">${icon("check", 17)}</span>
+            <p><small>미션 02</small><strong>데이터 품질 진단</strong></p>
+          </div>
+          <div class="terrain-roadmap-step is-current">
+            <span class="terrain-node">03</span>
+            <p><small>현재 미션</small><strong>예측 모델 설계</strong></p>
+          </div>
+          <div class="terrain-roadmap-step is-locked">
+            <span class="terrain-node">${icon("shield", 16)}</span>
+            <p><small>미션 04</small><strong>모델 성능 검증</strong></p>
+          </div>
+          <div class="terrain-roadmap-step is-locked">
+            <span class="terrain-node">+2</span>
+            <p><small>남은 미션</small><strong>대시보드 · 최종 브리핑</strong></p>
+          </div>
+        </div>
+
+        <div class="priority-grid">
         <article class="priority-card">
           <div class="priority-card-top">
             <span class="status-pill revision">${icon("message", 14)} 수정 필요 · 제출 v1.2</span>
@@ -399,6 +423,7 @@ function homeView() {
           </ol>
           <div class="unlock-note">${icon("shield", 15)} 미션 03이 통과되면 다음 미션이 열립니다.</div>
         </aside>
+        </div>
       </div>
 
       <div class="home-insight-grid">

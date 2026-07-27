@@ -849,3 +849,436 @@ textarea::placeholder {
     font-size: 27px;
   }
 }
+
+/* Home terrain journey — visualizes the existing project journey without changing its data or flow. */
+html[data-route="home"] body::before {
+  opacity: 0.52;
+}
+
+html[data-route="home"] body::after {
+  background:
+    radial-gradient(circle at 64% 33%, rgba(180, 255, 57, 0.08), transparent 23%),
+    linear-gradient(90deg, rgba(5, 7, 5, 0.9) 0, rgba(5, 7, 5, 0.42) 38%, rgba(5, 7, 5, 0.72) 100%);
+}
+
+.priority-home {
+  width: min(100%, 1600px);
+  max-width: 1600px;
+  padding-top: 0;
+}
+
+.priority-home::before {
+  top: 80px;
+  right: 12%;
+  width: 520px;
+  height: 340px;
+  opacity: 0.75;
+}
+
+.home-terrain-stage {
+  position: relative;
+  min-height: calc(100svh - 68px);
+  padding: clamp(54px, 7vh, 78px) 0 30px;
+  isolation: isolate;
+}
+
+.home-terrain-stage::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0 -2vw 28%;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(180, 255, 57, 0.055), transparent 26%),
+    linear-gradient(180deg, transparent 48%, rgba(5, 7, 5, 0.5) 100%);
+  content: "";
+  pointer-events: none;
+}
+
+.home-intro {
+  position: relative;
+  z-index: 2;
+  align-items: flex-start;
+  margin-bottom: 0;
+}
+
+.home-intro > div:first-child {
+  max-width: 790px;
+}
+
+.home-intro h1 {
+  max-width: 790px;
+  margin-top: 12px;
+  color: var(--platform-text);
+  font-family: "Pretendard", var(--font-display);
+  font-size: clamp(40px, 4vw, 58px);
+  font-weight: 750;
+  line-height: 1.12;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+
+.home-intro p {
+  max-width: 620px;
+  margin-top: 18px;
+  color: var(--platform-text-muted);
+  font-size: 14px;
+}
+
+.home-intro .today-signal {
+  border-color: rgba(180, 255, 57, 0.16);
+  color: var(--platform-text);
+  background: rgba(8, 12, 8, 0.74);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.05), 0 16px 42px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(18px);
+}
+
+.home-intro .today-signal > span {
+  color: var(--platform-accent);
+  background: var(--platform-accent-muted);
+}
+
+.home-intro .today-signal small {
+  color: var(--platform-text-muted);
+}
+
+.home-intro .today-signal em {
+  color: #ffd3c5;
+  background: rgba(240, 116, 72, 0.16);
+}
+
+.terrain-roadmap {
+  position: relative;
+  z-index: 1;
+  height: clamp(280px, 32vh, 350px);
+  margin-top: 4px;
+}
+
+.terrain-roadmap::before {
+  position: absolute;
+  top: 53%;
+  right: 4%;
+  left: 3%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(180, 255, 57, 0.14) 10%, rgba(180, 255, 57, 0.32) 54%, rgba(180, 255, 57, 0.08) 90%, transparent);
+  box-shadow: 0 0 12px rgba(180, 255, 57, 0.12);
+  content: "";
+  opacity: 0.7;
+  transform: rotate(-4deg);
+}
+
+.terrain-roadmap-step {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--platform-text-secondary);
+}
+
+.terrain-roadmap-step:nth-child(1) {
+  top: 54%;
+  left: 2%;
+}
+
+.terrain-roadmap-step:nth-child(2) {
+  top: 10%;
+  left: 27%;
+}
+
+.terrain-roadmap-step:nth-child(3) {
+  top: 58%;
+  left: 49%;
+}
+
+.terrain-roadmap-step:nth-child(4) {
+  top: 4%;
+  left: 70%;
+}
+
+.terrain-roadmap-step:nth-child(5) {
+  top: 62%;
+  right: 1%;
+}
+
+.terrain-node {
+  position: relative;
+  display: grid;
+  width: 56px;
+  height: 62px;
+  flex: 0 0 auto;
+  place-items: center;
+  clip-path: polygon(50% 0, 94% 23%, 94% 73%, 50% 100%, 6% 73%, 6% 23%);
+  color: #142000;
+  background: conic-gradient(from 30deg, #8dcc19, #c6ff42 33%, #91d51c 34%, #76b10e 66%, #aef220 67%, #8dcc19);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 850;
+  filter: drop-shadow(0 0 8px rgba(180, 255, 57, 0.72)) drop-shadow(0 0 22px rgba(180, 255, 57, 0.28));
+}
+
+.terrain-roadmap-step p {
+  display: flex;
+  min-width: 130px;
+  flex-direction: column;
+  gap: 3px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+}
+
+.terrain-roadmap-step small {
+  color: var(--platform-text-muted);
+  font-size: 13px;
+}
+
+.terrain-roadmap-step strong {
+  color: var(--platform-text);
+  font-size: clamp(15px, 1.35vw, 20px);
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+}
+
+.terrain-roadmap-step.is-current .terrain-node {
+  width: 68px;
+  height: 75px;
+  background: conic-gradient(from 30deg, #a4ec18, #d4ff5f 33%, #9ce615 34%, #6fa900 66%, #b8ff24 67%, #a4ec18);
+  box-shadow: 0 0 0 1px rgba(213, 255, 123, 0.6);
+  filter: drop-shadow(0 0 11px rgba(180, 255, 57, 0.92)) drop-shadow(0 0 34px rgba(180, 255, 57, 0.46));
+}
+
+.terrain-roadmap-step.is-current strong,
+.terrain-roadmap-step.is-current small {
+  color: var(--platform-accent);
+}
+
+.terrain-roadmap-step.is-locked {
+  opacity: 0.58;
+}
+
+.terrain-roadmap-step.is-locked .terrain-node {
+  color: #1b2412;
+  filter: drop-shadow(0 0 7px rgba(180, 255, 57, 0.4));
+}
+
+.home-terrain-stage .priority-grid {
+  position: relative;
+  z-index: 2;
+  grid-template-columns: minmax(0, 2.25fr) minmax(340px, 0.95fr);
+  gap: 20px;
+}
+
+.home-terrain-stage .priority-card,
+.home-terrain-stage .journey-card {
+  min-height: 380px;
+  border: 1px solid rgba(180, 255, 57, 0.22);
+  border-radius: 2px;
+  background: linear-gradient(135deg, rgba(9, 14, 9, 0.9), rgba(5, 8, 5, 0.76));
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.035), 0 22px 58px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(16px);
+}
+
+.home-terrain-stage .priority-card {
+  padding: 27px 30px 24px;
+}
+
+.home-terrain-stage .journey-card {
+  position: relative;
+  overflow: hidden;
+  padding: 25px 23px 20px;
+}
+
+.home-terrain-stage .priority-card::after,
+.home-terrain-stage .journey-card::after {
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgba(180, 255, 57, 0.18);
+  border-radius: inherit;
+  background:
+    linear-gradient(var(--platform-accent), var(--platform-accent)) left top / 22px 2px no-repeat,
+    linear-gradient(var(--platform-accent), var(--platform-accent)) left top / 2px 22px no-repeat,
+    linear-gradient(var(--platform-accent), var(--platform-accent)) right bottom / 22px 2px no-repeat,
+    linear-gradient(var(--platform-accent), var(--platform-accent)) right bottom / 2px 22px no-repeat;
+  content: "";
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.home-terrain-stage .priority-copy {
+  margin-top: 20px;
+}
+
+.home-terrain-stage .priority-copy h2 {
+  font-family: "Pretendard", var(--font-display);
+  font-size: clamp(28px, 2.3vw, 36px);
+}
+
+.home-terrain-stage .feedback-focus {
+  margin-top: 19px;
+  background: rgba(0, 0, 0, 0.36);
+}
+
+.home-terrain-stage .priority-footer {
+  margin-top: 20px;
+}
+
+.home-terrain-stage .journey-list {
+  margin-top: 12px;
+}
+
+.home-terrain-stage .journey-list li {
+  min-height: 46px;
+}
+
+.home-terrain-stage .journey-card .unlock-note {
+  color: var(--platform-text-muted);
+  background: rgba(180, 255, 57, 0.055);
+}
+
+.home-insight-grid {
+  margin-top: 24px;
+}
+
+@media (max-width: 1260px) {
+  .home-terrain-stage {
+    padding-top: 48px;
+  }
+
+  .terrain-roadmap-step:nth-child(1) { left: 0; }
+  .terrain-roadmap-step:nth-child(2) { left: 23%; }
+  .terrain-roadmap-step:nth-child(3) { left: 45%; }
+  .terrain-roadmap-step:nth-child(4) { left: 66%; }
+
+  .terrain-roadmap-step:nth-child(5) {
+    right: 0;
+  }
+
+  .terrain-roadmap-step strong {
+    font-size: 15px;
+  }
+
+  .terrain-roadmap-step p {
+    min-width: 112px;
+  }
+}
+
+@media (max-width: 1080px) {
+  .home-terrain-stage {
+    min-height: auto;
+  }
+
+  .terrain-roadmap {
+    height: 280px;
+  }
+
+  .terrain-roadmap-step p {
+    min-width: 0;
+  }
+
+  .terrain-node {
+    width: 48px;
+    height: 53px;
+  }
+
+  .terrain-roadmap-step.is-current .terrain-node {
+    width: 58px;
+    height: 64px;
+  }
+
+  .home-terrain-stage .priority-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-terrain-stage .journey-card {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 760px) {
+  html[data-route="home"] body::before {
+    opacity: 0.23;
+  }
+
+  html[data-route="home"] body::after {
+    background: linear-gradient(rgba(5, 7, 5, 0.84), rgba(5, 7, 5, 0.97));
+  }
+
+  .priority-home {
+    padding-top: 20px;
+  }
+
+  .home-terrain-stage {
+    padding: 20px 0 16px;
+  }
+
+  .home-terrain-stage::before {
+    inset: 0 -16px 38%;
+  }
+
+  .home-intro h1 {
+    font-size: clamp(32px, 9vw, 42px);
+  }
+
+  .home-intro p {
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  .terrain-roadmap {
+    display: grid;
+    height: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 30px 0 24px;
+  }
+
+  .terrain-roadmap::before {
+    display: none;
+  }
+
+  .terrain-roadmap-step,
+  .terrain-roadmap-step:nth-child(n) {
+    position: relative;
+    inset: auto;
+    min-height: 82px;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid var(--platform-border);
+    background: rgba(5, 8, 5, 0.7);
+    backdrop-filter: blur(10px);
+  }
+
+  .terrain-roadmap-step:nth-child(5) {
+    grid-column: 1 / -1;
+  }
+
+  .terrain-node,
+  .terrain-roadmap-step.is-current .terrain-node {
+    width: 40px;
+    height: 44px;
+  }
+
+  .terrain-roadmap-step small {
+    font-size: 10px;
+  }
+
+  .terrain-roadmap-step strong {
+    font-size: 13px;
+    white-space: normal;
+  }
+
+  .home-terrain-stage .priority-card,
+  .home-terrain-stage .journey-card {
+    min-height: 0;
+    border-radius: 2px;
+  }
+
+  .home-terrain-stage .priority-card {
+    padding: 23px 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .terrain-roadmap {
+    grid-template-columns: 1fr;
+  }
+
+  .terrain-roadmap-step:nth-child(5) {
+    grid-column: auto;
+  }
+}
