@@ -37,5 +37,7 @@
     --ds-asset-background: url("../../../assets/concepts/digital-camouflage/terrain-network-v1.png");
     --ds-asset-texture: url("../../../assets/concepts/digital-camouflage/camo-texture-v1.png");
     --ds-asset-scrim: rgba(0, 0, 0, 0.28);
+    --ds-asset-ambient-duration: 18s;
+    --ds-asset-texture-duration: 26s;
   }
 }
