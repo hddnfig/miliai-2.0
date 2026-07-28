@@ -207,7 +207,8 @@ function sidebar() {
   return `
     <aside class="sidebar ${state.sidebarOpen ? "is-open" : ""}" aria-label="주 메뉴">
       <div class="brand">
-        <img class="brand-logo" src="./assets/mili-logo.png" alt="MILI AI" />\n        <span class="brand-copy"><small>MISSION INTELLIGENCE</small></span>
+        <img class="brand-logo" src="./assets/mili-logo.png" alt="MILI AI" />
+        <span class="brand-copy"><small>MISSION INTELLIGENCE</small></span>
         <button class="icon-button sidebar-close" data-action="close-menu" aria-label="메뉴 닫기">${icon("close")}</button>
       </div>
       <div class="environment-badge"><span></span> MILI AI 학습 플랫폼 <b>MVP</b></div>
@@ -228,7 +229,8 @@ function sidebar() {
         <button class="text-button light" data-action="open-ai">질문하기 ${icon("arrow", 15)}</button>
       </div>
       <div class="sidebar-profile">
-        <span class="avatar profile-avatar" aria-hidden="true"></span>\n        <div><strong>${roleLabels[state.role][1]}</strong><small>${roleLabels[state.role][0]} 모드</small></div>
+        <span class="avatar profile-avatar" aria-hidden="true"></span>
+        <div><strong>${roleLabels[state.role][1]}</strong><small>${roleLabels[state.role][0]} 모드</small></div>
         <button class="icon-button dark" aria-label="로그아웃">${icon("logout", 17)}</button>
       </div>
     </aside>
@@ -342,143 +344,47 @@ function progressBar(value, label = "") {
 }
 
 function homeView() {
-  return `
-    <section class="view dashboard-view priority-home">
-      <div class="home-terrain-stage">
-        <header class="home-intro">
-        <div>
-          <span class="eyebrow">FRIDAY · 2026. 07. 24</span>
-          <h1>오늘 연결할 지식이, <br />내일 해결할 문제의 길이 됩니다.</h1>
-          <p>김밀리 상병님, 지금은 새 학습보다 받은 피드백을 반영하는 일이 먼저예요.</p>
+  const rankSteps = ["AI 개념 이해", "생성 AI 활용", "AI 결과 개선", "실무 적용", "인증서 발급"];
+  return \`
+    <section class="view dashboard-view mission-home">
+      <div class="mission-map-hero">
+        <div class="mission-hero-copy">
+          <span class="eyebrow">LEARNING MISSION MAP</span>
+          <h1>김철수 상병님,<br />오늘의 탐사를 이어가 보세요.</h1>
+          <p>현재 학습 단계와 새롭게 도전할 프로젝트를 확인하고, 다음 단계로 나아가세요.</p>
+          <button class="primary-button" data-action="go-learning">학습 이어가기 \${icon("arrow", 16)}</button>
         </div>
-        <div class="today-signal" aria-label="오늘의 우선순위 1개">
-          <span>${icon("message", 18)}</span>
-          <div><small>오늘의 우선순위</small><strong>수정 필요 1건</strong></div>
-          <em>D-2</em>
-        </div>
-        </header>
-
-        <div class="terrain-roadmap" aria-hidden="true">
-          <div class="terrain-roadmap-step is-complete">
-            <span class="terrain-node">${icon("check", 17)}</span>
-            <p><small>미션 01</small><strong>문제와 조건 이해</strong></p>
-          </div>
-          <div class="terrain-roadmap-step is-complete">
-            <span class="terrain-node">${icon("check", 17)}</span>
-            <p><small>미션 02</small><strong>데이터 품질 진단</strong></p>
-          </div>
-          <div class="terrain-roadmap-step is-current">
-            <span class="terrain-node">03</span>
-            <p><small>현재 미션</small><strong>예측 모델 설계</strong></p>
-          </div>
-          <div class="terrain-roadmap-step is-locked">
-            <span class="terrain-node">${icon("shield", 16)}</span>
-            <p><small>미션 04</small><strong>모델 성능 검증</strong></p>
-          </div>
-          <div class="terrain-roadmap-step is-locked">
-            <span class="terrain-node">+2</span>
-            <p><small>남은 미션</small><strong>대시보드 · 최종 브리핑</strong></p>
-          </div>
-        </div>
-
-        <div class="priority-grid">
-        <article class="priority-card">
-          <div class="priority-card-top">
-            <span class="status-pill revision">${icon("message", 14)} 수정 필요 · 제출 v1.2</span>
-            <span class="autosave-state">${icon("check", 14)} 초안 자동 저장됨</span>
-          </div>
-          <div class="priority-copy">
-            <span class="eyebrow light">AI로 군수 수요 예측하기 · 미션 03</span>
-            <h2>피드백을 반영해<br />모델 선택 근거를 완성하세요.</h2>
-            <p>멘토와 동료가 같은 보완 지점을 짚었습니다. 계절성 변동이 큰 품목군의 검증 근거를 추가하면 재제출할 수 있어요.</p>
-          </div>
-          <div class="feedback-focus">
-            <span class="feedback-source mentor">멘토</span>
-            <p><strong>검증 구간을 품목군별로 분리해 주세요.</strong><small>루브릭 03 · 결과 해석의 타당성</small></p>
-            <span class="feedback-source peer">동료</span>
-            <p><strong>전체 MAPE만으로는 변동성이 가려집니다.</strong><small>동료평가 · 오늘 09:42</small></p>
-          </div>
-          <div class="priority-footer">
-            <div class="priority-actions">
-              <button class="primary-button light-button" data-action="continue-learning">피드백 반영하기 ${icon("arrow", 17)}</button>
-              <button class="outline-button light-outline" data-action="open-ai">AI 교관에게 먼저 묻기</button>
-            </div>
-            <div class="priority-progress">
-              <span><b>48%</b><small>프로젝트 진행률 · 3/6 미션</small></span>
-              ${progressBar(48, "프로젝트 진행률")}
-            </div>
-          </div>
-          <div class="field-visual" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
-        </article>
-
-        <aside class="panel journey-card">
-          <div class="section-heading">
-            <div><span class="eyebrow">PROJECT JOURNEY</span><h2>프로젝트 여정</h2></div>
-            <button class="text-button" data-action="go-learning">전체 보기 ${icon("arrow", 14)}</button>
-          </div>
-          <p class="journey-summary"><strong>2개 완료</strong> · 1개 보완 중 · 3개 대기</p>
-          <ol class="journey-list">
-            <li class="complete"><span>${icon("check", 14)}</span><div><small>미션 01</small><b>문제와 조건 이해</b></div><em>완료</em></li>
-            <li class="complete"><span>${icon("check", 14)}</span><div><small>미션 02</small><b>데이터 품질 진단</b></div><em>완료</em></li>
-            <li class="current"><span>03</span><div><small>현재 미션</small><b>예측 모델 설계</b></div><em>보완 중</em></li>
-            <li class="locked"><span>${icon("shield", 13)}</span><div><small>미션 04</small><b>모델 성능 검증</b></div><em>03 통과 후</em></li>
-            <li class="locked compact-node"><span>+2</span><div><small>남은 미션</small><b>대시보드 · 최종 브리핑</b></div></li>
-          </ol>
-          <div class="unlock-note">${icon("shield", 15)} 미션 03이 통과되면 다음 미션이 열립니다.</div>
-        </aside>
-        </div>
+        <ol class="mission-route" aria-label="AI 학습 여정">
+          \${rankSteps.map((step, index) => \`<li class="\${index === 1 ? "current" : ""}"><span>\${index + 1}</span><small>\${index === 4 ? "최종" : index + 1 + "단계"}</small><b>\${step}</b></li>\`).join("")}
+        </ol>
       </div>
-
-      <div class="home-insight-grid">
-        <article class="panel learning-flow-panel">
-          <div class="section-heading"><div><span class="eyebrow">TODAY'S FLOW</span><h2>오늘의 학습 흐름</h2></div><span class="count-badge">3</span></div>
-          <div class="flow-list">
-            <button class="is-priority" data-action="continue-learning"><span class="flow-time">지금</span><span class="flow-marker">01</span><span><b>미션 03 수정본 완성</b><small>멘토 피드백 2개 반영 · 예상 35분</small></span><em>우선</em>${icon("chevron", 16)}</button>
-            <button><span class="flow-time">이후</span><span class="flow-marker vod">02</span><span><b>시계열 검증 VOD 12분</b><small>현재 보완 항목과 연결된 선수학습</small></span>${icon("chevron", 16)}</button>
-            <button data-action="go-peer"><span class="flow-time">오늘</span><span class="flow-marker peer">03</span><span><b>동료 결과물 평가</b><small>익명 평가 · 오늘 23:59 마감</small></span>${icon("chevron", 16)}</button>
+      <div class="mission-home-grid">
+        <article class="panel learner-profile-panel">
+          <div class="learner-portrait"><img src="./assets/soldier-profile.jpg" alt="김철수 상병 프로필" /><strong>LV.23</strong></div>
+          <div class="learner-profile-content">
+            <div class="learner-name"><div><h2>김철수 상병</h2><span>AI 탐사대원</span></div><p>이병 · 비전공 장병 · 체력 기록 관리 시스템 진행 중</p></div>
+            <div class="learner-stat-grid">
+              <div><small>연속 학습</small><b>21</b><em>리그 내 최고 기록!</em></div>
+              <div><small>탐사 배지</small><b>3</b><em>총 10개 중</em></div>
+              <div><small>완료 미션</small><b>4/10</b><em>이번 프로젝트 기준</em></div>
+              <div><small>누적 학습</small><b>16h</b><em>이번 달 총계</em></div>
+            </div>
+            <div class="learner-level"><div><b>LV.23</b><span>84%</span></div><i><em></em></i></div>
           </div>
         </article>
-
-        <article class="panel ai-clue-card">
-          <div class="ai-clue-head"><span class="ai-clue-icon">${icon("sparkles", 19)}</span><div><span class="eyebrow">AI TUTOR · NEXT CLUE</span><h2>AI 교관의 다음 단서</h2></div><span class="verified-label">근거 2개</span></div>
-          <blockquote>“전체 평균을 다시 계산하기보다, 변동성이 큰 A·C 품목군을 별도 검증 구간으로 나눠 비교해 보세요.”</blockquote>
-          <div class="source-list">
-            <button><span>01</span><p><b>미션 가이드 3.2</b><small>검증 데이터 분할 기준 · v2.1</small></p>${icon("chevron", 14)}</button>
-            <button><span>02</span><p><b>수요 데이터 명세서</b><small>품목군별 계절성 지표 · v1.4</small></p>${icon("chevron", 14)}</button>
-          </div>
-          <p class="ai-caution">${icon("shield", 14)} AI 답변은 제안입니다. 출처와 실제 데이터를 함께 확인하세요.</p>
-          <button class="text-button" data-action="open-ai">이 맥락으로 질문하기 ${icon("arrow", 14)}</button>
-        </article>
-
-        <article class="panel evidence-card">
-          <div class="section-heading"><div><span class="eyebrow">SKILL EVIDENCE</span><h2>이번 프로젝트의 역량 근거</h2></div><button class="icon-button" data-action="go-growth" aria-label="역량 근거 보기">${icon("arrow", 17)}</button></div>
-          <p>수강 완료가 아니라 제출물과 평가 결과가 근거로 반영됩니다.</p>
-          <div class="evidence-list">
-            <div><span class="evidence-icon confirmed">${icon("check", 14)}</span><p><b>데이터 품질 진단</b><small>미션 02 · 멘토 평가 통과</small></p><em>확인됨</em></div>
-            <div><span class="evidence-icon current">03</span><p><b>예측 모델 비교</b><small>수정본 평가 후 반영 예정</small></p><em>검토 중</em></div>
-            <div><span class="evidence-icon locked">${icon("shield", 13)}</span><p><b>의사결정 설명</b><small>미션 06 완료 후 확인</small></p><em>대기</em></div>
-          </div>
-          <button class="full-link" data-action="go-growth">역량 근거 전체 보기 ${icon("arrow", 14)}</button>
+        <article class="panel recent-project-panel">
+          <span class="eyebrow">RECENT PROJECT</span>
+          <h2>최근 프로젝트</h2>
+          <span class="project-status">진행 중 · MY PROJECT</span>
+          <h3>체력 기록 관리 시스템</h3>
+          <p>3일차 · 여러 기록 목록 관리하기</p>
+          <div class="recent-progress"><div><small>진행률</small><b>38%</b></div><i><em></em></i></div>
+          <div class="current-task"><small>현재 단계</small><b>여러 기록 목록 관리하기</b><span>3일차</span></div>
+          <button class="primary-button" data-action="go-project">이어서 학습하기 \${icon("arrow", 16)}</button>
         </article>
       </div>
-      ${homeExtensionMarkup()}
-    </section>`;
-}
-
-function miniCourse(project) {
-  return `<button class="mini-course" data-project="${project.id}"><span class="mini-cover ${project.tone}"><b>${project.eyebrow.split(" · ")[1]}</b><small>${project.level}</small></span><span class="mini-copy"><small>${project.eyebrow}</small><strong>${project.title}</strong><span><em>${project.fit}% 적합</em> · ${project.duration}</span></span>${icon("arrow", 17)}</button>`;
-}
-
-function projectCard(project) {
-  return `<article class="project-card">
-    <button class="project-cover ${project.tone}" data-project="${project.id}" aria-label="${project.title} 상세 보기">
-      <span class="project-index">${project.id === "demand-forecast" ? "01" : String(projects.indexOf(project) + 1).padStart(2, "0")}</span>
-      <span class="cover-grid"></span>
-      <span class="fit-score"><b>${project.fit}</b><small>% MATCH</small></span>
-      ${project.mode.includes("모바일") ? '<span class="mobile-ready">모바일 학습</span>' : ""}
-    </button>
-    <div class="project-info"><div><span class="eyebrow">${project.eyebrow}</span><span class="bookmark" aria-label="찜하기">♡</span></div><h3>${project.title}</h3><p>${project.description}</p><div class="tag-row">${project.skills.map((skill) => `<span>${skill}</span>`).join("")}</div><footer><span>${icon("clock", 15)} ${project.duration}</span><span>${icon("users", 15)} ${project.mode}</span><button data-project="${project.id}">${icon("arrow", 17)}</button></footer></div>
-  </article>`;
+      \${homeExtensionMarkup()}
+    </section>\`;
 }
 
 function exploreView() {
