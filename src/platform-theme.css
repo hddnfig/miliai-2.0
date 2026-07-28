@@ -1282,3 +1282,91 @@ html[data-route="home"] body::after {
     grid-column: auto;
   }
 }
+
+
+/* Reference design assets and hard-edged field-frame calibration. */
+.brand-logo {
+  display: block;
+  width: 138px;
+  height: auto;
+  object-fit: contain;
+}
+.brand-copy { margin-left: 0; }
+.brand-copy small { display: block; margin-top: 3px; letter-spacing: .13em; }
+
+.profile-avatar,
+.top-avatar {
+  overflow: hidden;
+  color: transparent;
+  background-color: #0a0d0a;
+  background-image:
+    linear-gradient(180deg, transparent 54%, rgba(5,7,5,.88) 100%),
+    url("../assets/soldier-profile.jpg");
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+}
+.profile-avatar { border: 1px solid rgba(180,255,57,.6); }
+.top-avatar { background-size: 132%; }
+
+.sidebar {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 256px;
+  padding-inline: 18px;
+  border-color: rgba(180,255,57,.16);
+  border-radius: 0;
+  background:
+    linear-gradient(180deg, rgba(5,8,5,.97), rgba(8,14,8,.94)),
+    url("../assets/concepts/digital-camouflage/camo-texture-v1.png") center / cover;
+}
+.sidebar::before,
+.sidebar::after,
+.panel::before,
+.panel::after,
+.project-card::before,
+.project-card::after {
+  position: absolute;
+  z-index: 1;
+  width: 19px;
+  height: 19px;
+  content: "";
+  pointer-events: none;
+}
+.sidebar::before,
+.panel::before,
+.project-card::before {
+  top: -1px;
+  left: -1px;
+  border-top: 3px solid var(--platform-accent);
+  border-left: 3px solid var(--platform-accent);
+}
+.sidebar::after,
+.panel::after,
+.project-card::after {
+  right: -1px;
+  bottom: -1px;
+  border-right: 3px solid var(--platform-accent);
+  border-bottom: 3px solid var(--platform-accent);
+}
+.panel,
+.project-card,
+.priority-card,
+.journey-card,
+.vod-detail-hero,
+.next-badge,
+.vod-hero {
+  position: relative;
+  border-radius: 0 !important;
+}
+.home-extension-grid > .panel,
+.vod-grid > .panel,
+.my-overview-grid > .panel,
+.my-detail-grid > .panel {
+  background: linear-gradient(135deg, rgba(12,19,12,.96), rgba(6,10,7,.92));
+}
+.home-extension-grid { margin-bottom: 28px; }
+@media (max-width: 980px) {
+  .sidebar { top: 10px; bottom: 10px; left: 10px; width: min(280px, calc(100vw - 20px)); border-radius: 0; }
+}
