@@ -1370,3 +1370,53 @@ html[data-route="home"] body::after {
 @media (max-width: 980px) {
   .sidebar { top: 10px; bottom: 10px; left: 10px; width: min(280px, calc(100vw - 20px)); border-radius: 0; }
 }
+
+
+/* Reference home layout — full canvas mission map with profile and recent project. */
+.mission-home { width:min(100%, 1680px); max-width:1680px; padding-top:0; }
+.mission-map-hero { position:relative; min-height:500px; padding:74px 34px 34px; overflow:hidden; }
+.mission-map-hero::before { position:absolute; inset:0; background:linear-gradient(90deg,rgba(5,7,5,.98) 0%,rgba(5,7,5,.87) 33%,rgba(5,7,5,.18) 72%,rgba(5,7,5,.52)),url("../assets/concepts/digital-camouflage/terrain-network-v1.png") center/cover; content:""; z-index:-1; }
+.mission-hero-copy { max-width:650px; }
+.mission-hero-copy h1 { margin:13px 0 16px; color:var(--platform-text); font-size:clamp(40px,4.2vw,62px); letter-spacing:-.065em; line-height:1.1; }
+.mission-hero-copy p { max-width:510px; margin-bottom:26px; color:var(--platform-text-secondary); font-size:14px; line-height:1.7; }
+.mission-route { position:absolute; right:6%; bottom:42px; display:grid; width:min(62%,860px); grid-template-columns:repeat(5,1fr); gap:8px; padding:0; list-style:none; }
+.mission-route::before { position:absolute; top:24px; right:9%; left:9%; border-top:3px dotted rgba(255,255,255,.82); content:""; }
+.mission-route li { position:relative; z-index:1; display:grid; justify-items:center; gap:5px; text-align:center; }
+.mission-route li span { display:grid; width:48px; height:48px; place-items:center; border:3px solid var(--platform-text); color:var(--platform-text); background:#090d09; font-weight:900; }
+.mission-route li.current span { color:#161a0e; border-color:#ff931f; background:#ff931f; }
+.mission-route li.current b,.mission-route li.current small { color:#ff931f; }
+.mission-route small { color:var(--platform-text-muted); font-size:11px; }
+.mission-route b { color:var(--platform-text); font-size:13px; white-space:nowrap; }
+.mission-home-grid { display:grid; grid-template-columns:minmax(0,1.8fr) minmax(330px,.75fr); gap:22px; margin:0 34px 22px; }
+.learner-profile-panel { display:grid; grid-template-columns:290px minmax(0,1fr); gap:26px; padding:26px; background:linear-gradient(120deg,rgba(13,25,15,.97),rgba(5,11,6,.96)); }
+.learner-portrait { position:relative; min-height:310px; overflow:hidden; border:1px solid rgba(180,255,57,.72); background:radial-gradient(circle,rgba(180,255,57,.15),transparent 58%),#050806; }
+.learner-portrait img { width:100%; height:100%; object-fit:cover; object-position:center bottom; }
+.learner-portrait strong { position:absolute; right:0; bottom:14px; left:0; color:var(--platform-accent); font-size:25px; text-align:center; }
+.learner-name { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; }
+.learner-name h2,.recent-project-panel h2 { margin:0; color:var(--platform-text); font-size:28px; letter-spacing:-.045em; }
+.learner-name span,.project-status { display:inline-block; margin-top:8px; padding:5px 8px; color:#63b9ff; background:rgba(99,185,255,.1); font-size:11px; font-weight:800; }
+.learner-name p { margin:9px 0 0; color:var(--platform-text-muted); font-size:12px; }
+.learner-stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:38px; }
+.learner-stat-grid div { padding:16px 13px; background:#030503; }
+.learner-stat-grid small,.learner-stat-grid em { display:block; color:var(--platform-text-muted); font-size:10px; font-style:normal; }
+.learner-stat-grid b { display:block; margin:9px 0; color:var(--platform-text); font-size:29px; }
+.learner-level { margin-top:20px; padding:17px; background:#030503; }
+.learner-level div,.recent-progress div { display:flex; justify-content:space-between; }
+.learner-level b,.learner-level span { color:var(--platform-text); }
+.learner-level i,.recent-progress i { display:block; height:9px; margin-top:12px; background:rgba(255,255,255,.12); }
+.learner-level em { display:block; width:84%; height:100%; background:#fff; }
+.recent-project-panel { display:flex; min-height:400px; flex-direction:column; padding:26px; background:linear-gradient(150deg,rgba(16,28,16,.96),rgba(6,13,7,.98)); }
+.recent-project-panel h2 { margin-top:8px; }
+.recent-project-panel h3 { margin:22px 0 5px; color:var(--platform-text); font-size:21px; }
+.recent-project-panel > p { color:var(--platform-text-muted); font-size:12px; }
+.recent-progress { margin-top:34px; }
+.recent-progress small { color:var(--platform-text-muted); font-size:11px; }
+.recent-progress b { color:var(--platform-text); font-size:12px; }
+.recent-progress em { display:block; width:38%; height:100%; background:var(--platform-accent); }
+.current-task { position:relative; display:grid; gap:5px; margin:20px 0; padding:13px; background:rgba(255,255,255,.045); }
+.current-task small { color:var(--platform-text-muted); font-size:10px; }
+.current-task b { color:var(--platform-text); font-size:12px; }
+.current-task span { position:absolute; right:12px; bottom:13px; color:var(--platform-accent); font-size:11px; font-weight:800; }
+.recent-project-panel .primary-button { width:100%; margin-top:auto; }
+@media(max-width:1080px){.mission-home-grid{grid-template-columns:1fr}.mission-route{position:relative;right:auto;bottom:auto;width:100%;margin-top:66px}.mission-map-hero{min-height:0}.learner-stat-grid{grid-template-columns:repeat(2,1fr)}} 
+@media(max-width:700px){.mission-map-hero{padding:38px 18px 24px}.mission-route{grid-template-columns:repeat(2,1fr);gap:14px}.mission-route::before{display:none}.mission-route li:last-child{grid-column:1/-1}.mission-home-grid{margin:0 18px 20px}.learner-profile-panel{grid-template-columns:1fr}.learner-portrait{min-height:270px}.learner-name{display:block}.learner-stat-grid{margin-top:20px}.mission-route b{white-space:normal}.mission-hero-copy h1{font-size:36px}}
