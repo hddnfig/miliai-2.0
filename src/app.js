@@ -345,17 +345,17 @@ function progressBar(value, label = "") {
 
 function homeView() {
   const rankSteps = ["AI 개념 이해", "생성 AI 활용", "AI 결과 개선", "실무 적용", "인증서 발급"];
-  return \`
+  return `
     <section class="view dashboard-view mission-home">
       <div class="mission-map-hero">
         <div class="mission-hero-copy">
           <span class="eyebrow">LEARNING MISSION MAP</span>
           <h1>김철수 상병님,<br />오늘의 탐사를 이어가 보세요.</h1>
           <p>현재 학습 단계와 새롭게 도전할 프로젝트를 확인하고, 다음 단계로 나아가세요.</p>
-          <button class="primary-button" data-action="go-learning">학습 이어가기 \${icon("arrow", 16)}</button>
+          <button class="primary-button" data-action="go-learning">학습 이어가기 ${icon("arrow", 16)}</button>
         </div>
         <ol class="mission-route" aria-label="AI 학습 여정">
-          \${rankSteps.map((step, index) => \`<li class="\${index === 1 ? "current" : ""}"><span>\${index + 1}</span><small>\${index === 4 ? "최종" : index + 1 + "단계"}</small><b>\${step}</b></li>\`).join("")}
+          ${rankSteps.map((step, index) => `<li class="${index === 1 ? "current" : ""}"><span>${index + 1}</span><small>${index === 4 ? "최종" : index + 1 + "단계"}</small><b>${step}</b></li>`).join("")}
         </ol>
       </div>
       <div class="mission-home-grid">
@@ -380,11 +380,11 @@ function homeView() {
           <p>3일차 · 여러 기록 목록 관리하기</p>
           <div class="recent-progress"><div><small>진행률</small><b>38%</b></div><i><em></em></i></div>
           <div class="current-task"><small>현재 단계</small><b>여러 기록 목록 관리하기</b><span>3일차</span></div>
-          <button class="primary-button" data-action="go-project">이어서 학습하기 \${icon("arrow", 16)}</button>
+          <button class="primary-button" data-action="go-project">이어서 학습하기 ${icon("arrow", 16)}</button>
         </article>
       </div>
-      \${homeExtensionMarkup()}
-    </section>\`;
+      ${homeExtensionMarkup()}
+    </section>`;
 }
 
 function exploreView() {
