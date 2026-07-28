@@ -256,7 +256,7 @@ function topbar() {
           </select>
         </label>
         <button class="icon-button has-dot" data-action="toggle-notifications" aria-label="알림 열기">${icon("bell", 19)}<span></span></button>
-        <button class="avatar top-avatar" data-action="go-my" aria-label="내 프로필">김</button>
+        <button class="avatar top-avatar" data-action="go-my" aria-label="내 프로필"><span class="sr-only">내 프로필</span></button>
       </div>
     </header>
   `;
