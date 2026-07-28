@@ -125,6 +125,9 @@ const state = {
   submitted: false,
   aiMessages: [],
   checklist: new Set(["품목군별 검증 구간 추가", "MAPE 비교표 갱신", "민감정보 포함 여부 확인"]),
+  unitRankStep: 0,
+  vodDetail: false,
+  myTab: "overview",
 };
 
 const navByRole = {
@@ -132,6 +135,7 @@ const navByRole = {
     ["home", "home", "홈"],
     ["explore", "compass", "탐색"],
     ["learning", "book", "내 학습"],
+    ["vod", "play", "VOD 강의"],
     ["peer", "users", "함께 학습", "3"],
     ["growth", "growth", "나의 성장"],
   ],
@@ -159,6 +163,7 @@ const labels = {
   explore: "탐색",
   project: "프로젝트 상세",
   learning: "내 학습",
+  vod: "VOD 강의",
   workspace: "미션 수행",
   peer: "함께 학습",
   community: "커뮤니티",
@@ -189,7 +194,7 @@ function routeFromHash() {
   const next = window.location.hash.replace("#/", "").split("?")[0];
   if (navByRole.commander.some(([route]) => route === next)) state.role = "commander";
   if (navByRole.admin.some(([route]) => route === next)) state.role = "admin";
-  if (["home", "explore", "project", "learning", "workspace", "peer", "community", "growth", "my"].includes(next)) state.role = "learner";
+  if (["home", "explore", "project", "learning", "vod", "workspace", "peer", "community", "growth", "my"].includes(next)) state.role = "learner";
   return labels[next] ? next : state.role === "learner" ? "home" : state.role;
 }
 
@@ -251,7 +256,7 @@ function topbar() {
           </select>
         </label>
         <button class="icon-button has-dot" data-action="toggle-notifications" aria-label="알림 열기">${icon("bell", 19)}<span></span></button>
-        <button class="avatar top-avatar" aria-label="내 프로필">김</button>
+        <button class="avatar top-avatar" data-action="go-my" aria-label="내 프로필">김</button>
       </div>
     </header>
   `;
@@ -458,6 +463,7 @@ function homeView() {
           <button class="full-link" data-action="go-growth">역량 근거 전체 보기 ${icon("arrow", 14)}</button>
         </article>
       </div>
+      ${homeExtensionMarkup()}
     </section>`;
 }
 
@@ -633,6 +639,36 @@ function adminView() {
     </section>`;
 }
 
+
+function homeExtensionMarkup() {
+  const snapshots = [
+    [["1대대", "1,284 XP"], ["3대대", "1,246 XP"], ["2대대", "1,208 XP"], ["5대대", "1,173 XP"], ["4대대", "1,116 XP"]],
+    [["1대대", "1,284 XP"], ["2대대", "1,252 XP · ↑1"], ["3대대", "1,246 XP"], ["5대대", "1,173 XP"], ["4대대", "1,116 XP"]],
+    [["2대대", "1,301 XP · ↑1"], ["1대대", "1,284 XP"], ["3대대", "1,246 XP"], ["5대대", "1,173 XP"], ["4대대", "1,116 XP"]],
+  ];
+  const notice = ["최신 집계 대기 중", "2대대가 3위에서 2위로 상승했습니다.", "2대대가 이번 주 1위에 올랐습니다."][state.unitRankStep];
+  const rows = snapshots[state.unitRankStep].map((item, index) => '<li class="' + (index === 0 ? 'top' : '') + '"><span>' + (index === 0 ? '♛' : index + 1) + '</span><b>' + item[0] + '</b><em>' + item[1] + '</em></li>').join("");
+  return '<div class="home-extension-grid"><article class="panel peer-review-request"><div class="section-heading"><div><span class="eyebrow">PEER REVIEW</span><h2>동료 리뷰 요청</h2></div><span class="count-badge">5</span></div><div class="peer-request-body"><span class="review-symbol">' + icon("users", 22) + '</span><div><b>대기 중인 리뷰 요청 5건</b><p>동료의 결과물을 검토하고 구체적인 피드백을 남겨주세요.</p></div></div><button class="primary-button compact" data-action="go-peer">리뷰 바로가기 ' + icon("arrow", 15) + '</button></article><article class="panel unit-ranking-card"><div class="section-heading"><div><span class="eyebrow">UNIT RANKING</span><h2>부대별 학습 순위</h2></div><button class="text-button" data-action="refresh-unit-ranking">순위 갱신 ' + icon("arrow", 14) + '</button></div><p class="ranking-copy">AI 역량, 참여율, 단계 달성률을 종합한 이번 주 순위입니다.</p><ol class="unit-ranking-list">' + rows + '</ol><small class="ranking-update">' + notice + '</small></article></div>';
+}
+
+function vodView() {
+  if (state.vodDetail) return vodDetailView();
+  return '<section class="view vod-view">' + pageHeader("VIDEO LEARNING", "VOD 강의", "현재 학습 단계와 연결된 짧은 강의부터 바로 시작할 수 있습니다.") + '<div class="vod-hero panel"><div><span class="eyebrow">RECOMMENDED NEXT</span><h2>시계열 검증 VOD</h2><p>현재 미션의 보완 항목과 연결된 12분 학습입니다.</p></div><button class="primary-button" data-action="open-vod-detail">강의 소개 보기 ' + icon("arrow", 16) + '</button></div><div class="vod-grid"><article class="panel vod-course-card"><span class="chip blue">진행 중 · 72%</span><h2>Python 데이터 분석 기초</h2><p>데이터 시각화와 인사이트 도출 · 18분 남음</p><button class="text-button" data-action="open-vod-detail">이어서 보기 ' + icon("arrow", 14) + '</button></article><article class="panel vod-course-card"><span class="chip green">추천 강의</span><h2>생성 AI 업무 활용 기초</h2><p>프롬프트 설계와 결과 검증 실습 · 38분</p><button class="text-button" data-action="open-vod-detail">강의 소개 보기 ' + icon("arrow", 14) + '</button></article><article class="panel vod-course-card"><span class="chip orange">필수 이수</span><h2>보안 AI 활용 수칙</h2><p>안전한 AI 활용을 위한 핵심 원칙 · 18분</p><button class="text-button" data-action="open-vod-detail">강의 소개 보기 ' + icon("arrow", 14) + '</button></article></div></section>';
+}
+
+function vodDetailView() {
+  return '<section class="view vod-detail-view"><button class="back-link" data-action="close-vod-detail">← VOD 강의 목록</button><article class="vod-detail-hero"><span class="eyebrow light">GENERATIVE AI · LEVEL 02</span><h1>생성 AI 업무 활용 기초</h1><p>업무 맥락을 읽는 프롬프트 구조를 익히고, 보고서 요약 실습으로 바로 적용합니다.</p><div><span>총 38분</span><span>영상 6개</span><span>실습 1개</span><span>퀴즈 3문항</span></div><button class="primary-button light-button">강의 시작하기 ' + icon("play", 16) + '</button></article><div class="vod-detail-layout"><article class="panel course-outline"><span class="eyebrow">COURSE OUTLINE</span><h2>강의에서 얻는 것</h2><ul><li>업무 상황에 맞는 프롬프트 구조화 방법</li><li>AI 결과를 검증하고 개선하는 체크포인트</li><li>작전 보고서 요약 실습 결과물 1개</li></ul></article><aside class="panel course-progress"><span class="eyebrow">LEARNING STATUS</span><strong>64%</strong>' + progressBar(64, "강의 진행률") + '<p>다음 학습 · 프롬프트 구조 설계</p></aside></div></section>';
+}
+
+function myView() {
+  const tabs = '<nav class="my-tabs"><button class="' + (state.myTab === "overview" ? "active" : "") + '" data-action="my-home">개요</button><button class="' + (state.myTab === "courses" ? "active" : "") + '" data-action="my-courses">내 강의</button><button class="' + (state.myTab === "posts" ? "active" : "") + '" data-action="my-posts">작성한 게시글</button><button class="' + (state.myTab === "badges" ? "active" : "") + '" data-action="my-badges">뱃지</button></nav>';
+  let content = '<div class="my-overview-grid"><article class="panel"><span class="eyebrow">LEARNING RECORD</span><h2>내 강의</h2><p>최근 수강 강의와 관심 강의를 함께 확인하세요.</p><button class="text-button" data-action="my-courses">내 강의 보기 ' + icon("arrow", 14) + '</button></article><article class="panel"><span class="eyebrow">MY ACTIVITY</span><h2>작성한 게시글</h2><p>댓글, 동료 평가, 게시판 질의, AI 교관 대화를 모아봅니다.</p><button class="text-button" data-action="my-posts">활동 보기 ' + icon("arrow", 14) + '</button></article><article class="panel"><span class="eyebrow">REWARDS</span><h2>뱃지 달성 현황</h2><p>획득 6/8 · 다음 뱃지까지 프로젝트 2개가 남았습니다.</p><button class="text-button" data-action="my-badges">뱃지 보기 ' + icon("arrow", 14) + '</button></article></div>';
+  if (state.myTab === "courses") content = '<div class="my-detail-grid"><article class="panel"><span class="eyebrow">IN PROGRESS</span><h2>최근 수강 강의</h2><div class="my-course-row"><b>생성 AI 업무 활용 기초</b><span>64%</span>' + progressBar(64) + '</div><div class="my-course-row"><b>보안 AI 활용 수칙</b><span>22%</span>' + progressBar(22) + '</div></article><article class="panel"><span class="eyebrow">SAVED COURSE</span><h2>관심 강의</h2><button class="saved-course" data-action="open-vod-detail">AI 결과 검증과 개선 ' + icon("arrow", 14) + '</button><button class="saved-course" data-action="open-vod-detail">데이터 시각화의 첫걸음 ' + icon("arrow", 14) + '</button><button class="saved-course" data-action="open-vod-detail">업무용 문서 작성 자동화 ' + icon("arrow", 14) + '</button></article></div>';
+  if (state.myTab === "posts") content = '<article class="panel activity-panel"><span class="eyebrow">MY ACTIVITY</span><h2>작성한 게시글</h2><div class="activity-tabs"><button>내 댓글</button><button>동료 평가</button><button>게시판 질의</button><button>AI 교관</button></div><div class="activity-row"><span>1</span><div><b>Python 모듈 질문에 댓글을 남겼습니다.</b><small>내 댓글 · 2026.07.25</small></div>' + icon("chevron", 15) + '</div><div class="activity-row"><span>2</span><div><b>체력 기록 관리 시스템 · 동료 평가</b><small>동료 평가 · 2026.07.24</small></div>' + icon("chevron", 15) + '</div><div class="activity-row"><span>3</span><div><b>정보 누락을 줄이는 방법이 있나요?</b><small>게시판 질의 · 2026.07.23</small></div>' + icon("chevron", 15) + '</div><div class="activity-row"><span>4</span><div><b>보고서 요약 프롬프트 상담</b><small>AI 교관 대화 · 2026.07.22</small></div>' + icon("chevron", 15) + '</div></article>';
+  if (state.myTab === "badges") content = '<article class="panel badge-progress-panel"><div class="section-heading"><div><span class="eyebrow">BADGE COLLECTION</span><h2>뱃지 달성 현황</h2></div><span class="chip">획득 6/8</span></div><div class="next-badge"><span>3<small>/5</small></span><div><small>다음 뱃지</small><h3>프롬프트 실전 뱃지</h3><p>남은 조건 · 생성 AI 실습 프로젝트 2개 완료</p><em>XP +150 · 3단계 진입 조건 반영</em></div><button class="primary-button" data-action="go-explore">남은 프로젝트 보기</button></div><div class="badge-collection"><div class="earned"><span>✦</span><b>AI 기초 이해</b></div><div class="earned"><span>✦</span><b>프롬프트 입문</b></div><div class="earned"><span>✦</span><b>보안 수칙 통과</b></div><div class="earned"><span>✦</span><b>생성 AI 활용</b></div><div class="earned"><span>✦</span><b>바이브코딩 입문</b></div><div class="earned"><span>✦</span><b>동료 리뷰 참여</b></div><div class="locked"><span>?</span><b>프롬프트 실전</b></div><div class="locked"><span>?</span><b>데이터 분석 입문</b></div></div></article>';
+  return '<section class="view my-view">' + pageHeader("MY DASHBOARD", "김밀리 상병의 성장 기록", "학습과 수행, 피드백으로 쌓인 나의 기록을 확인하세요.") + tabs + content + '</section>';
+}
+
 function genericView() {
   const title = labels[state.route] || "준비 중인 메뉴";
   return `<section class="view generic-view">${pageHeader("MILI AI WORKSPACE", title, "기획 문서의 메뉴 구조를 반영한 다음 확장 화면입니다.")}<div class="empty-state large">${icon("folder", 40)}<span class="eyebrow">NEXT ITERATION</span><h2>${title} 화면은 다음 구축 단계에서 연결됩니다.</h2><p>현재 MVP에서는 핵심 학습 흐름과 역할별 대시보드 탐색을 우선 제공합니다.</p><button class="primary-button" data-action="go-home">대시보드로 돌아가기</button></div></section>`;
@@ -643,6 +679,8 @@ const views = {
   explore: exploreView,
   project: projectDetailView,
   learning: learningView,
+  vod: vodView,
+  my: myView,
   workspace: workspaceView,
   peer: peerView,
   growth: growthView,
@@ -729,6 +767,15 @@ document.addEventListener("click", (event) => {
     "go-search": () => navigate("explore"),
     "go-explore": () => navigate("explore"),
     "go-learning": () => navigate("learning"),
+    "go-vod": () => navigate("vod"),
+    "go-my": () => navigate("my"),
+    "open-vod-detail": () => { state.vodDetail = true; navigate("vod"); },
+    "close-vod-detail": () => { state.vodDetail = false; render(); },
+    "refresh-unit-ranking": () => { state.unitRankStep = (state.unitRankStep + 1) % 3; render(); toast("부대별 학습 순위를 갱신했습니다."); },
+    "my-home": () => { state.myTab = "overview"; render(); },
+    "my-courses": () => { state.myTab = "courses"; render(); },
+    "my-posts": () => { state.myTab = "posts"; render(); },
+    "my-badges": () => { state.myTab = "badges"; render(); },
     "go-peer": () => navigate("peer"),
     "go-growth": () => navigate("growth"),
     "go-home": () => navigate(state.role === "learner" ? "home" : state.role),
