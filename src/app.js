@@ -207,8 +207,7 @@ function sidebar() {
   return `
     <aside class="sidebar ${state.sidebarOpen ? "is-open" : ""}" aria-label="주 메뉴">
       <div class="brand">
-        <span class="brand-mark">M</span>
-        <span class="brand-copy"><strong>MILI AI</strong><small>MISSION INTELLIGENCE</small></span>
+        <img class="brand-logo" src="./assets/mili-logo.png" alt="MILI AI" />\n        <span class="brand-copy"><small>MISSION INTELLIGENCE</small></span>
         <button class="icon-button sidebar-close" data-action="close-menu" aria-label="메뉴 닫기">${icon("close")}</button>
       </div>
       <div class="environment-badge"><span></span> MILI AI 학습 플랫폼 <b>MVP</b></div>
@@ -229,8 +228,7 @@ function sidebar() {
         <button class="text-button light" data-action="open-ai">질문하기 ${icon("arrow", 15)}</button>
       </div>
       <div class="sidebar-profile">
-        <span class="avatar">김</span>
-        <div><strong>${roleLabels[state.role][1]}</strong><small>${roleLabels[state.role][0]} 모드</small></div>
+        <span class="avatar profile-avatar" aria-hidden="true"></span>\n        <div><strong>${roleLabels[state.role][1]}</strong><small>${roleLabels[state.role][0]} 모드</small></div>
         <button class="icon-button dark" aria-label="로그아웃">${icon("logout", 17)}</button>
       </div>
     </aside>
