@@ -8,46 +8,55 @@
 
 ## 1. 메뉴 구조
 
-```text
-MiliAI 2.0
-├─ 홈
-├─ 강의
-│  ├─ 전체 강의
-│  ├─ 강의 상세
-│  └─ VOD 학습
-├─ 프로젝트
-│  ├─ PBL 프로젝트 목록
-│  ├─ 프로젝트 상세
-│  ├─ 학습맵
-│  └─ 미션 수행
-├─ 내 학습
-│  ├─ VOD 강의
-│  └─ PBL 프로젝트
-├─ 클래스룸
-│  ├─ 출석
-│  ├─ 헬프센터
-│  └─ 테스트
-├─ 랭킹
-│  ├─ 누적 크레딧
-│  ├─ 평균 진도율
-│  └─ 문제 해결
-├─ 쇼케이스
-├─ 팀프로젝트
-├─ 커뮤니티
-│  ├─ 공지사항
-│  ├─ Q&A
-│  └─ FAQ
-├─ 통합검색
-└─ 마이페이지
-   ├─ 대시보드
-   ├─ 내 학습
-   ├─ 보관함
-   ├─ 수료증
-   ├─ 크레딧
-   ├─ 작성한 게시글
-   ├─ 알림
-   ├─ 계정 설정
-   └─ 회원 탈퇴
+```mermaid
+flowchart LR
+    ROOT["MiliAI 2.0"]
+
+    ROOT --> HOME["홈"]
+    ROOT --> COURSE["강의"]
+    ROOT --> PROJECT["프로젝트"]
+    ROOT --> LEARNING["내 학습"]
+    ROOT --> CLASSROOM["클래스룸"]
+    ROOT --> RANKING["랭킹"]
+    ROOT --> SHOWCASE["쇼케이스"]
+    ROOT --> TEAM["팀프로젝트"]
+    ROOT --> COMMUNITY["커뮤니티"]
+    ROOT --> SEARCH["통합검색"]
+    ROOT --> MY["마이페이지"]
+
+    COURSE --> COURSE_LIST["전체 강의"]
+    COURSE --> COURSE_DETAIL["강의 상세"]
+    COURSE --> VOD["VOD 학습"]
+
+    PROJECT --> PROJECT_LIST["PBL 프로젝트 목록"]
+    PROJECT --> PROJECT_DETAIL["프로젝트 상세"]
+    PROJECT --> PROJECT_MAP["학습맵"]
+    PROJECT --> MISSION["미션 수행"]
+
+    LEARNING --> MY_VOD["VOD 강의"]
+    LEARNING --> MY_PBL["PBL 프로젝트"]
+
+    CLASSROOM --> ATTENDANCE["출석"]
+    CLASSROOM --> HELPDESK["헬프센터"]
+    CLASSROOM --> TEST["테스트"]
+
+    RANKING --> CREDIT_RANK["누적 크레딧"]
+    RANKING --> PROGRESS_RANK["평균 진도율"]
+    RANKING --> PROBLEM_RANK["문제 해결"]
+
+    COMMUNITY --> NOTICE["공지사항"]
+    COMMUNITY --> QNA["Q&A"]
+    COMMUNITY --> FAQ["FAQ"]
+
+    MY --> DASHBOARD["대시보드"]
+    MY --> MY_LEARNING["내 학습"]
+    MY --> WISHLIST["보관함"]
+    MY --> CERTS["수료증"]
+    MY --> CREDIT["크레딧"]
+    MY --> POSTS["작성한 게시글"]
+    MY --> NOTIFICATIONS["알림"]
+    MY --> PROFILE["계정 설정"]
+    MY --> WITHDRAW["회원 탈퇴"]
 ```
 
 ## 2. 페이지 목록
