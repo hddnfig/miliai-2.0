@@ -14,6 +14,7 @@
 | [02-screen-inventory.md](./02-screen-inventory.md) | 전체 주요 페이지와 페이지별 UI·기능·상태·연결 | UX, UI, FE |
 | [03-user-flows.md](./03-user-flows.md) | 핵심 과업별 페이지 이동과 분기 | UX, FE, BE |
 | [04-data-traceability.md](./04-data-traceability.md) | ERD 엔티티와 화면의 추적 관계, 정책 공백 | PM, FE, BE |
+| [05-current-site-menu-page-list.md](./05-current-site-menu-page-list.md) | 실제 학생 화면 기준 메뉴 구조와 페이지 목록 | PM, UX, FE |
 
 ## 2. 해석 규칙
 
